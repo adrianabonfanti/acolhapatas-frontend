@@ -14,19 +14,16 @@ export default function HomeOng() {
   const buttonRef = useRef();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = user?.token;
-  
-    api.get("/animals") // [CONVERTIDO DE FETCH]
-    .then((res) => res.json())
-    .then((data) => {
-      setAnimais(data.slice(-6).reverse()); // Últimos 6 cadastrados
-      setTotalAnimais(data.length);
-      setPrecisamLarTemporario(data.filter(a => a.precisaLarTemporario).length);
-    })
-  
-      .catch((err) => console.error("Erro ao buscar animais:", err));
+    api.get("/ongs/animais")
+      .then((res) => {
+        const data = res.data;
+        setAnimais(data.slice(-6).reverse()); // últimos 6 cadastrados
+        setTotalAnimais(data.length);
+        setPrecisamLarTemporario(data.filter(a => a.precisaLarTemporario).length);
+      })
+      .catch((err) => console.error("Erro ao buscar animais da ONG:", err));
   }, []);
+  
   
 
   useEffect(() => {
