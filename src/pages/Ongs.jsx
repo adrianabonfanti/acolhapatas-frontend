@@ -117,31 +117,21 @@ const Ongs = () => {
         </form>
       </div>
 
-      {/* Publicidade lateral */}
-      <div className="hidden lg:block w-64 bg-gray-100 p-4">
-        <h2 className="text-lg font-bold mb-2">Publicidade</h2>
-        <div className="w-full h-96 bg-gray-300 flex items-center justify-center">
-          <span className="text-gray-600">Seu Anúncio Aqui</span>
-        </div>
-      </div>
-
-      {/* Botão flutuante de contato */}
-      <button
+    
+      
+    {/* Botão flutuante de contato */}
+    <button 
         ref={buttonRef}
-        onClick={() => setShowForm((prev) => !prev)}
-        className="fixed bottom-6 right-6 bg-emerald-500 text-white p-4 rounded-full shadow-lg text-xl z-50"
+        onClick={() => setShowForm(prev => !prev)}
+        className="botaoFlutuante fixed bottom-6 right-6 bg-emerald-500 text-white p-4 rounded-full shadow-lg text-xl z-50"
       >
         💬
       </button>
 
       {/* Formulário de contato */}
       {showForm && (
-        <div ref={formRef} className="fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            setFormEnviado(true);
-            setShowForm(false);
-          }}>
+        <div ref={formRef} className="caixaContatoFlutuante fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
+          <form onSubmit={handleEnviarContato}>
             <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
             <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
@@ -152,7 +142,7 @@ const Ongs = () => {
         </div>
       )}
 
-      {/* Modal de confirmação */}
+      {/* Mensagem enviada */}
       {formEnviado && (
         <div className="fixed bottom-24 right-6 bg-emerald-500 text-white p-4 rounded-lg shadow-lg w-80 z-50">
           <p>Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.</p>

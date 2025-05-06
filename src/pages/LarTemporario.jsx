@@ -197,7 +197,36 @@ function LarTemporario() {
             </button>
           </div>
         </form>
+ {/* Botão flutuante de contato */}
+ <button 
+        ref={buttonRef}
+        onClick={() => setShowForm(prev => !prev)}
+        className="botaoFlutuante fixed bottom-6 right-6 bg-emerald-500 text-white p-4 rounded-full shadow-lg text-xl z-50"
+      >
+        💬
+      </button>
 
+      {/* Formulário de contato */}
+      {showForm && (
+        <div ref={formRef} className="caixaContatoFlutuante fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
+          <form onSubmit={handleEnviarContato}>
+            <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
+            <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
+            <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
+            <input name="email" type="email" placeholder="E-mail" className="w-full mb-2 p-2 border rounded" required />
+            <textarea name="message" placeholder="Mensagem" className="w-full mb-2 p-2 border rounded" required />
+            <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full">Enviar</button>
+          </form>
+        </div>
+      )}
+
+      {/* Mensagem enviada */}
+      {formEnviado && (
+        <div className="fixed bottom-24 right-6 bg-emerald-500 text-white p-4 rounded-lg shadow-lg w-80 z-50">
+          <p>Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.</p>
+          <button onClick={() => setFormEnviado(false)} className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded">Fechar</button>
+        </div>
+      )}
         {showModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">

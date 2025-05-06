@@ -79,6 +79,10 @@ font-family: "Poppins";
           }
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
+    body{
+    
+      padding-bottom: 80px;
+    }
     .filtroAdocaoMobile{
       border-bottom: 1px solid #ccc;
     }
