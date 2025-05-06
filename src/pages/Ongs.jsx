@@ -75,8 +75,10 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
                 alt={ong.name}
                 className="w-full h-40 object-cover rounded-lg shadow"
               />
+      <ContatoFlutuante />
             </div>
           ))}
+      <ContatoFlutuante />
         </div>
 
         {showModal && selectedOng && (
@@ -89,7 +91,10 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
               <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
               <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
               <p><strong>Website:</strong> {selectedOng.website}</p>
-            </div>
+      <ContatoFlutuante />
+          </div>
+        )}
+      <ContatoFlutuante />
           </div>
 
         <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
@@ -112,6 +117,7 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange} className="input" />
           <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button>
         </form>
+      <ContatoFlutuante />
       </div>
 
     
@@ -119,8 +125,7 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
     
 
       {
-          <ContatoFlutuante />
-    <ContatoFlutuante />
+      <ContatoFlutuante />
   </div>
   );
 };
