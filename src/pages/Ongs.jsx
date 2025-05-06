@@ -33,7 +33,8 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -45,7 +46,8 @@ import.meta.env.VITE_API_BASE_URL}/ongs`, data);
 
   const fetchOngs = async () => {
     try {
-import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+
       setOngs(response.data);
     } catch (error) {
       console.error(error); 
@@ -74,7 +76,8 @@ import.meta.env.VITE_API_BASE_URL}/public/ongs`);
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
               <img
-import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
+src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
+
                 alt={ong.name}
                 className="w-full h-40 object-cover rounded-lg shadow"
               />
