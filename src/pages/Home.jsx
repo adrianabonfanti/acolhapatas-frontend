@@ -20,13 +20,12 @@ function Home() {
   const buttonRef = useRef();
 
   useEffect(() => {
-    api.get("/random/6") // [CONVERTIDO DE FETCH]
-      .then((res) => res.json())
-      .then(setAnimais);
-
-    api.get("/public/ongs") // [CONVERTIDO DE FETCH]
-      .then((res) => res.json())
-      .then(setOngs);
+    api.get("/random/6")
+    .then((res) => setAnimais(res.data));
+  
+  api.get("/public/ongs")
+    .then((res) => setOngs(res.data));
+  
   }, []);
 
   useEffect(() => {
