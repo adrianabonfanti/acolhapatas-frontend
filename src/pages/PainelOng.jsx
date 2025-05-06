@@ -41,13 +41,7 @@ export default function PainelOng() {
 
           </div>
 
-          {/* Espaço para publicidade */}
-          <div className="hidden lg:block w-64 bg-gray-100 p-4">
-            <h2 className="text-lg font-bold mb-2">Publicidade</h2>
-            <div className="w-full h-96 bg-gray-300 flex items-center justify-center">
-              <span className="text-gray-600">Seu Anúncio Aqui</span>
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>
