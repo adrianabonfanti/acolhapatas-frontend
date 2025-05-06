@@ -29,7 +29,7 @@ export default function PainelOng() {
       <div className="flex-1 flex flex-col">
         {/* Menu no topo */}
        
-        <NavbarLogada />
+        <NavbarLogada setActivePage={setActivePage} />
 
         {/* Conteúdo dinâmico */}
         <div className="flex flex-1">
