@@ -1,0 +1,10 @@
+.navbar {
+  background-color: #008000;
+  color: white;
+  padding: 10px;
+}
+.navbar a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+}

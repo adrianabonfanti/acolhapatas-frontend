@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  font-family: "Inter";
+  font-weight: 300;
+}
+h1, h2, h3{
+  font-family: "Poppins";
+
+}
+.backImage{
+font-family: "Poppins";
+}
+.backImage h1{  
+  font-weight: 700;
+}
+.backImage p{  
+  font-weight: 400;
+}
+
+.page-header {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0px;
+    margin-bottom: 20px;
+  }
+  
+  .page-header .overlay {
+    background-color: rgb(0 0 0 / 17%); /* escurece imagem para o texto se destacar */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .page-header .page-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px black;
+    font-family: 'Inter', sans-serif;
+    
+  }
+  .page-header h1{
+    font-family: "Poppins";
+    font-weight: 500;
+  }
+  .headerLar{
+    background-image: url(/public/lar_lado.png);
+    background-size: 50%;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: #d2bdb0;
+    }
+    .headerAdocao {
+      background-image: url(/public/adote_lado.png);
+      background-size: 61%;
+      background-position: left;
+      background-repeat: no-repeat;
+      background-color: #d3c7bd;
+        }
+        .conteudo-lar {
+            padding-inline: 1.5rem;
+            margin-top: 1rem;
+          }
+          .logoHeader{
+            height: 45px;
+          }
+          .ongsHome img{
+            height: 100px;
+    width: auto !important;
+          }
+            /* MOBILE - Abaixo de 768px */
+  @media (max-width: 768px) {
+    .filtroAdocaoMobile{
+      border-bottom: 1px solid #ccc;
+    }
+    .botao-toggle-filtros{
+       
+         background-color: transparent;
+    border: 0px solid #ccc!important;
+    color: #333;
+    padding: 0;
+    border-radius: 0px;
+    font-size: 15px;
+    font-weight: 500;
+       display: flex;;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    margin: 0px!important;
+    }
+    .conteudo-adocao{
+      margin-top: -20px;
+    }
+    .botaoFlutuante{
+    bottom:4rem;
+    line-height: 1.4rem;
+    }
+    header{
+      padding:0px;
+    }
+    .page-header{
+      height: 150px;
+      background-size: 77%;
+    }
+    .headerAdocao {
+      background-color:#d4c9be;
+      background-size: 77%;
+     
+       }
+    .logoHeader{
+      height: 60px;
+      margin-left: 13vh;
+    }
+    .caixaContatoFlutuante{
+      bottom: 7.8rem;
+    }
+    .backTextoHome{
+      
+    }
+  }

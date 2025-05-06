@@ -1,0 +1,210 @@
+/* Layout principal da seção */
+.conteudo-adocao {
+    display: flex;
+    gap: 2rem;
+    padding: 0rem;
+    
+  }
+  
+  /* Filtros à esquerda */
+  .filtros-container {
+    padding: 1.5rem;
+    width: 280px;
+    background: #f5f9fb;
+    border-right: 1px solid #ddd;
+    height: auto;
+    max-height: none;
+    position: sticky;
+    top:70px;
+    align-self: start;
+    height: fit-content;
+  }
+  
+  
+  
+  .filtros-container h2 {
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+  }
+  
+  .campoFiltro label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .campoFiltro input,
+  .campoFiltro select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.2rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+  }
+  
+  .filtroCheckbox {
+    margin-bottom: 0.1rem;
+  }
+  
+  .filtroCheckbox > label:first-child {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+  
+  .filtroCheckbox label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.88rem;
+    margin-right: 0.8rem;
+    color: #333;
+    cursor: pointer;
+    white-space: nowrap;
+    gap: 4px;
+    margin-bottom: 0.4rem;
+    margin-right: 0.25rem;
+  }
+  
+  .filtroCheckbox input[type="checkbox"] {
+    accent-color: #00c37e;
+    transform: scale(1.1);
+    margin: 0;
+    margin-right: 0.25rem;
+  }
+  .filtros input,
+  .filtros select {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .campoFiltro h3, .filtroCheckbox h3{
+    font-size: 0.9rem;
+    color: #00986d;
+  }
+  
+  /* Lista de animais */
+  .lista-animais {
+    flex: 1;
+  }
+  
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .cardAnimal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .cardAnimal img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 200px;
+  }
+  
+  .cardAnimal h3 {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+  }
+  
+  .cardAnimal p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .cardAnimal .descricao {
+    font-style: italic;
+    color: #555;
+  }
+  
+  .cardAnimal button {
+    margin-top: 0.5rem;
+    background-color: #10b981;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .cardAnimal button:hover {
+    background-color: #059669;
+  }
+  .botao-toggle-filtros {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 16px auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .botao-toggle-filtros:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+  
+  .icone-filtro {
+    font-size: 20px;
+  }
+ 
+  
+  /* MOBILE - Abaixo de 768px */
+  @media (max-width: 768px) {
+    .conteudo-adocao {
+      display: block !important;
+      flex-direction: column;
+     
+    }
+  
+    .filtros-container {
+      position: relative;
+        width: 100%;
+        padding: 0rem 2rem 1rem;
+        box-sizing: border-box;
+        margin-top: -77px;
+    }
+  
+    .lista-animais {
+      width: 100%;
+      padding: 1rem 0;
+    }
+  
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  
+    .cardAnimal {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+  }
+      
