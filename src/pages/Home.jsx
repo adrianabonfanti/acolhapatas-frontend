@@ -359,8 +359,8 @@ function Home() {
         className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
       >
         ✕
-      </button>
-
+      </button> 
+ 
       {ongAdocao.logo && (
         <div className="mb-4 text-center">
           <img
