@@ -483,7 +483,7 @@ function Home() {
 
       {showForm && (
         <div ref={formRef} className="caixaContatoFlutuante fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
-          <form onSubmit={handleEnviarContato}>
+          <form action="https://formsubmit.co/adrianahbonfanti@gmail.com" method="POST">
             <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
             <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
