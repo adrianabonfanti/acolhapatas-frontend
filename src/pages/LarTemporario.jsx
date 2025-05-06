@@ -22,8 +22,9 @@ function LarTemporario() {
     body.sexo = data.get("sexo"); // Corrigido para incluir o sexo
 
     try {
-      const res = await api.get("/lartemporario") // [CONVERTIDO DE FETCH],      
-      if (res.ok) {
+      const res = await api.get("/lartemporario");
+    
+      if (res.status === 200) {
         setShowModal(true);
         form.reset();
       } else {
@@ -32,6 +33,7 @@ function LarTemporario() {
     } catch (err) {
       alert("Erro de conexão com o servidor.");
     }
+    
   };
 
   const buscarCep = async (e) => {
