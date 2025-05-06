@@ -50,15 +50,15 @@ function NavbarLogada() {
               <span className="material-icons">home</span>
               Início
             </Link>
-            <Link to="animais" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+            <Link to="/painel-ong/animais" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">pets</span>
               Animais
             </Link>
-            <Link to="/procurar" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+            <Link to="/painel-ong/procurar" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">search</span>
               Buscar
             </Link>
-            <Link to="meusdados" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+            <Link to="/painel-ong/meusdados" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">apartment</span>
               ONG
             </Link>
