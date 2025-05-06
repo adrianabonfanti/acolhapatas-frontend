@@ -23,8 +23,7 @@ function LarTemporario() {
 
     try {
       const res = await api.get("/lartemporario") // [CONVERTIDO DE FETCH],
-      });
-
+      
       if (res.ok) {
         setShowModal(true);
         form.reset();
