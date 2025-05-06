@@ -52,14 +52,14 @@ font-family: "Poppins";
     font-weight: 500;
   }
   .headerLar{
-    background-image: url(/public/lar_lado.png);
+    background-image: url(/lar_lado.png);
     background-size: 50%;
     background-position: left;
     background-repeat: no-repeat;
     background-color: #d2bdb0;
     }
     .headerAdocao {
-      background-image: url(/public/adote_lado.png);
+      background-image: url(/adote_lado.png);
       background-size: 61%;
       background-position: left;
       background-repeat: no-repeat;
