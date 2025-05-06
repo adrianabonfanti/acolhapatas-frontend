@@ -1,6 +1,6 @@
-import api from '../services/api';
+import api from "../services/api";
+
 import React, { useState, useEffect, useRef } from "react";
-import api from '../services/api';
 import axios from "axios";
 
 const Ongs = () => {
@@ -22,7 +22,31 @@ const Ongs = () => {
   const handleFileChange = (e) => {
     setLogo(e.target.files[0]);
   };
-
+  const handleEnviarContato = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+  
+    try {
+      const response = await api.post("/contato", data);
+      if (response.status === 200) {
+        setFormEnviado(true);
+        setShowForm(false);
+        form.reset();
+      } else {
+        alert("Erro ao enviar mensagem.");
+      }
+    } catch (error) {
+      alert("Erro ao conectar com o servidor.");
+      console.error(error);
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,8 +58,7 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-      await axios.post(`${import api from '../services/api';
-import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -47,8 +70,7 @@ import.meta.env.VITE_API_BASE_URL}/ongs`, data);
 
   const fetchOngs = async () => {
     try {
-      const response = await axios.get(`${import api from '../services/api';
-import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
       console.error(error); 
@@ -77,8 +99,7 @@ import.meta.env.VITE_API_BASE_URL}/public/ongs`);
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
               <img
-                src={ong.logo ? `${import api from '../services/api';
-import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
+                src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
                 alt={ong.name}
                 className="w-full h-40 object-cover rounded-lg shadow"
               />
