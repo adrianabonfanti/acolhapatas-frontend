@@ -107,7 +107,7 @@ function Home() {
     {animais.map((animal) => (
       <div key={animal._id} className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
         <img
-          src={`http://localhost:5000/uploads/${animal.fotos[0]}`}
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} 
           alt={animal.nome}
           className="w-full h-60 object-cover"
         />
@@ -188,7 +188,7 @@ function Home() {
         onClick={() => setOngSelecionada(ong)}
       >
         <img
-          src={`http://localhost:5000/uploads/${ong.logo}`}
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
           alt={ong.nome}
           className=""
         />
@@ -241,7 +241,7 @@ function Home() {
       {ongSelecionada.logo && (
         <div className="mb-4 text-center">
           <img
-            src={`http://localhost:5000/uploads/${ongSelecionada.logo}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongSelecionada.logo}`}
             alt={`Logo da ${ongSelecionada.nome}`}
             className="h-24 mx-auto object-contain"
           />
@@ -364,7 +364,7 @@ function Home() {
       {ongAdocao.logo && (
         <div className="mb-4 text-center">
           <img
-            src={`http://localhost:5000/uploads/${ongAdocao.logo}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongAdocao.logo}`}
             alt={`Logo da ${ongAdocao.nome}`}
             className="h-24 mx-auto object-contain"
           />
