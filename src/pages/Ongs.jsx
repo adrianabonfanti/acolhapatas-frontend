@@ -91,7 +91,6 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
               <p><strong>Website:</strong> {selectedOng.website}</p>
             </div>
           </div>
-        )}
 
         <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -118,10 +117,8 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
     
       
     
-      )}
 
       {
-      )}
           <ContatoFlutuante />
 </div>
   );
