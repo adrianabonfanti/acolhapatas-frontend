@@ -5,7 +5,7 @@ export default function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
 
   const buscarPendentes = async () => {
-    const res = await axios.get("${import.meta.env.VITE_API_BASE_URL}/admin/pendentes");
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/pendentes`);
     setPendentes(res.data);
   };
 
