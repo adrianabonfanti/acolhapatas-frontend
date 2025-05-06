@@ -143,7 +143,8 @@ export default function CadastroAnimal() {
         });
         alert("Animal atualizado com sucesso!");
       } else {
-        await axios.post("${import.meta.env.VITE_API_BASE_URL}/animals", data, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
+
           headers: {
             Authorization: `Bearer ${token}`,
             // NÃO coloca "Content-Type" manualmente aqui
