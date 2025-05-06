@@ -32,10 +32,10 @@ export default function BuscarLarTemporario() {
       Object.keys(filtros).forEach((key) => {
         if (filtros[key]) query.append(key, filtros[key]);
       });
-
+ 
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(`http://localhost:5000/lartemporario?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/lartemporario?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+ 
 export default function CadastroAnimal() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
@@ -110,7 +110,7 @@ export default function CadastroAnimal() {
       if (filtros.idade) query.append("idade", filtros.idade);
       if (filtros.porte) query.append("porte", filtros.porte);
 
-      const response = await axios.get(`http://localhost:5000/animals?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/animals?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAnimais(response.data);
@@ -135,7 +135,7 @@ export default function CadastroAnimal() {
       
   
       if (modoEdicao && animalSelecionado) {
-        await axios.put(`http://localhost:5000/animals/${animalSelecionado._id}`, data, {
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
             // NÃO coloca "Content-Type" manualmente aqui
@@ -143,7 +143,7 @@ export default function CadastroAnimal() {
         });
         alert("Animal atualizado com sucesso!");
       } else {
-        await axios.post("http://localhost:5000/animals", data, {
+        await axios.post("${import.meta.env.VITE_API_BASE_URL}/animals", data, {
           headers: {
             Authorization: `Bearer ${token}`,
             // NÃO coloca "Content-Type" manualmente aqui
@@ -164,7 +164,7 @@ export default function CadastroAnimal() {
     if (!window.confirm("Tem certeza que deseja apagar este animal?")) return;
   
     try {
-      await axios.delete(`http://localhost:5000/animals/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/animals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Animal apagado com sucesso!");
@@ -281,7 +281,7 @@ export default function CadastroAnimal() {
   <div className="col-span-2">
     <p className="font-semibold mb-2">Imagem atual:</p>
     <img
-      src={`http://localhost:5000/uploads/${animalSelecionado.fotos}`} // ajusta se o caminho for diferente
+      src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animalSelecionado.fotos}`} // ajusta se o caminho for diferente
       alt="Foto atual do animal"
       className="w-48 h-48 object-cover rounded-md"
     />

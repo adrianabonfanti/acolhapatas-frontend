@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+ 
 export default function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
 
   const buscarPendentes = async () => {
-    const res = await axios.get("http://localhost:5000/admin/pendentes");
+    const res = await axios.get("${import.meta.env.VITE_API_BASE_URL}/admin/pendentes");
     setPendentes(res.data);
   };
 
   const aprovar = async (id) => {
-    await axios.post(`http://localhost:5000/admin/aprovar/${id}`);
+    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/aprovar/${id}`);
     buscarPendentes();
   };
 
   const recusar = async (id) => {
-    await axios.delete(`http://localhost:5000/admin/recusar/${id}`);
+    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
     buscarPendentes();
   };
 

@@ -43,12 +43,12 @@ export default function EditarPerfilLar() {
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
-  };
+  }; 
 
   const salvarAlteracoes = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:5000/lartemporario/editar", form, {
+      await axios.put("${import.meta.env.VITE_API_BASE_URL}/lartemporario/editar", form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMensagem("Perfil atualizado com sucesso!");

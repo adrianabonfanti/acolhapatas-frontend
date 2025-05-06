@@ -15,7 +15,7 @@ function Login() {
     const rota = tipoUsuario === "ong" ? "login-ong" : "login-lar";
 
     try {
-      const response = await fetch(`http://localhost:5000/${rota}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${rota}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

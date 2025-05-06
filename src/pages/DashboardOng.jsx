@@ -4,12 +4,12 @@ import axios from "axios";
 export default function DashboardOng() {
   const [animais, setAnimais] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchAnimais = async () => {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await axios.get("http://localhost:5000/ongs/animais", {
+        const response = await axios.get("${import.meta.env.VITE_API_BASE_URL}/ongs/animais", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
