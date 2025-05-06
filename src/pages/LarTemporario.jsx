@@ -22,8 +22,7 @@ function LarTemporario() {
     body.sexo = data.get("sexo"); // Corrigido para incluir o sexo
 
     try {
-      const res = await api.get("/lartemporario") // [CONVERTIDO DE FETCH],
-      
+      const res = await api.get("/lartemporario") // [CONVERTIDO DE FETCH],      
       if (res.ok) {
         setShowModal(true);
         form.reset();
