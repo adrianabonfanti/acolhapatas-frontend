@@ -17,7 +17,7 @@ export default function HomeOng() {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user?.token;
   
-    api.get("/ongs/animais", {
+    api.get("/animais", {
       headers: {
         Authorization: `Bearer ${token}`
       }
