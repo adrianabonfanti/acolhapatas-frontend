@@ -5,6 +5,7 @@ import BuscarLarTemporario from "./BuscarLarTemporario";
 import MeusDadosOng from "./MeusDadosOng";
 import HomeOng from "./HomeOng";  
 import "../styles/Home.css";
+import NavbarLogada from "../components/NavbarLogada";
 export default function PainelOng() {
   const navigate = useNavigate();
   const [activePage, setActivePage] = useState("home");
@@ -27,18 +28,8 @@ export default function PainelOng() {
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col">
         {/* Menu no topo */}
-        <nav className="flex items-center justify-between bg-white shadow p-4">
-          <div className="flex space-x-6">
-            <button onClick={() => setActivePage("home")} className="font-semibold">Home</button>
-            <button onClick={() => setActivePage("animais")} className="font-semibold">Cadastrar/Gerenciar meus Animais</button>
-            <button onClick={() => setActivePage("procurar")} className="font-semibold">Procurar Lar Temporário</button>
-            <button onClick={() => setActivePage("meusDados")} className="font-semibold">
-  Meus Dados da ONG
-</button>
-
-          </div>
-          <button onClick={handleLogout} className="font-semibold text-red-500">Sair</button>
-        </nav>
+       
+        <NavbarLogada />
 
         {/* Conteúdo dinâmico */}
         <div className="flex flex-1">
