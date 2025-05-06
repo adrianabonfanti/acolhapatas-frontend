@@ -20,7 +20,7 @@ export default function AdminPanel() {
   };
 
   useEffect(() => {
-    buscarPendentes();
+    buscarPendentes(); 
   }, []);
 
   return (
