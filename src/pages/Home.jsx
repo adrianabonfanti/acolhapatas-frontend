@@ -52,21 +52,23 @@ function Home() {
   const handleEnviarContato = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+  
     try {
-      const response = await api.get("/ajax/adrianahbonfanti@gmail.com") // [CONVERTIDO DE FETCH];
-
-      if (response.ok) {
-        setFormEnviado(true);
-        setShowForm(false);
-      } else {
-        alert("Erro ao enviar mensagem. Tente novamente.");
-      }
+      await api.post("/contato", {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message")
+      });
+  
+      setFormEnviado(true);
+      setShowForm(false);
     } catch (error) {
       console.error(error);
       alert("Erro ao enviar mensagem. Tente novamente.");
     }
   };
+  
 
   return (
     <>
@@ -483,7 +485,8 @@ function Home() {
 
       {showForm && (
         <div ref={formRef} className="caixaContatoFlutuante fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
-          <form action="https://formsubmit.co/adrianahbonfanti@gmail.com" method="POST">
+          <form onSubmit={handleEnviarContato}>
+
             <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
             <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
