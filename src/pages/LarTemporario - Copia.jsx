@@ -4,16 +4,38 @@ import React, { useState, useRef } from "react";
 import "../styles/global.css";
 
 function LarTemporario() {
+
   const [showModal, setShowModal] = useState(false);
   const formRef = useRef();
-  const [showForm, setShowForm] = useState(false);
-  const [formEnviado, setFormEnviado] = useState(false);
-  const buttonRef = useRef();
-  
+const [showForm, setShowForm] = useState(false);
+const [formEnviado, setFormEnviado] = useState(false);
+const buttonRef = useRef();
+
+const handleEnviarContato = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  try {
+    await api.post("/contato", {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message")
+    });
+
+    setFormEnviado(true);
+    e.target.reset();
+    setShowForm(false);
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao enviar mensagem. Tente novamente.");
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const data = new FormData(form);
+    const data = new FormData(form); 
     const body = Object.fromEntries(data.entries());
 
     body.especie = data.getAll("especie");
