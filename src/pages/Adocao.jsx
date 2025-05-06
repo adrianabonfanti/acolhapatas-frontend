@@ -34,7 +34,8 @@ export default function Adocao() {
       if (filtros.cidade) query.append("cidade", filtros.cidade.trim().toLowerCase());
       if (filtros.estado) query.append("estado", filtros.estado.toUpperCase());
 
-      const response = await axios.get(`http://localhost:5000/public/animals?${query.toString()}`);
+      const response = await axios.get(`https://acolhapatas-api.onrender.com/public/animals?${query.toString()}`);
+
       setAnimais(response.data);
     } catch (error) {
       console.error("Erro ao buscar animais:", error);
@@ -43,7 +44,8 @@ export default function Adocao() {
 
   const buscarOngs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/public/ongs");
+      const response = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+
       setOngs(response.data);
     } catch (error) {
       console.error("Erro ao buscar ONGs:", error);
@@ -52,7 +54,8 @@ export default function Adocao() {
   useEffect(() => {
     async function carregarOngs() {
       try {
-        const res = await axios.get("http://localhost:5000/public/ongs");
+        const res = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+
         setOngs(res.data);
       } catch (error) {
         console.error("Erro ao carregar ONGs:", error);
@@ -88,16 +91,17 @@ export default function Adocao() {
   const handleEnviarContato = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+  
     try {
-      const response = await api.get("/ajax/adrianahbonfanti@gmail.com") // [CONVERTIDO DE FETCH];
-
-      if (response.ok) {
-        setFormEnviado(true);
-        setShowForm(false);
-      } else {
-        alert("Erro ao enviar mensagem. Tente novamente.");
-      }
+      await api.post("/contato", {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message")
+      });
+  
+      setFormEnviado(true);
+      setShowForm(false);
     } catch (error) {
       console.error(error);
       alert("Erro ao enviar mensagem. Tente novamente.");
