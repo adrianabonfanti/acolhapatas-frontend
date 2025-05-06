@@ -32,7 +32,7 @@ export default function HomeOng() {
         formRef.current && !formRef.current.contains(event.target) &&
         buttonRef.current && !buttonRef.current.contains(event.target)
       ) {
-        setShowForm(false);
+        setShowForm(false); 
       }
     }
 
