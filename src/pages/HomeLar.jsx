@@ -41,7 +41,7 @@ export default function HomeLar() {
         query.medicacao = true;
       }
       console.log("ENVIANDO PARA API:", query);
-      const response = await axios.get("http://localhost:5000/public/animais-filtrados-por-lar", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
         params: query
       });
       
@@ -90,7 +90,7 @@ export default function HomeLar() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {animais.map((animal) => (
             <div key={animal._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={`http://localhost:5000/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
+              <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{animal.nome}</h2>
                 <p><strong>Espécie:</strong> {animal.especie}</p>

@@ -17,7 +17,7 @@ const ModalOng = ({ ong, onClose }) => {
         {ong.logo && (
           <div className="mb-4 text-center">
             <img
-              src={`http://localhost:5000/uploads/${ong.logo}`}
+              src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
               alt={`Logo da ${ong.nome}`}
               className="h-24 mx-auto object-contain"
             />
