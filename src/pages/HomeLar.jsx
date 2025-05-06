@@ -127,7 +127,7 @@ export default function HomeLar() {
     onClick={async () => {
       try {
         const response = await api.get("/contato/acolhimento") // [CONVERTIDO DE FETCH]
-        });
+     
 
         const resultado = await response.json();
 
