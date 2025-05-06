@@ -47,7 +47,7 @@ const Ongs = () => {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 
