@@ -1,5 +1,5 @@
 import api from '../services/api';
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 
@@ -30,7 +30,7 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -42,10 +42,10 @@ await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
 
   const fetchOngs = async () => {
     try {
-const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
-      console.error(error); 
+      console.error(error);
     }
   };
 
@@ -64,21 +64,19 @@ const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/on
 
   return (
     <div className="flex min-h-screen">
-      {/* Área principal */}
       <div className="flex-1 p-6 flex flex-col">
         <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
               <img
-src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
+                src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
                 alt={ong.name}
                 className="w-full h-40 object-cover rounded-lg shadow"
               />
-      <ContatoFlutuante />
             </div>
           ))}
-      <ContatoFlutuante />
         </div>
 
         {showModal && selectedOng && (
@@ -91,11 +89,10 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
               <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
               <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
               <p><strong>Website:</strong> {selectedOng.website}</p>
-      <ContatoFlutuante />
+              <ContatoFlutuante />
+            </div>
           </div>
         )}
-      <ContatoFlutuante />
-          </div>
 
         <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -117,16 +114,10 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange} className="input" />
           <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button>
         </form>
-      <ContatoFlutuante />
+
+        <ContatoFlutuante />
       </div>
-
-    
-      
-    
-
-      {
-      <ContatoFlutuante />
-  </div>
+    </div>
   );
 };
 
