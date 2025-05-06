@@ -10,7 +10,7 @@ function LarTemporario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const data = new FormData(form);
+    const data = new FormData(form); 
     const body = Object.fromEntries(data.entries());
 
     body.especie = data.getAll("especie");
