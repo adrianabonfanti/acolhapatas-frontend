@@ -120,7 +120,8 @@ src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/s
 
       {
           <ContatoFlutuante />
-</div>
+    <ContatoFlutuante />
+  </div>
   );
 };
 
