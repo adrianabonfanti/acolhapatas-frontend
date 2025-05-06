@@ -32,7 +32,7 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-      await axios.post("${import.meta.env.VITE_API_BASE_URL}/ongs", data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -44,7 +44,7 @@ const Ongs = () => {
 
   const fetchOngs = async () => {
     try {
-      const response = await axios.get("${import.meta.env.VITE_API_BASE_URL}/public/ongs");
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
       console.error(error);
