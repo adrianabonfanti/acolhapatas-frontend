@@ -125,7 +125,7 @@ export default function CadastroAnimal() {
       const data = new FormData();
       Object.keys(formData).forEach((key) => {
         if (key === "fotos" && formData.fotos) {
-          data.append("fotos", formData.fotos);
+          data.append("fotos", formData.fotos, formData.fotos.name);
         } else if (typeof formData[key] === "boolean") {
           data.append(key, formData[key] ? "true" : "false");
         } else {
