@@ -31,7 +31,7 @@ export default function CadastroAnimal() {
     necessidadesEspeciais: false,
     deficiencia: false,
     precisaLarTemporario: false, // <<< adiciona ISSO
-    foto: null,
+    fotos: null,
   });
 
   const limparFormulario = () => {
@@ -48,7 +48,7 @@ export default function CadastroAnimal() {
       necessidadesEspeciais: false,
       deficiencia: false,
       precisaLarTemporario: false, // <<< adiciona ISSO
-      foto: null,
+      fotos: null,
     });
     setModoCadastro(false);
     setModoEdicao(false);
@@ -73,7 +73,7 @@ export default function CadastroAnimal() {
     deficiencia: animal.deficiencia === "true" || animal.deficiencia === true,
     precisaLarTemporario: animal.precisaLarTemporario === "true" || animal.precisaLarTemporario === true,
 
-      foto: null,
+      fotos: null,
     });
   };
 
