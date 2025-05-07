@@ -83,7 +83,7 @@ export default function CadastroAnimal() {
       setFormData({ ...formData, [name]: checked });
     } else if (type === "file") {
       const novoArquivo = files[0];
-      setFormData({ ...formData, foto: novoArquivo });
+      setFormData({ ...formData, fotos: novoArquivo });
       if (animalSelecionado) {
         setAnimalSelecionado((prev) => ({
           ...prev,
@@ -124,8 +124,8 @@ export default function CadastroAnimal() {
     try {
       const data = new FormData();
       Object.keys(formData).forEach((key) => {
-        if (key === "foto" && formData.foto) {
-          data.append("fotos", formData.foto);
+        if (key === "fotos" && formData.fotos) {
+          data.append("fotos", formData.fotos);
         } else if (typeof formData[key] === "boolean") {
           data.append(key, formData[key] ? "true" : "false");
         } else {
@@ -289,7 +289,7 @@ export default function CadastroAnimal() {
   </div>
 )}
 
-          <input type="file" name="foto" onChange={handleFormChange} className="col-span-2" />
+          <input type="file" name="fotos" onChange={handleFormChange} className="col-span-2" />
 
           <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded col-span-2">
             {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
