@@ -79,7 +79,7 @@ function Home() {
   <div className="absolute inset-0  z-0" />
   
   <div className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10">
-    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-snug ">
+    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-snug "> 
       Um lar temporário pode mudar uma vida
     </h1>
     <p className="text-lg sm:text-xl text-white/90 ">
