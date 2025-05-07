@@ -97,7 +97,7 @@ export default function HomeOng() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {animais.map((animal) => (
           <div key={animal._id} className="bg-white shadow-md p-4 rounded-lg">
-            <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
+            <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
             <h4 className="text-lg font-semibold mt-2">{animal.nome}</h4>
             <p className="text-sm mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
 

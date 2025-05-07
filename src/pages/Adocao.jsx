@@ -258,7 +258,7 @@ export default function Adocao() {
         {animais.length > 0 ? (
           animais.map((animal) => (
             <div key={animal._id} className="bg-white rounded-3xl shadow-md hover:shadow-lg p-4 flex flex-col">
-  <img src={`https://acolhapatas-api.onrender.com/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded-xl mb-4" />
+  <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded-xl mb-4" />
 
   <h3 className="text-lg font-bold text-gray-800 mb-1">{animal.nome}</h3>
   <p className="text-sm text-gray-600 mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
@@ -363,7 +363,7 @@ export default function Adocao() {
       {ongAdocao.logo && (
   <div className="mb-4 text-center">
     <img
-      src={`https://acolhapatas-api.onrender.com/uploads/${ongAdocao.logo}`}
+      src={ongAdocao.logo}
       alt={`Logo da ${ongAdocao.nome}`}
       className="h-24 mx-auto object-contain"
     />

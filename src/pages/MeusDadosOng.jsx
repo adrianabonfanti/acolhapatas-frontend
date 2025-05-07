@@ -34,7 +34,7 @@ export default function MeusDadosOng() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
-        setLogoPreview(`${import.meta.env.VITE_API_BASE_URL}/uploads/${response.data.logo}`);
+        setLogoPreview(response.data.logo);
       } catch (error) {
         console.error("Erro ao buscar dados da ONG:", error);
       }

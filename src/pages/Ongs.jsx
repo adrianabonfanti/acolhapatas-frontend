@@ -71,10 +71,11 @@ const Ongs = () => {
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
               <img
-                src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
-                alt={ong.name}
-                className="w-full h-40 object-cover rounded-lg shadow"
-              />
+  src={ong.logo || "/sem_logo.png"}
+  alt={ong.name}
+  className="w-full h-40 object-cover rounded-lg shadow"
+/>
+
             </div>
           ))}
         </div>

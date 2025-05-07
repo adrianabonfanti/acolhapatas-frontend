@@ -17,7 +17,7 @@ const OngCardList = ({ ongs, openModal }) => {
           >
             <div className="w-full h-28 flex items-center justify-center overflow-hidden rounded">
               <img
-                src={ong.logo ? `${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}` : "/sem_logo.png"}
+                src={ong.logo || "/sem_logo.png"}
                 alt={ong.name}
                 className="max-h-24 object-contain"
               />

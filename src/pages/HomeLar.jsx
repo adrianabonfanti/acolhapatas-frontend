@@ -90,7 +90,7 @@ export default function HomeLar() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {animais.map((animal) => (
             <div key={animal._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
+              <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{animal.nome}</h2>
                 <p><strong>Espécie:</strong> {animal.especie}</p>

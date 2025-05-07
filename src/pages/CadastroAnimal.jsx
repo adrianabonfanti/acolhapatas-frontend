@@ -282,7 +282,7 @@ export default function CadastroAnimal() {
   <div className="col-span-2">
     <p className="font-semibold mb-2">Imagem atual:</p>
     <img
-      src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animalSelecionado.fotos?.[0]}`} // ajusta se o caminho for diferente
+      src={animalSelecionado.fotos?.[0]}// ajusta se o caminho for diferente
       alt="Foto atual do animal"
       className="w-48 h-48 object-cover rounded-md"
     />

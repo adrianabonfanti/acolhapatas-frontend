@@ -111,7 +111,7 @@ function Home() {
     {animais.map((animal) => (
       <div key={animal._id} className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
         <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} 
+         src={animal.fotos[0]}
           alt={animal.nome}
           className="w-full h-60 object-cover"
         />
@@ -192,7 +192,7 @@ function Home() {
         onClick={() => setOngSelecionada(ong)}
       >
         <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
+          src={ong.logo}
           alt={ong.nome}
           className=""
         />
