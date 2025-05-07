@@ -131,7 +131,7 @@ export default function CadastroAnimal() {
         } else {
           data.append(key, formData[key]);
         }
-      });
+      }); 
       
   
       if (modoEdicao && animalSelecionado) {
