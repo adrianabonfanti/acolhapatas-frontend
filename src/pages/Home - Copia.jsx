@@ -20,13 +20,12 @@ function Home() {
   const buttonRef = useRef();
 
   useEffect(() => {
-    api.get("/random/6") // [CONVERTIDO DE FETCH]
-      .then((res) => res.json())
-      .then(setAnimais);
-
-    api.get("/public/ongs") // [CONVERTIDO DE FETCH]
-      .then((res) => res.json())
-      .then(setOngs);
+    api.get("/random/6")
+    .then((res) => setAnimais(res.data));
+  
+  api.get("/public/ongs")
+    .then((res) => setOngs(res.data));
+  
   }, []);
 
   useEffect(() => {
@@ -53,25 +52,27 @@ function Home() {
   const handleEnviarContato = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+  
     try {
-      const response = await api.get("/ajax/adrianahbonfanti@gmail.com") // [CONVERTIDO DE FETCH];
-
-      if (response.ok) {
-        setFormEnviado(true);
-        setShowForm(false);
-      } else {
-        alert("Erro ao enviar mensagem. Tente novamente.");
-      }
+      await api.post("/contato", {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message")
+      });
+  
+      setFormEnviado(true);
+      setShowForm(false);
     } catch (error) {
       console.error(error);
       alert("Erro ao enviar mensagem. Tente novamente.");
     }
   };
+  
 
   return (
     <>
-    <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/public/hero.png")' }}>
+    <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero.png")' }}>
   <div className="absolute inset-0  z-0" />
   
   <div className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10">
@@ -107,7 +108,7 @@ function Home() {
     {animais.map((animal) => (
       <div key={animal._id} className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
         <img
-          src={`http://localhost:5000/uploads/${animal.fotos[0]}`}
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} 
           alt={animal.nome}
           className="w-full h-60 object-cover"
         />
@@ -188,7 +189,7 @@ function Home() {
         onClick={() => setOngSelecionada(ong)}
       >
         <img
-          src={`http://localhost:5000/uploads/${ong.logo}`}
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
           alt={ong.nome}
           className=""
         />
@@ -241,7 +242,7 @@ function Home() {
       {ongSelecionada.logo && (
         <div className="mb-4 text-center">
           <img
-            src={`http://localhost:5000/uploads/${ongSelecionada.logo}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongSelecionada.logo}`}
             alt={`Logo da ${ongSelecionada.nome}`}
             className="h-24 mx-auto object-contain"
           />
@@ -359,12 +360,12 @@ function Home() {
         className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
       >
         ✕
-      </button>
-
+      </button> 
+ 
       {ongAdocao.logo && (
         <div className="mb-4 text-center">
           <img
-            src={`http://localhost:5000/uploads/${ongAdocao.logo}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongAdocao.logo}`}
             alt={`Logo da ${ongAdocao.nome}`}
             className="h-24 mx-auto object-contain"
           />
@@ -485,6 +486,7 @@ function Home() {
       {showForm && (
         <div ref={formRef} className="caixaContatoFlutuante fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
           <form onSubmit={handleEnviarContato}>
+
             <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
             <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
