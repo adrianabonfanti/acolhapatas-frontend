@@ -186,15 +186,41 @@ function Home() {
 
   <div className="ongsHome grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
     {ongs.map((ong) => (
-    <OngCardList ongs={ongs} openModal={openModal} />
-
+      <div
+        key={ong._id}
+        className="group bg-gray-50 rounded-2xl p-4 shadow hover:shadow-md flex flex-col items-center transition cursor-pointer relative"
+        onClick={() => setOngSelecionada(ong)}
+      >
+        <img
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
+          alt={ong.nome}
+          className=""
+        />
+        <h3 className="text-sm font-semibold text-center text-gray-700">{ong.nome}</h3>
+      </div>
     ))}
   </div>
 
   {ongSelecionada && (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <ModalOng ong={selectedOng} onClose={closeModal} />
-
+      <div className="bg-white max-w-md w-full p-6 rounded-2xl shadow-lg relative">
+        <button
+          onClick={() => setOngSelecionada(null)}
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+        >
+          ✕
+        </button>
+        <h3 className="text-xl font-bold mb-4 text-gray-800">{ongSelecionada.nome}</h3>
+        <p className="text-sm text-gray-600 mb-2">
+          <strong>Email:</strong> {ongSelecionada.email}
+        </p>
+        <p className="text-sm text-gray-600 mb-2">
+          <strong>Telefone:</strong> {ongSelecionada.telefone}
+        </p>
+        <p className="text-sm text-gray-600 mb-2">
+          <strong>Instagram:</strong> {ongSelecionada.instagram}
+        </p>
+      </div>
     </div>
   )}
 </section>
