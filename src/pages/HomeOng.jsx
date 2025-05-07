@@ -102,15 +102,28 @@ export default function HomeOng() {
             <p className="text-sm mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
 
             {animal.descricao && <p className="text-sm mb-2"><strong>Sobre:</strong> {animal.descricao}</p>}
-            <ul className="text-xs text-gray-600 space-y-1">
-            {String(animal.castrado) === "true" && <li>✅ Castrado</li>}
-{String(animal.vacinado) === "true" && <li>✅ Vacinado</li>}
-{String(animal.precisaLarTemporario) === "true" && <li>🏡 Precisa de lar temporário</li>}
-{String(animal.usaMedicacao) === "true" && <li>💊 Usa medicação</li>}
-{String(animal.deficiencia) === "true" && <li>♿ Possui deficiência</li>}
-{String(animal.necessidadesEspeciais) === "true" && <li>🩺 Necessidades especiais</li>}
-
-            </ul>
+            <div className="flex flex-wrap gap-2 mb-5">
+  {String(animal.castrado) === "true" && (
+    <span className="flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-3 py-1 rounded-full font-medium">
+      <CheckIcon fontSize="small" /> Castrado
+    </span>
+  )}
+  {String(animal.vacinado) === "true" && (
+    <span className="flex items-center gap-1 bg-cyan-50 text-cyan-700 text-xs px-3 py-1 rounded-full font-medium">
+      <VaccinesIcon fontSize="small" /> Vacinado
+    </span>
+  )}
+  {String(animal.precisaLarTemporario) === "true" && (
+    <span className="flex items-center gap-1 bg-sky-50 text-sky-700 text-xs px-3 py-1 rounded-full font-medium">
+      <PetsIcon fontSize="small" /> Precisa de lar temporário
+    </span>
+  )}
+  {String(animal.usaMedicacao) === "true" && (
+    <span className="flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded-full font-medium">
+      <MedicationIcon fontSize="small" /> Usa medicação
+    </span>
+  )}
+</div>
           </div>
         ))}
       </div>
