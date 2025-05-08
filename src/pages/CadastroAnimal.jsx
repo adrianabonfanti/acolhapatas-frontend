@@ -312,6 +312,7 @@ export default function CadastroAnimal() {
         <table className="min-w-full bg-white border border-gray-300 rounded-md shadow-sm">
           <thead className="bg-gray-100">
             <tr>
+            <th className="py-2 px-4 border-b text-left">Foto</th>
               <th className="py-2 px-4 border-b text-left">Nome</th>
               <th className="py-2 px-4 border-b text-left">Espécie</th>
               <th className="py-2 px-4 border-b text-left">Idade</th>
@@ -324,6 +325,16 @@ export default function CadastroAnimal() {
           <tbody>
             {animais.map((animal) => (
               <tr key={animal._id} className="hover:bg-gray-50">
+                <td className="py-2 px-4 border-b">
+  {animal.fotos && animal.fotos[0] && (
+    <img
+      src={animal.fotos[0]}
+      alt={`Foto de ${animal.nome}`}
+      className="w-12 h-12 object-cover rounded"
+    />
+  )}
+</td>
+
                 <td className="py-2 px-4 border-b">{animal.nome}</td>
                 <td className="py-2 px-4 border-b">{animal.especie}</td>
                 <td className="py-2 px-4 border-b">{animal.idade}</td>
@@ -361,10 +372,20 @@ export default function CadastroAnimal() {
         {animais.map((animal) => (
           <div key={animal._id} className="bg-white shadow rounded-md p-4 border border-gray-200">
             <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-lg font-bold">{animal.nome}</h3>
-                <p className="text-sm text-gray-600">{animal.especie} • {animal.sexo}</p>
-              </div>
+            <div className="flex items-center gap-4">
+  {animal.fotos && animal.fotos[0] && (
+    <img
+      src={animal.fotos[0]}
+      alt={`Foto de ${animal.nome}`}
+      className="w-16 h-16 object-cover rounded"
+    />
+  )}
+  <div>
+    <h3 className="text-lg font-bold">{animal.nome}</h3>
+    <p className="text-sm text-gray-600">{animal.especie} • {animal.sexo}</p>
+  </div>
+</div>
+
               <div className="flex gap-2">
                 <button
                   onClick={() => editarAnimal(animal)}
