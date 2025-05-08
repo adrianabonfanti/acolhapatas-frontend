@@ -302,58 +302,103 @@ export default function CadastroAnimal() {
           {animais.length === 0 ? (
             <p className="text-gray-500">Nenhum animal encontrado.</p>
           ) : (
-            <div className="mt-8 overflow-x-auto">
+            <div className="mt-8">
   {animais.length === 0 ? (
     <p className="text-gray-500">Nenhum animal encontrado.</p>
   ) : (
-    <table className="min-w-full bg-white border border-gray-300 rounded-md shadow-sm">
-      <thead className="bg-gray-100">
-        <tr>
-          <th className="py-2 px-4 border-b text-left">Nome</th>
-          <th className="py-2 px-4 border-b text-left">Espécie</th>
-          <th className="py-2 px-4 border-b text-left">Idade</th>
-          <th className="py-2 px-4 border-b text-left">Porte</th>
-          <th className="py-2 px-4 border-b text-left">Sexo</th>
-          <th className="py-2 px-4 border-b text-left">Status</th>
-          <th className="py-2 px-4 border-b text-left">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {animais.map((animal) => (
-          <tr key={animal._id} className="hover:bg-gray-50">
-            <td className="py-2 px-4 border-b">{animal.nome}</td>
-            <td className="py-2 px-4 border-b">{animal.especie}</td>
-            <td className="py-2 px-4 border-b">{animal.idade}</td>
-            <td className="py-2 px-4 border-b">{animal.porte}</td>
-            <td className="py-2 px-4 border-b">{animal.sexo}</td>
-            <td className="py-2 px-4 border-b">{animal.status || "Disponível"}</td>
-            <td className="py-2 px-4 border-b flex flex-wrap gap-2">
-  <button
-    onClick={() => editarAnimal(animal)}
-    className="text-blue-600 hover:text-blue-800 relative group"
-  >
-    <span className="material-icons">edit</span>
-    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-      Editar
-    </span>
-  </button>
-  <button
-    onClick={() => deletarAnimal(animal._id)}
-    className="text-red-600 hover:text-red-800 relative group"
-  >
-    <span className="material-icons">delete</span>
-    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-      Apagar
-    </span>
-  </button>
-</td>
+    <>
+      {/* Tabela para desktop */}
+      <div className="overflow-x-auto hidden md:block">
+        <table className="min-w-full bg-white border border-gray-300 rounded-md shadow-sm">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="py-2 px-4 border-b text-left">Nome</th>
+              <th className="py-2 px-4 border-b text-left">Espécie</th>
+              <th className="py-2 px-4 border-b text-left">Idade</th>
+              <th className="py-2 px-4 border-b text-left">Porte</th>
+              <th className="py-2 px-4 border-b text-left">Sexo</th>
+              <th className="py-2 px-4 border-b text-left">Status</th>
+              <th className="py-2 px-4 border-b text-left">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {animais.map((animal) => (
+              <tr key={animal._id} className="hover:bg-gray-50">
+                <td className="py-2 px-4 border-b">{animal.nome}</td>
+                <td className="py-2 px-4 border-b">{animal.especie}</td>
+                <td className="py-2 px-4 border-b">{animal.idade}</td>
+                <td className="py-2 px-4 border-b">{animal.porte}</td>
+                <td className="py-2 px-4 border-b">{animal.sexo}</td>
+                <td className="py-2 px-4 border-b">{animal.status || "Disponível"}</td>
+                <td className="py-2 px-4 border-b flex flex-wrap gap-2">
+                  <button
+                    onClick={() => editarAnimal(animal)}
+                    className="text-blue-600 hover:text-blue-800 relative group"
+                  >
+                    <span className="material-icons">edit</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Editar
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => deletarAnimal(animal._id)}
+                    className="text-red-600 hover:text-red-800 relative group"
+                  >
+                    <span className="material-icons">delete</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Apagar
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-          </tr>
+      {/* Cards para mobile */}
+      <div className="md:hidden flex flex-col gap-4">
+        {animais.map((animal) => (
+          <div key={animal._id} className="bg-white shadow rounded-md p-4 border border-gray-200">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-lg font-bold">{animal.nome}</h3>
+                <p className="text-sm text-gray-600">{animal.especie} • {animal.sexo}</p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => editarAnimal(animal)}
+                  className="text-blue-600 hover:text-blue-800 relative group"
+                >
+                  <span className="material-icons">edit</span>
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    Editar
+                  </span>
+                </button>
+                <button
+                  onClick={() => deletarAnimal(animal._id)}
+                  className="text-red-600 hover:text-red-800 relative group"
+                >
+                  <span className="material-icons">delete</span>
+                  <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    Apagar
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div className="mt-2 text-sm text-gray-700">
+              <p><strong>Idade:</strong> {animal.idade}</p>
+              <p><strong>Porte:</strong> {animal.porte}</p>
+              <p><strong>Status:</strong> {animal.status || "Disponível"}</p>
+            </div>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </>
   )}
 </div>
+
+
 
           )}
         </div>
