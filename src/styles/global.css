@@ -87,7 +87,13 @@ font-family: "Poppins";
             gap: 1rem;
             max-width: 100%;
           }
-          
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{
@@ -142,4 +148,6 @@ font-family: "Poppins";
     .backTextoHome{
       
     }
+   
+    
   }
