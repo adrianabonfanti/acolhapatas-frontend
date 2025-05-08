@@ -324,7 +324,8 @@ export default function CadastroAnimal() {
                 <td className="py-2 px-4 border-b">{animal.porte}</td>
                 <td className="py-2 px-4 border-b">{animal.sexo}</td>
                 <td className="py-2 px-4 border-b">{animal.status || "Disponível"}</td>
-                <td className="py-2 px-4 border-b flex flex-wrap gap-2">
+                <td className="py-2 px-4 border-b">
+                <div className="flex items-center gap-2">
                   <button
                     onClick={() => editarAnimal(animal)}
                     className="text-blue-600 hover:text-blue-800 relative group"
@@ -343,6 +344,7 @@ export default function CadastroAnimal() {
                       Apagar
                     </span>
                   </button>
+                  </div>
                 </td>
               </tr>
             ))}
