@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ModalONG({ ong, onClose }) {
+export default function ModalOng({ ong, onClose }) {
   if (!ong) return null;
 
   return (

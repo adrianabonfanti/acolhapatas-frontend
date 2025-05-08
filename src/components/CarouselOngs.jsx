@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ModalONG from "./ModalONG";
+import ModalONG from "./ModalOng";
 
 export default function CarouselOngs({ ongs }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
@@ -26,7 +26,7 @@ export default function CarouselOngs({ ongs }) {
       </div>
 
       {ongSelecionada && (
-        <ModalONG
+        <ModalOng
           ong={ongSelecionada}
           onClose={() => setOngSelecionada(null)}
         />
