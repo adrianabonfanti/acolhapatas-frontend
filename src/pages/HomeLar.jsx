@@ -80,7 +80,7 @@ export default function HomeLar() {
 
   return (
     <>
-    <NavbarLogada setActivePage={setActivePage} />
+  
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Animais Disponíveis para Acolhimento</h1>
 

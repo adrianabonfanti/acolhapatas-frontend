@@ -119,10 +119,7 @@ export default function EditarPerfilLar() {
         {mensagem && <p className="text-green-600 mt-4 font-semibold">{mensagem}</p>}
       </div>
 
-      {/* Publicidade */}
-      <div className="w-1/4 p-4">
-        <div className="bg-gray-200 h-full rounded shadow text-center p-4">ESPAÇO PARA PUBLICIDADE</div>
-      </div>
+    
     </div>
     </>
   );
