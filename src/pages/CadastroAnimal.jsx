@@ -238,70 +238,46 @@ export default function CadastroAnimal() {
 
       {modoCadastro && (
         <form onSubmit={cadastrarAnimal} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full bg-white text-gray-700" />
-          <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
-            <option value="">Selecione a Espécie</option>
-            <option value="Cachorro">Cachorro</option>
-            <option value="Gato">Gato</option>
-          </select>
-          <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
-            <option value="">Selecione a Idade</option>
-            <option value="Filhote">Filhote</option>
-            <option value="Adulto">Adulto</option>
-            <option value="Idoso">Idoso</option>
-          </select>
-          <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
-            <option value="">Selecione o Porte</option>
-            <option value="Pequeno">Pequeno</option>
-            <option value="Médio">Médio</option>
-            <option value="Grande">Grande</option>
-          </select>
-          <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
-            <option value="">Selecione o Sexo</option>
-            <option value="femea">Fêmea</option>
-            <option value="macho">Macho</option>
-          </select>
-          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700" />
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-  <input
-    type="checkbox"
-    name="precisaLarTemporario"
-    checked={formData.precisaLarTemporario}
-    onChange={handleFormChange}
-  /> Precisa de Lar Temporário
-</div>
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-            <input type="checkbox" name="castrado" checked={formData.castrado} onChange={handleFormChange} /> Castrado
-          </div>
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-            <input type="checkbox" name="vacinado" checked={formData.vacinado} onChange={handleFormChange} /> Vacinado
-          </div>
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-            <input type="checkbox" name="usaMedicacao" checked={formData.usaMedicacao} onChange={handleFormChange} /> Usa Medicação
-          </div>
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-            <input type="checkbox" name="necessidadesEspeciais" checked={formData.necessidadesEspeciais} onChange={handleFormChange} /> Necessidades Especiais
-          </div>
-          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
-            <input type="checkbox" name="deficiencia" checked={formData.deficiencia} onChange={handleFormChange} /> Deficiência
-          </div>
-          {animalSelecionado && animalSelecionado.fotos && (
-  <div className="col-span-2">
-    <p className="font-semibold mb-2">Imagem atual:</p>
-    <img
-      src={animalSelecionado.fotos?.[0]}// ajusta se o caminho for diferente
-      alt="Foto atual do animal" 
-      className="w-48 h-48 object-cover rounded-md"
-    />
-  </div>
-)}
-
-          <input type="file" name="fotos" onChange={handleFormChange} className="col-span-2" />
-
-          <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded col-span-2">
-            {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
-          </button>
-        </form>
+        <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full bg-white text-gray-700" />
+        <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+          <option value="">Selecione a Espécie</option>
+          <option value="Cachorro">Cachorro</option>
+          <option value="Gato">Gato</option>
+        </select>
+        <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+          <option value="">Selecione a Idade</option>
+          <option value="Filhote">Filhote</option>
+          <option value="Adulto">Adulto</option>
+          <option value="Idoso">Idoso</option>
+        </select>
+        <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+          <option value="">Selecione o Porte</option>
+          <option value="Pequeno">Pequeno</option>
+          <option value="Médio">Médio</option>
+          <option value="Grande">Grande</option>
+        </select>
+        <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+          <option value="">Selecione o Sexo</option>
+          <option value="femea">Fêmea</option>
+          <option value="macho">Macho</option>
+        </select>
+        <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700 md:col-span-2" />
+        {["precisaLarTemporario", "castrado", "vacinado", "usaMedicacao", "necessidadesEspeciais", "deficiencia"].map((campo) => (
+          <label key={campo} className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
+            <input
+              type="checkbox"
+              name={campo}
+              checked={formData[campo]}
+              onChange={handleFormChange}
+            />
+            {campo.charAt(0).toUpperCase() + campo.slice(1).replace(/([A-Z])/g, ' $1')}
+          </label>
+        ))}
+        <input type="file" name="fotos" onChange={handleFormChange} className="md:col-span-2 w-full bg-white text-gray-700" />
+        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
+          {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
+        </button>
+      </form>
       )}
 
       {!modoCadastro && (
