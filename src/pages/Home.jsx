@@ -8,8 +8,8 @@ import CheckIcon from '@mui/icons-material/CheckCircle';
 import MedicationIcon from '@mui/icons-material/Medication';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
-import OngCardList from '../components/CarouselOngs';
-import ModalOng from '../components/ModalONG';
+import CarouselOngs from '../components/CarouselOngs';
+
 
 function Home() {
   const navigate = useNavigate();
