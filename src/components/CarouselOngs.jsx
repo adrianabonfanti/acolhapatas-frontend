@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import ModalONG from "./ModalOng";
 
 export default function CarouselOngs({ ongs, onClickOng }) {
- 
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
-    <div className="w-full  overflow-hidden ">
-      <div className="flex gap-4 items-center py-4 px-2 ">
+    <div className="w-full overflow-hidden px-4">
+      <div className="flex gap-4 overflow-x-auto scroll-snap-x snap-x snap-mandatory pb-4 scrollbar-hide">
         {ongs.map((ong) => (
           <div
             key={ong._id}
-            className="min-w-[100px] max-w-[100px] flex-shrink-0 bg-white p-2 rounded-xl shadow hover:shadow-md cursor-pointer flex flex-col items-center justify-center"
+            className="snap-start min-w-[120px] bg-white p-2 rounded-xl shadow hover:shadow-md cursor-pointer flex flex-col items-center justify-center flex-shrink-0"
             onClick={() => onClickOng && onClickOng(ong)}
-
           >
             <img
               src={ong.logo}
@@ -28,10 +26,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
       </div>
 
       {ongSelecionada && (
-        <ModalOng
-          ong={ongSelecionada}
-          onClose={() => setOngSelecionada(null)}
-        />
+        <ModalONG ong={ongSelecionada} onClose={() => setOngSelecionada(null)} />
       )}
     </div>
   );
