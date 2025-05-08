@@ -18,6 +18,7 @@ function Home() {
   const [showForm, setShowForm] = useState(false);
   const [formEnviado, setFormEnviado] = useState(false);
   const [ongAdocao, setOngAdocao] = useState(null);
+  
   const formRef = useRef();
   const buttonRef = useRef();
 
@@ -148,15 +149,15 @@ function Home() {
 </div>
 
           <button
-            onClick={() => {
-              const ongId = animal.ong?.$oid || animal.ong;
-              const ongAnimal = ongs.find((ong) => ong._id === ongId);
-              if (ongAnimal) {
-                setOngAdocao(ongAnimal);
-              } else {
-                alert("ONG não encontrada para este animal.");
-              }
-            }}
+        onClick={() => {
+          const ongId = animal.ong?.$oid || animal.ong;
+          const ongAnimal = ongs.find((ong) => ong._id === ongId);
+          if (ongAnimal) {
+            setOngAdocao(ongAnimal);
+          } else {
+            alert("ONG não encontrada para este animal.");
+          }
+        }}
             className="botaoQueroAdotar w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm py-2 rounded-full transition duration-300"
           >
             Quero Adotar
@@ -222,7 +223,15 @@ function Home() {
           <button onClick={() => setFormEnviado(false)} className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded">Fechar</button>
         </div>
       )}
-    </div></>
+    </div>
+    {ongAdocao && (
+  <ModalONG
+    ong={ongAdocao}
+    onClose={() => setOngAdocao(null)}
+  />
+)}
+
+    </>
   );
 }
 
