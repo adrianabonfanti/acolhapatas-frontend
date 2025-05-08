@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ModalONG from "./ModalOng";
 
-export default function CarouselOngs({ ongs }) {
+export default function CarouselOngs({ ongs, onClickOng }) {
+
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
