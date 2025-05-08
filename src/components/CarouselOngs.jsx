@@ -11,7 +11,8 @@ export default function CarouselOngs({ ongs }) {
           <div
             key={ong._id}
             className="min-w-[100px] max-w-[100px] flex-shrink-0 bg-white p-2 rounded-xl shadow hover:shadow-md cursor-pointer flex flex-col items-center justify-center"
-            onClick={() => setOngSelecionada(ong)}
+            onClick={() => onClickOng && onClickOng(ong)}
+
           >
             <img
               src={ong.logo}
