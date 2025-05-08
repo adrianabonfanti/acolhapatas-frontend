@@ -2,7 +2,7 @@ import api from '../services/api';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import NavbarLar from "../components/NavbarLar"; // ajuste o caminho se necessário
+import NavbarLogada from "../components/NavbarLogada"; 
 
 export default function HomeLar() {
   const [animais, setAnimais] = useState([]);
@@ -80,7 +80,7 @@ export default function HomeLar() {
 
   return (
     <>
-    <NavbarLar />
+    <NavbarLogada setActivePage={setActivePage} />
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Animais Disponíveis para Acolhimento</h1>
 
