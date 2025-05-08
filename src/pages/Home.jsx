@@ -112,11 +112,16 @@ function Home() {
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
     {animais.map((animal) => (
       <div key={animal._id} className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
-        <img
-         src={animal.fotos[0]}
-          alt={animal.nome}
-          className="w-full h-60 object-cover"
-        />
+    <img
+  src={animal.fotos[0]}
+  alt={animal.nome}
+  className="w-full h-60 object-cover"
+  onError={(e) => {
+    e.target.onerror = null;
+    e.target.src = "/placeholder.png"; // Substitua pelo caminho real do seu fallback
+  }}
+/>
+
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 capitalize mb-1">{animal.nome}</h3>
           <p className="text-sm text-gray-500 mb-3">
