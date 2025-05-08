@@ -238,31 +238,31 @@ export default function CadastroAnimal() {
 
       {modoCadastro && (
         <form onSubmit={cadastrarAnimal} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2" />
-          <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2">
+          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full bg-white text-gray-700" />
+          <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
             <option value="">Selecione a Espécie</option>
             <option value="Cachorro">Cachorro</option>
             <option value="Gato">Gato</option>
           </select>
-          <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2">
+          <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
             <option value="">Selecione a Idade</option>
             <option value="Filhote">Filhote</option>
             <option value="Adulto">Adulto</option>
             <option value="Idoso">Idoso</option>
           </select>
-          <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2">
+          <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
             <option value="">Selecione o Porte</option>
             <option value="Pequeno">Pequeno</option>
             <option value="Médio">Médio</option>
             <option value="Grande">Grande</option>
           </select>
-          <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2">
+          <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
             <option value="">Selecione o Sexo</option>
             <option value="femea">Fêmea</option>
             <option value="macho">Macho</option>
           </select>
-          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 col-span-2" />
-          <div className="flex items-center gap-2">
+          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700" />
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
   <input
     type="checkbox"
     name="precisaLarTemporario"
@@ -270,19 +270,19 @@ export default function CadastroAnimal() {
     onChange={handleFormChange}
   /> Precisa de Lar Temporário
 </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input type="checkbox" name="castrado" checked={formData.castrado} onChange={handleFormChange} /> Castrado
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input type="checkbox" name="vacinado" checked={formData.vacinado} onChange={handleFormChange} /> Vacinado
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input type="checkbox" name="usaMedicacao" checked={formData.usaMedicacao} onChange={handleFormChange} /> Usa Medicação
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input type="checkbox" name="necessidadesEspeciais" checked={formData.necessidadesEspeciais} onChange={handleFormChange} /> Necessidades Especiais
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input type="checkbox" name="deficiencia" checked={formData.deficiencia} onChange={handleFormChange} /> Deficiência
           </div>
           {animalSelecionado && animalSelecionado.fotos && (
