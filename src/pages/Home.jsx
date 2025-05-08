@@ -225,7 +225,7 @@ function Home() {
       )}
     </div>
     {ongAdocao && (
-  <ModalONG
+  <ModalOng
     ong={ongAdocao}
     onClose={() => setOngAdocao(null)}
   />
