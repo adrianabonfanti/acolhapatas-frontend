@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import NavbarLar from "../components/NavbarLar"; // ajuste o caminho se necessário
+import NavbarLogada from "../components/NavbarLogada"; 
 
 export default function EditarPerfilLar() {
   const [form, setForm] = useState({
@@ -61,7 +61,7 @@ export default function EditarPerfilLar() {
 
   return (
     <>
-    <NavbarLar />
+<NavbarLogada setActivePage={setActivePage} />
     <div className="flex">
       {/* Conteúdo principal */}
       <div className="w-3/4 p-6">
