@@ -74,7 +74,7 @@ const Ongs = () => {
   <img
     src={ong.logo || "/sem_logo.png"}
     alt={ong.name}
-    className="max-h-full max-w-full object-contain"
+    className="w-48 rounded shadow mb-4"
   />
 </div>
 
