@@ -6,7 +6,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
-    <div className="w-full overflow-x-auto carouselOng">
+    <div className="w-full carouselOng">
       <div className="flex gap-4 items-center py-4 px-2">
         {ongs.map((ong) => (
           <div

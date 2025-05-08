@@ -78,7 +78,7 @@ font-family: "Poppins";
     width: auto !important;
           }
           .carouselOng{
-            width:90vh;
+            width:80%;
             overflow-x: scroll;
           }
             /* MOBILE - Abaixo de 768px */
