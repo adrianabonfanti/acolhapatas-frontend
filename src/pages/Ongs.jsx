@@ -67,14 +67,15 @@ const Ongs = () => {
       <div className="flex-1 p-6 flex flex-col">
         <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
-              <img
+             <img
   src={ong.logo || "/sem_logo.png"}
   alt={ong.name}
-  className="w-full h-40 object-cover rounded-lg shadow"
+  className="w-full h-40 object-contain rounded-lg shadow bg-white p-2"
 />
+
 
             </div>
           ))}
