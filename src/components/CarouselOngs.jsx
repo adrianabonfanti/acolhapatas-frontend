@@ -6,7 +6,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
 
   return (
     <div className="w-full overflow-hidden px-4">
-      <div className="carouselOng flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4">
+      <div className="carouselOng">
         {ongs.map((ong) => (
           <div
             key={ong._id}
@@ -18,7 +18,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
               alt={ong.nome}
               className="w-full h-24 object-contain mb-2"
               onError={(e) => {
-                e.target.src = "/placeholder.png"; // Imagem padrão se quebrar
+                e.target.src = "/placeholder.png";
               }}
             />
             <p className="text-xs text-center font-semibold text-gray-700 truncate w-full">
