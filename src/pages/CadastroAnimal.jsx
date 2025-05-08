@@ -185,30 +185,37 @@ export default function CadastroAnimal() {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Buscar Animais</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2" />
-        <select name="especie" value={filtros.especie} onChange={handleFiltroChange} className="border p-2">
+        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2 w-full text-gray-700 bg-white" />
+        <select name="especie" value={filtros.especie} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Espécies</option>
           <option value="Cachorro">Cachorro</option>
           <option value="Gato">Gato</option>
         </select>
-        <select name="sexo" value={filtros.sexo} onChange={handleFiltroChange} className="border p-2">
+        <select name="sexo" value={filtros.sexo} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Sexos</option>
           <option value="femea">Fêmea</option>
 <option value="macho">Macho</option>
         </select>
-        <select name="idade" value={filtros.idade} onChange={handleFiltroChange} className="border p-2">
+        <select name="idade" value={filtros.idade} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Idades</option>
           <option value="Filhote">Filhote</option>
           <option value="Adulto">Adulto</option>
           <option value="Idoso">Idoso</option>
         </select>
-        <select name="porte" value={filtros.porte} onChange={handleFiltroChange} className="border p-2">
+        <select name="porte" value={filtros.porte} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Portes</option>
           <option value="Pequeno">Pequeno</option>
           <option value="Médio">Médio</option>
           <option value="Grande">Grande</option>
         </select>
-        <input type="date" name="dataCadastro" value={filtros.dataCadastro} onChange={handleFiltroChange} className="border p-2" />
+        <input
+  type="date"
+  name="dataCadastro"
+  value={filtros.dataCadastro}
+  onChange={handleFiltroChange}
+  className="border p-2 w-full text-gray-700 placeholder:text-gray-400 bg-white"
+/>
+
       </div>
 
       <div className="mt-4 flex gap-4">
