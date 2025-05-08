@@ -83,11 +83,17 @@ font-family: "Poppins";
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
-            display: flex;
-            gap: 1rem;
-            max-width: 70%;
+            scroll-padding-left: 1rem;
           }
-        
+          
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{
