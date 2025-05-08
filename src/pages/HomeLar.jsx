@@ -2,7 +2,7 @@ import api from '../services/api';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import NavbarLogada from "../components/NavbarLogada"; 
+
 
 export default function HomeLar() {
   const [animais, setAnimais] = useState([]);
