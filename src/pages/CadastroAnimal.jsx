@@ -290,7 +290,7 @@ export default function CadastroAnimal() {
     <p className="font-semibold mb-2">Imagem atual:</p>
     <img
       src={animalSelecionado.fotos?.[0]}// ajusta se o caminho for diferente
-      alt="Foto atual do animal"
+      alt="Foto atual do animal" 
       className="w-48 h-48 object-cover rounded-md"
     />
   </div>
