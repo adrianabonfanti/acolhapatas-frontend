@@ -5,12 +5,12 @@ export default function CarouselOngs({ ongs, onClickOng }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
-    <div className="w-full overflow-hidden px-4">
-      <div className="carouselOng">
+    <div className="overflow-x-auto -mx-4 px-4">
+      <div className="flex gap-4 snap-x snap-mandatory pb-4 overflow-x-auto scrollbar-hide">
         {ongs.map((ong) => (
           <div
             key={ong._id}
-            className="snap-start min-w-[120px] bg-white p-2 rounded-xl shadow hover:shadow-md cursor-pointer flex flex-col items-center justify-center flex-shrink-0"
+            className="snap-start w-[140px] flex-shrink-0 bg-white p-2 rounded-xl shadow hover:shadow-md cursor-pointer flex flex-col items-center justify-center"
             onClick={() => onClickOng && onClickOng(ong)}
           >
             <img
