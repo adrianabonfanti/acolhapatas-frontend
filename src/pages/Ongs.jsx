@@ -31,6 +31,13 @@ const Ongs = () => {
       }
 
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      // Envia o e-mail para avisar você
+await api.post("/contato", {
+  name: formData.name,
+  email: formData.responsibleEmail,
+  phone: formData.phone,
+  message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
+});
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
