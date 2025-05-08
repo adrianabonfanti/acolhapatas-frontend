@@ -10,14 +10,25 @@ export default function AdminPanel() {
   };
 
   const aprovar = async (id) => {
-    await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/aprovar/${id}`);
-    buscarPendentes();
+    try {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/aprovar/${id}`);
+      buscarPendentes();
+    } catch (error) {
+      console.error("Erro ao aprovar:", error);
+      alert("Erro ao aprovar cadastro.");
+    }
   };
-
+  
   const recusar = async (id) => {
-    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
-    buscarPendentes();
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
+      buscarPendentes();
+    } catch (error) {
+      console.error("Erro ao recusar:", error);
+      alert("Erro ao recusar cadastro.");
+    }
   };
+  
 
   useEffect(() => {
     buscarPendentes(); 
