@@ -71,8 +71,7 @@ await api.post("/contato", {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="flex-1 p-6 flex flex-col">
+   
               {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
   <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
@@ -98,7 +97,7 @@ await api.post("/contato", {
           ))}
         </div> */}
 
-        {showModal && selectedOng && (
+     {/*    {showModal && selectedOng && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg relative max-w-md w-full">
               <button onClick={closeModal} className="absolute top-2 right-3 text-xl font-bold">✕</button>
@@ -108,11 +107,12 @@ await api.post("/contato", {
               <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
               <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
               <p><strong>Website:</strong> {selectedOng.website}</p>
-              <ContatoFlutuante />
+            
             </div>
           </div>
-        )}
-
+        )} */}
+        <div className="flex min-h-screen">
+      <div className="flex-1 p-6 flex flex-col">
         <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" name="name" placeholder="Nome da ONG" onChange={handleChange} required className="input" />
