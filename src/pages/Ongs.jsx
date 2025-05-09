@@ -81,7 +81,8 @@ await api.post("/contato", {
   </h2>
   <div className="max-w-7xl mx-auto">
   <div className="relative z-0">
-  <CarouselOngs ongs={ongs} />
+  <CarouselOngs ongs={ongs} onClickOng={openModal} />
+
 </div>
 
 
