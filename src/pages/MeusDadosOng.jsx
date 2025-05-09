@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ContatoFlutuante from '../components/ContatoFlutuante';
+import ContatoFlutuante from '../components/ContatoFlutuante'; 
 
 export default function MeusDadosOng() {
   const user = JSON.parse(localStorage.getItem("user"));

@@ -409,6 +409,7 @@ export default function CadastroAnimal() {
           )}
         </div>
       )}
+       <ContatoFlutuante />
     </div>
   );
 }
