@@ -88,6 +88,9 @@ await api.post("/contato", {
 
   </div>
 </section>
+{showModal && selectedOng && (
+  <ModalONG ong={selectedOng} onClose={closeModal} />
+)}
        {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
