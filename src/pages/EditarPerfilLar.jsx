@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function EditarPerfilLar() {
   const [form, setForm] = useState({
@@ -62,13 +62,13 @@ export default function EditarPerfilLar() {
   return (
     <>
   
-    <div className="flex">
+  <div className="p-6">
       {/* Conteúdo principal */}
-      <div className="w-3/4 p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <h1 className="text-2xl font-bold mb-4">Editar Perfil do Lar Temporário</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <input type="text" name="nome" value={form.nome} readOnly className="border p-2 bg-gray-100" />
+          <input type="text" name="nome" value={form.nome} readOnly className="border p-2 " />
           <input type="text" name="telefone" value={form.telefone} onChange={handleChange} className="border p-2" placeholder="Telefone" />
           <input type="text" name="cidade" value={form.cidade} onChange={handleChange} className="border p-2" placeholder="Cidade" />
           <input type="text" name="estado" value={form.estado} onChange={handleChange} className="border p-2" placeholder="Estado" />
@@ -119,7 +119,7 @@ export default function EditarPerfilLar() {
         {mensagem && <p className="text-green-600 mt-4 font-semibold">{mensagem}</p>}
       </div>
 
-    
+      <ContatoFlutuante />
     </div>
     </>
   );

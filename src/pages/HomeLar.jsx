@@ -2,7 +2,7 @@ import api from '../services/api';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function HomeLar() {
   const [animais, setAnimais] = useState([]);
@@ -107,6 +107,7 @@ export default function HomeLar() {
             </div>
           ))}
         </div>
+        
       )}
 
       {modalAberto && animalSelecionado && (
@@ -167,6 +168,7 @@ export default function HomeLar() {
           </div>
         </div>
       )}
+      <ContatoFlutuante />
     </div>
     </>
   );
