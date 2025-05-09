@@ -64,7 +64,7 @@ export default function EditarPerfilLar() {
   
   <div className="p-6">
       {/* Conteúdo principal */}
-      <div className="conteudo-lar grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <h1 className="text-2xl font-bold mb-4">Editar Perfil do Lar Temporário</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
