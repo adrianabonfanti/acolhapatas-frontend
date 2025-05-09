@@ -5,8 +5,8 @@ export default function CarouselOngs({ ongs, onClickOng }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
-    <div className="overflow-x-auto scrollbar-hide">
-      <div className="flex flex-nowrap gap-4 snap-x snap-mandatory pb-4">
+    <div className="w-full overflow-x-auto px-4 scrollbar-hide">
+      <div className="flex gap-4 snap-x snap-mandatory pb-4 w-fit">
         {ongs.map((ong) => (
           <div
             key={ong._id}
