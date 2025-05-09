@@ -79,7 +79,8 @@ await api.post("/contato", {
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
-    <CarouselOngs ongs={ongs} onClickOng={setSelectedOng} />
+  <CarouselOngs ongs={ongs} />
+
   </div>
 </section>
        {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
