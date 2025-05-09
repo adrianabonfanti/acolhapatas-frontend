@@ -133,13 +133,7 @@ font-family: "Poppins";
     .caixaContatoFlutuante{
       bottom: 7.8rem;
     }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+  
     .backTextoHome{
       
     }
