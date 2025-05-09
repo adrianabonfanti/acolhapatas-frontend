@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function MeusDadosOng() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -145,6 +146,8 @@ export default function MeusDadosOng() {
           Salvar Alterações
         </button>
       </form>
-    </div></div>
+    </div>
+    <ContatoFlutuante />
+    </div>
   );
 }
