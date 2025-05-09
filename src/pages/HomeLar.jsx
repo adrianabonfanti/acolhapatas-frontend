@@ -123,31 +123,39 @@ export default function HomeLar() {
               <li><strong>Descrição:</strong> {animalSelecionado.descricao}</li>
             </ul>
             <div className="mt-6 flex flex-col gap-4">
-  <button
-    onClick={async () => {
-      try {
-        const response = await api.get("/contato/acolhimento") // [CONVERTIDO DE FETCH]
-     
+            <button
+  onClick={async () => {
+    try {
+      const mensagem = `
+        O lar temporário ${dadosLar.nome} demonstrou interesse em acolher o animal ${animalSelecionado.nome}.
+        📍 Localização: ${dadosLar.cidade} - ${dadosLar.estado}
+        📞 Telefone: ${dadosLar.telefone}
+        📧 Email: ${dadosLar.email}
+      `;
 
-        const resultado = await response.json();
+      const payload = {
+        name: dadosLar.nome,
+        email: dadosLar.email,
+        phone: dadosLar.telefone,
+        message: mensagem,
+      };
 
-        if (response.ok) {
-          alert("Solicitação enviada com sucesso! 🐾");
-          setTimeout(() => {
-            fecharModal();
-          }, 2000);
-        } else {
-          alert("Erro: " + resultado.message);
-        }
-      } catch (error) {
-        console.error("Erro ao enviar:", error);
-        alert("Erro inesperado ao enviar solicitação.");
-      }
-    }}
-    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded"
-  >
-    Confirmar Interesse
-  </button>
+      await api.post("/contato", payload);
+
+      alert("Solicitação enviada com sucesso! 🐾");
+      setTimeout(() => {
+        fecharModal();
+      }, 2000);
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      alert("Erro inesperado ao enviar solicitação.");
+    }
+  }}
+  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded"
+>
+  Confirmar Interesse
+</button>
+
 </div>
 
             <button
