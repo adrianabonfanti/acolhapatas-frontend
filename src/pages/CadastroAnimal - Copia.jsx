@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
- 
+import ContatoFlutuante from '../components/ContatoFlutuante';
 export default function CadastroAnimal() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
@@ -409,6 +409,7 @@ export default function CadastroAnimal() {
           )}
         </div>
       )}
+       <ContatoFlutuante />
     </div>
   );
 }

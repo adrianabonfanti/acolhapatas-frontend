@@ -20,7 +20,8 @@ function Home() {
   const [showForm, setShowForm] = useState(false);
   const [formEnviado, setFormEnviado] = useState(false);
   const [ongAdocao, setOngAdocao] = useState(null);
-  
+  const [loading, setLoading] = useState(false);
+
   const formRef = useRef();
   const buttonRef = useRef();
 
@@ -56,6 +57,7 @@ function Home() {
 
   const handleEnviarContato = async (e) => {
     e.preventDefault();
+    setLoading(true); // INÍCIO DO LOADING
     const formData = new FormData(e.target);
   
     try {
@@ -71,8 +73,11 @@ function Home() {
     } catch (error) {
       console.error(error);
       alert("Erro ao enviar mensagem. Tente novamente.");
+    } finally {
+      setLoading(false); // FIM DO LOADING
     }
   };
+  
   
 
   return (

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function BuscarLarTemporario() {
   const [filtros, setFiltros] = useState({
@@ -125,6 +126,7 @@ export default function BuscarLarTemporario() {
       ) : (
         <p className="text-gray-500 mt-6">Nenhum lar encontrado.</p>
       )}
+       <ContatoFlutuante />
     </div>
   );
 }

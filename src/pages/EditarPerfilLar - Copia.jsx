@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function EditarPerfilLar() {
   const [form, setForm] = useState({
@@ -62,65 +62,89 @@ export default function EditarPerfilLar() {
   return (
     <>
   
-    <div className="flex">
-      {/* Conteúdo principal */}
-      <div className="w-3/4 p-6">
-        <h1 className="text-2xl font-bold mb-4">Editar Perfil do Lar Temporário</h1>
+  <div className="p-6 max-w-5xl mx-auto">
+  <div className="bg-white shadow-md rounded-3xl p-6 border border-gray-200">
+    <h1 className="text-3xl font-extrabold text-gray-800 mb-8 flex items-center gap-3">
+      <span className="material-icons text-emerald-500">home</span>
+      Editar Perfil do Lar Temporário
+    </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <input type="text" name="nome" value={form.nome} readOnly className="border p-2 bg-gray-100" />
-          <input type="text" name="telefone" value={form.telefone} onChange={handleChange} className="border p-2" placeholder="Telefone" />
-          <input type="text" name="cidade" value={form.cidade} onChange={handleChange} className="border p-2" placeholder="Cidade" />
-          <input type="text" name="estado" value={form.estado} onChange={handleChange} className="border p-2" placeholder="Estado" />
-          <input type="text" name="cep" value={form.cep} onChange={handleChange} className="border p-2" placeholder="CEP" />
-          <input type="text" name="rua" value={form.rua} onChange={handleChange} className="border p-2" placeholder="Rua" />
-          <input type="text" name="numero" value={form.numero} onChange={handleChange} className="border p-2" placeholder="Número" />
-          <input type="text" name="complemento" value={form.complemento} onChange={handleChange} className="border p-2" placeholder="Complemento" />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <input type="text" name="nome" value={form.nome} readOnly className="input bg-gray-100" />
+      <input type="text" name="telefone" value={form.telefone} onChange={handleChange} className="input" placeholder="Telefone" />
+      <input type="text" name="cidade" value={form.cidade} onChange={handleChange} className="input" placeholder="Cidade" />
+      <input type="text" name="estado" value={form.estado} onChange={handleChange} className="input" placeholder="Estado" />
+      <input type="text" name="cep" value={form.cep} onChange={handleChange} className="input" placeholder="CEP" />
+      <input type="text" name="rua" value={form.rua} onChange={handleChange} className="input" placeholder="Rua" />
+      <input type="text" name="numero" value={form.numero} onChange={handleChange} className="input" placeholder="Número" />
+      <input type="text" name="complemento" value={form.complemento} onChange={handleChange} className="input" placeholder="Complemento" />
 
-          <select multiple name="especie" value={form.especie} onChange={handleChange} className="border p-2">
-            <option value="cachorro">Cachorro</option>
-            <option value="gato">Gato</option>
-          </select>
-          <select multiple name="porte" value={form.porte} onChange={handleChange} className="border p-2">
-            <option value="pequeno">Pequeno</option>
-            <option value="medio">Médio</option>
-            <option value="grande">Grande</option>
-          </select>
-          <select multiple name="idade" value={form.idade} onChange={handleChange} className="border p-2">
-            <option value="filhote">Filhote</option>
-            <option value="adulto">Adulto</option>
-            <option value="idoso">Idoso</option>
-          </select>
-
-          <select name="sexo" value={form.sexo} onChange={handleChange} className="border p-2">
-            <option value="">Todos os Sexos</option>
-            <option value="macho">Macho</option>
-            <option value="femea">Fêmea</option>
-            <option value="tanto-faz">Tanto faz</option>
-          </select>
-
-          <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} className="border p-2" placeholder="Vagas disponíveis" />
-
-          <div className="flex items-center gap-2">
-            <input type="checkbox" name="medicacao" checked={form.medicacao} onChange={handleChange} /> Usa medicação
-          </div>
-          <div className="flex items-center gap-2">
-            <input type="checkbox" name="tratamento" checked={form.tratamento} onChange={handleChange} /> Está em tratamento
-          </div>
-          <div className="flex items-center gap-2">
-            <input type="checkbox" name="necessidadesEspeciais" checked={form.necessidadesEspeciais} onChange={handleChange} /> Aceita animais com deficiência
-          </div>
-        </div>
-
-        <button onClick={salvarAlteracoes} className="bg-blue-600 text-white px-6 py-2 rounded font-bold">
-          Salvar Alterações
-        </button>
-
-        {mensagem && <p className="text-green-600 mt-4 font-semibold">{mensagem}</p>}
+      <div>
+        <label className="block font-semibold mb-1">Espécie</label>
+        <select multiple name="especie" value={form.especie} onChange={handleChange} className="input h-28">
+          <option value="cachorro">Cachorro</option>
+          <option value="gato">Gato</option>
+        </select>
       </div>
 
-    
+      <div>
+        <label className="block font-semibold mb-1">Porte</label>
+        <select multiple name="porte" value={form.porte} onChange={handleChange} className="input h-28">
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block font-semibold mb-1">Faixa Etária</label>
+        <select multiple name="idade" value={form.idade} onChange={handleChange} className="input h-28">
+          <option value="filhote">Filhote</option>
+          <option value="adulto">Adulto</option>
+          <option value="idoso">Idoso</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block font-semibold mb-1">Sexo</label>
+        <select name="sexo" value={form.sexo} onChange={handleChange} className="input">
+          <option value="">Todos os Sexos</option>
+          <option value="macho">Macho</option>
+          <option value="femea">Fêmea</option>
+          <option value="tanto-faz">Tanto faz</option>
+        </select>
+      </div>
+
+      <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} className="input" placeholder="Vagas disponíveis" />
+
+      <div className="flex items-center gap-2 col-span-1 md:col-span-2">
+        <input type="checkbox" name="medicacao" checked={form.medicacao} onChange={handleChange} className="w-5 h-5 text-emerald-600" />
+        <span className="text-sm">Aceita animais que usam medicação</span>
+      </div>
+
+      <div className="flex items-center gap-2 col-span-1 md:col-span-2">
+        <input type="checkbox" name="tratamento" checked={form.tratamento} onChange={handleChange} className="w-5 h-5 text-emerald-600" />
+        <span className="text-sm">Está em tratamento</span>
+      </div>
+
+      <div className="flex items-center gap-2 col-span-1 md:col-span-2">
+        <input type="checkbox" name="necessidadesEspeciais" checked={form.necessidadesEspeciais} onChange={handleChange} className="w-5 h-5 text-emerald-600" />
+        <span className="text-sm">Aceita animais com deficiência</span>
+      </div>
     </div>
+
+    <div className="mt-8 text-right">
+      <button onClick={salvarAlteracoes} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full font-semibold shadow inline-flex items-center gap-2">
+        <span className="material-icons">check_circle</span> Salvar Alterações
+      </button>
+    </div>
+
+    {mensagem && <p className="text-green-600 mt-4 font-semibold">{mensagem}</p>}
+  </div>
+
+  <ContatoFlutuante />
+</div>
+
     </>
   );
 }
