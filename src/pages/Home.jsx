@@ -61,12 +61,14 @@ function Home() {
     const formData = new FormData(e.target);
   
     try {
-      await api.post("/contato", {
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // simula atraso
+
+    /*   await api.post("/contato", {
         name: formData.get("name"),
         email: formData.get("email"),
         phone: formData.get("phone"),
         message: formData.get("message")
-      });
+      }); */
   
       setFormEnviado(true);
       setShowForm(false);
@@ -237,7 +239,21 @@ function Home() {
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
             <input name="email" type="email" placeholder="E-mail" className="w-full mb-2 p-2 border rounded" required />
             <textarea name="message" placeholder="Mensagem" className="w-full mb-2 p-2 border rounded" required />
-            <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full">Enviar</button>
+            <button
+  type="submit"
+  disabled={loading}
+  className={`bg-emerald-500 text-white px-4 py-2 rounded w-full flex justify-center items-center gap-2 ${loading ? 'opacity-60 cursor-not-allowed' : 'hover:bg-emerald-600'}`}
+>
+  {loading ? (
+    <>
+      <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      Enviando...
+    </>
+  ) : (
+    "Enviar"
+  )}
+</button>
+
           </form>
         </div>
       )}
