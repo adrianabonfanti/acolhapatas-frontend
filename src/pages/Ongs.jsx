@@ -9,7 +9,7 @@ const Ongs = () => {
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
   const [selectedOng, setSelectedOng] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
