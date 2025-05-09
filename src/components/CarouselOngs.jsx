@@ -6,7 +6,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
 
   return (
     <div className="w-full overflow-x-auto px-4 scrollbar-hide">
-      <div className="flex gap-4 snap-x snap-mandatory pb-4 w-fit">
+      <div className="flex gap-4 snap-x snap-mandatory pb-4 w-fit carrossel">
         {ongs.map((ong) => (
           <div
             key={ong._id}
