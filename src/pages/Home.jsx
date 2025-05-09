@@ -145,6 +145,7 @@ function Home() {
       key={animal._id}
       animal={animal}
       onAdotar={handleAdotar}
+      onImagemCarregada={handleImagemCarregada}
     />
   );
 })}
