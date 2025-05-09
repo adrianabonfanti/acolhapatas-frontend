@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
-
+import ModalOng from "../components/ModalOng";
 const Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
@@ -73,9 +73,7 @@ await api.post("/contato", {
   return (
     <div className="flex min-h-screen">
       <div className="flex-1 p-6 flex flex-col">
-        <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
-
-        {/* ONGs Participantes */}
+              {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
   <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
     ONGs participantes
@@ -84,7 +82,7 @@ await api.post("/contato", {
     <CarouselOngs ongs={ongs} onClickOng={setSelectedOng} />
   </div>
 </section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+       {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
    <div className="w-full min-h-[120px] max-h-[180px] flex items-center justify-center bg-white rounded-lg shadow p-2">
@@ -98,7 +96,7 @@ await api.post("/contato", {
 
             </div>
           ))}
-        </div>
+        </div> */}
 
         {showModal && selectedOng && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
