@@ -2,7 +2,7 @@ import api from '../services/api';
 
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
+import ContatoFlutuante from '../components/ContatoFlutuante';
 export default function HomeOng() {
   const navigate = useNavigate();
   const [animais, setAnimais] = useState([]);
