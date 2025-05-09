@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
-import ModalOng from "../components/ModalOng";
+
 const Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
