@@ -8,8 +8,8 @@ const Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
-  const [selectedOng, setSelectedOng] = useState(null);
-  const [showModal, setShowModal] = useState(false); 
+   const [ongAdocao, setOngAdocao] = useState(null);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,8 +79,7 @@ await api.post("/contato", {
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
-  <CarouselOngs ongs={ongs} />
-
+    <CarouselOngs ongs={ongs} onClickOng={setOngAdocao} />
   </div>
 </section>
        {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
