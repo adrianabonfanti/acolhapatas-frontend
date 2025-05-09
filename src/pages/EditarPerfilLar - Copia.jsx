@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import NavbarLar from "../components/NavbarLar"; // ajuste o caminho se necessário
+
 
 export default function EditarPerfilLar() {
   const [form, setForm] = useState({
@@ -43,12 +43,13 @@ export default function EditarPerfilLar() {
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
-  };
+  }; 
 
   const salvarAlteracoes = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:5000/lartemporario/editar", form, {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/lartemporario/editar`, form, {
+
         headers: { Authorization: `Bearer ${token}` },
       });
       setMensagem("Perfil atualizado com sucesso!");
@@ -60,7 +61,7 @@ export default function EditarPerfilLar() {
 
   return (
     <>
-    <NavbarLar />
+  
     <div className="flex">
       {/* Conteúdo principal */}
       <div className="w-3/4 p-6">
@@ -118,10 +119,7 @@ export default function EditarPerfilLar() {
         {mensagem && <p className="text-green-600 mt-4 font-semibold">{mensagem}</p>}
       </div>
 
-      {/* Publicidade */}
-      <div className="w-1/4 p-4">
-        <div className="bg-gray-200 h-full rounded shadow text-center p-4">ESPAÇO PARA PUBLICIDADE</div>
-      </div>
+    
     </div>
     </>
   );

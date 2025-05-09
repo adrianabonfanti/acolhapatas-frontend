@@ -15,7 +15,7 @@ function Login() {
     const rota = tipoUsuario === "ong" ? "login-ong" : "login-lar";
 
     try {
-      const response = await fetch(`http://localhost:5000/${rota}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${rota}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -86,13 +86,7 @@ function Login() {
         </form>
       </div>
 
-      {/* Publicidade lateral */}
-      <div className="hidden lg:block w-64 bg-gray-100 p-4">
-        <h2 className="text-lg font-bold mb-2">Publicidade</h2>
-        <div className="w-full h-96 bg-gray-300 flex items-center justify-center">
-          <span className="text-gray-600">Seu Anúncio Aqui</span>
-        </div>
-      </div>
+    
 
       {/* Botão flutuante de contato */}
       <button

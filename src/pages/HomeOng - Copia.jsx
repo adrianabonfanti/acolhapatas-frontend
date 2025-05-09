@@ -17,15 +17,21 @@ export default function HomeOng() {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = user?.token;
   
-    api.get("/animals") // [CONVERTIDO DE FETCH]
-      .then((res) => res.json())
-      .then((data) => {
-        setAnimais(data.slice(-6).reverse()); // Últimos 6 cadastrados
+    api.get("/animals", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => {
+        const data = res.data;
+        setAnimais(data.slice(-6).reverse());
         setTotalAnimais(data.length);
         setPrecisamLarTemporario(data.filter(a => a.precisaLarTemporario).length);
       })
-      .catch((err) => console.error("Erro ao buscar animais:", err));
+      .catch((err) => console.error("Erro ao buscar animais da ONG:", err));
   }, []);
+  
+  
   
 
   useEffect(() => {
@@ -34,7 +40,7 @@ export default function HomeOng() {
         formRef.current && !formRef.current.contains(event.target) &&
         buttonRef.current && !buttonRef.current.contains(event.target)
       ) {
-        setShowForm(false);
+        setShowForm(false); 
       }
     }
 
@@ -91,7 +97,7 @@ export default function HomeOng() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {animais.map((animal) => (
           <div key={animal._id} className="bg-white shadow-md p-4 rounded-lg">
-            <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
+            <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
             <h4 className="text-lg font-semibold mt-2">{animal.nome}</h4>
             <p className="text-sm mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
 

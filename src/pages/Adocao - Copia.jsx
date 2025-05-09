@@ -34,7 +34,8 @@ export default function Adocao() {
       if (filtros.cidade) query.append("cidade", filtros.cidade.trim().toLowerCase());
       if (filtros.estado) query.append("estado", filtros.estado.toUpperCase());
 
-      const response = await axios.get(`http://localhost:5000/public/animals?${query.toString()}`);
+      const response = await axios.get(`https://acolhapatas-api.onrender.com/public/animals?${query.toString()}`);
+
       setAnimais(response.data);
     } catch (error) {
       console.error("Erro ao buscar animais:", error);
@@ -43,7 +44,8 @@ export default function Adocao() {
 
   const buscarOngs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/public/ongs");
+      const response = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+
       setOngs(response.data);
     } catch (error) {
       console.error("Erro ao buscar ONGs:", error);
@@ -52,7 +54,8 @@ export default function Adocao() {
   useEffect(() => {
     async function carregarOngs() {
       try {
-        const res = await axios.get("http://localhost:5000/public/ongs");
+        const res = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+
         setOngs(res.data);
       } catch (error) {
         console.error("Erro ao carregar ONGs:", error);
@@ -88,16 +91,17 @@ export default function Adocao() {
   const handleEnviarContato = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+  
     try {
-      const response = await api.get("/ajax/adrianahbonfanti@gmail.com") // [CONVERTIDO DE FETCH];
-
-      if (response.ok) {
-        setFormEnviado(true);
-        setShowForm(false);
-      } else {
-        alert("Erro ao enviar mensagem. Tente novamente.");
-      }
+      await api.post("/contato", {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        message: formData.get("message")
+      });
+  
+      setFormEnviado(true);
+      setShowForm(false);
     } catch (error) {
       console.error(error);
       alert("Erro ao enviar mensagem. Tente novamente.");
@@ -254,7 +258,7 @@ export default function Adocao() {
         {animais.length > 0 ? (
           animais.map((animal) => (
             <div key={animal._id} className="bg-white rounded-3xl shadow-md hover:shadow-lg p-4 flex flex-col">
-  <img src={`http://localhost:5000/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded-xl mb-4" />
+  <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded-xl mb-4" />
 
   <h3 className="text-lg font-bold text-gray-800 mb-1">{animal.nome}</h3>
   <p className="text-sm text-gray-600 mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
@@ -359,7 +363,7 @@ export default function Adocao() {
       {ongAdocao.logo && (
   <div className="mb-4 text-center">
     <img
-      src={`http://localhost:5000/uploads/${ongAdocao.logo}`}
+      src={ongAdocao.logo}
       alt={`Logo da ${ongAdocao.nome}`}
       className="h-24 mx-auto object-contain"
     />

@@ -51,6 +51,12 @@ const handleEnviarContato = async (e) => {
       if (res.status === 200) {
         setShowModal(true);
         form.reset();
+        await api.post("/contato", {
+          name: body.nome,
+          email: body.email,
+          phone: body.telefone,
+          message: `Novo cadastro de lar temporário:\n\nNome: ${body.nome}\nEmail: ${body.email}\nTelefone: ${body.telefone}\nCidade: ${body.cidade} - ${body.estado}`
+        });
       } else {
         alert("Erro ao enviar cadastro.");
       }

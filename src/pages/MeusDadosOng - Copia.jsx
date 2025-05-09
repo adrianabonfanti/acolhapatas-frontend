@@ -30,11 +30,11 @@ export default function MeusDadosOng() {
   useEffect(() => {
     const buscarDados = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/ongs/${ongId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
-        setLogoPreview(`http://localhost:5000/uploads/${response.data.logo}`);
+        setLogoPreview(response.data.logo);
       } catch (error) {
         console.error("Erro ao buscar dados da ONG:", error);
       }
@@ -84,7 +84,7 @@ export default function MeusDadosOng() {
         data.append("logo", novaLogo);
       }
 
-      await axios.put(`http://localhost:5000/ongs/${ongId}`, data, {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

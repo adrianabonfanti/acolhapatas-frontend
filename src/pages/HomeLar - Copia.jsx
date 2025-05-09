@@ -2,7 +2,7 @@ import api from '../services/api';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import NavbarLar from "../components/NavbarLar"; // ajuste o caminho se necessário
+
 
 export default function HomeLar() {
   const [animais, setAnimais] = useState([]);
@@ -41,7 +41,7 @@ export default function HomeLar() {
         query.medicacao = true;
       }
       console.log("ENVIANDO PARA API:", query);
-      const response = await axios.get("http://localhost:5000/public/animais-filtrados-por-lar", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
         params: query
       });
       
@@ -80,7 +80,7 @@ export default function HomeLar() {
 
   return (
     <>
-    <NavbarLar />
+  
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Animais Disponíveis para Acolhimento</h1>
 
@@ -90,7 +90,7 @@ export default function HomeLar() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {animais.map((animal) => (
             <div key={animal._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={`http://localhost:5000/uploads/${animal.fotos[0]}`} alt={animal.nome} className="w-full h-48 object-cover rounded" />
+              <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{animal.nome}</h2>
                 <p><strong>Espécie:</strong> {animal.especie}</p>
@@ -123,31 +123,39 @@ export default function HomeLar() {
               <li><strong>Descrição:</strong> {animalSelecionado.descricao}</li>
             </ul>
             <div className="mt-6 flex flex-col gap-4">
-  <button
-    onClick={async () => {
-      try {
-        const response = await api.get("/contato/acolhimento") // [CONVERTIDO DE FETCH]
-        });
+            <button
+  onClick={async () => {
+    try {
+      const mensagem = `
+        O lar temporário ${dadosLar.nome} demonstrou interesse em acolher o animal ${animalSelecionado.nome}.
+        📍 Localização: ${dadosLar.cidade} - ${dadosLar.estado}
+        📞 Telefone: ${dadosLar.telefone}
+        📧 Email: ${dadosLar.email}
+      `;
 
-        const resultado = await response.json();
+      const payload = {
+        name: dadosLar.nome,
+        email: dadosLar.email,
+        phone: dadosLar.telefone,
+        message: mensagem,
+      };
 
-        if (response.ok) {
-          alert("Solicitação enviada com sucesso! 🐾");
-          setTimeout(() => {
-            fecharModal();
-          }, 2000);
-        } else {
-          alert("Erro: " + resultado.message);
-        }
-      } catch (error) {
-        console.error("Erro ao enviar:", error);
-        alert("Erro inesperado ao enviar solicitação.");
-      }
-    }}
-    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded"
-  >
-    Confirmar Interesse
-  </button>
+      await api.post("/contato", payload);
+
+      alert("Solicitação enviada com sucesso! 🐾");
+      setTimeout(() => {
+        fecharModal();
+      }, 2000);
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      alert("Erro inesperado ao enviar solicitação.");
+    }
+  }}
+  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded"
+>
+  Confirmar Interesse
+</button>
+
 </div>
 
             <button

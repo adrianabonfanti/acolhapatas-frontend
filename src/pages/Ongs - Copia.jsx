@@ -2,13 +2,15 @@ import api from '../services/api';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
+import CarouselOngs from '../components/CarouselOngs';
+import ModalONG from '../components/ModalOng';
 
 const Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
   const [selectedOng, setSelectedOng] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,11 +72,26 @@ await api.post("/contato", {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="relative  min-h-screen">
       <div className="flex-1 p-6 flex flex-col">
-        <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
+              {/* ONGs Participantes */}
+        <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+    ONGs participantes
+  </h2>
+  <div className="max-w-7xl mx-auto">
+  <div className="relative z-0">
+  <CarouselOngs ongs={ongs} onClickOng={openModal} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+</div>
+
+
+  </div>
+</section>
+{showModal && selectedOng && (
+  <ModalONG ong={selectedOng} onClose={closeModal} />
+)}
+       {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
    <div className="w-full min-h-[120px] max-h-[180px] flex items-center justify-center bg-white rounded-lg shadow p-2">
@@ -88,9 +105,9 @@ await api.post("/contato", {
 
             </div>
           ))}
-        </div>
+        </div> */}
 
-        {showModal && selectedOng && (
+     {/*    {showModal && selectedOng && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg relative max-w-md w-full">
               <button onClick={closeModal} className="absolute top-2 right-3 text-xl font-bold">✕</button>
@@ -100,10 +117,10 @@ await api.post("/contato", {
               <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
               <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
               <p><strong>Website:</strong> {selectedOng.website}</p>
-              <ContatoFlutuante />
+            
             </div>
           </div>
-        )}
+        )} */}
 
         <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">

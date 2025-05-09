@@ -8,14 +8,19 @@ import CheckIcon from '@mui/icons-material/CheckCircle';
 import MedicationIcon from '@mui/icons-material/Medication';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
+import CarouselOngs from '../components/CarouselOngs';
+import ModalOng from "../components/ModalOng";
+
+
+
 function Home() {
   const navigate = useNavigate();
   const [animais, setAnimais] = useState([]);
   const [ongs, setOngs] = useState([]);
-  const [ongSelecionada, setOngSelecionada] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formEnviado, setFormEnviado] = useState(false);
   const [ongAdocao, setOngAdocao] = useState(null);
+  
   const formRef = useRef();
   const buttonRef = useRef();
 
@@ -72,11 +77,11 @@ function Home() {
 
   return (
     <>
-    <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero.png")' }}>
+    <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero_horizontal.jpg")' }}>
   <div className="absolute inset-0  z-0" />
   
   <div className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10">
-    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-snug ">
+    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-snug "> 
       Um lar temporário pode mudar uma vida
     </h1>
     <p className="text-lg sm:text-xl text-white/90 ">
@@ -107,11 +112,26 @@ function Home() {
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
     {animais.map((animal) => (
       <div key={animal._id} className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
-        <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${animal.fotos[0]}`} 
-          alt={animal.nome}
-          className="w-full h-60 object-cover"
-        />
+{animal.fotos[0] ? (
+  <img
+    src={animal.fotos[0]}
+    alt={animal.nome}
+    className="w-full h-60 object-cover"
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = "/placeholder.png";
+    }}
+  />
+) : (
+  <img
+    src="/placeholder.png"
+    alt="Imagem não disponível"
+    className="w-full h-60 object-cover"
+  />
+)}
+
+
+
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 capitalize mb-1">{animal.nome}</h3>
           <p className="text-sm text-gray-500 mb-3">
@@ -146,15 +166,15 @@ function Home() {
 </div>
 
           <button
-            onClick={() => {
-              const ongId = animal.ong?.$oid || animal.ong;
-              const ongAnimal = ongs.find((ong) => ong._id === ongId);
-              if (ongAnimal) {
-                setOngAdocao(ongAnimal);
-              } else {
-                alert("ONG não encontrada para este animal.");
-              }
-            }}
+        onClick={() => {
+          const ongId = animal.ong?.$oid || animal.ong;
+          const ongAnimal = ongs.find((ong) => ong._id === ongId);
+          if (ongAnimal) {
+            setOngAdocao(ongAnimal);
+          } else {
+            alert("ONG não encontrada para este animal.");
+          }
+        }}
             className="botaoQueroAdotar w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm py-2 rounded-full transition duration-300"
           >
             Quero Adotar
@@ -176,51 +196,16 @@ function Home() {
 
 
         {/* ONGs Participantes */}
-        <section className="py-12 px-4 sm:px-8 bg-white">
-  <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center ">
+        <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
     ONGs participantes
   </h2>
-
-  <div className="ongsHome grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-    {ongs.map((ong) => (
-      <div
-        key={ong._id}
-        className="group bg-gray-50 rounded-2xl p-4 shadow hover:shadow-md flex flex-col items-center transition cursor-pointer relative"
-        onClick={() => setOngSelecionada(ong)}
-      >
-        <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ong.logo}`}
-          alt={ong.nome}
-          className=""
-        />
-        <h3 className="text-sm font-semibold text-center text-gray-700">{ong.nome}</h3>
-      </div>
-    ))}
+  <div className="max-w-7xl mx-auto">
+    <CarouselOngs ongs={ongs} onClickOng={setOngAdocao} />
   </div>
-
-  {ongSelecionada && (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white max-w-md w-full p-6 rounded-2xl shadow-lg relative">
-        <button
-          onClick={() => setOngSelecionada(null)}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-        >
-          ✕
-        </button>
-        <h3 className="text-xl font-bold mb-4 text-gray-800">{ongSelecionada.nome}</h3>
-        <p className="text-sm text-gray-600 mb-2">
-          <strong>Email:</strong> {ongSelecionada.email}
-        </p>
-        <p className="text-sm text-gray-600 mb-2">
-          <strong>Telefone:</strong> {ongSelecionada.telefone}
-        </p>
-        <p className="text-sm text-gray-600 mb-2">
-          <strong>Instagram:</strong> {ongSelecionada.instagram}
-        </p>
-      </div>
-    </div>
-  )}
 </section>
+
+
 
       </div>
 
@@ -229,251 +214,6 @@ function Home() {
       {/* Modais e Botões flutuantes */}
   
 
-{ongSelecionada && (
-  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-    <div className="bg-white w-full max-w-lg p-6 rounded-3xl shadow-xl relative">
-      <button
-        onClick={() => setOngSelecionada(null)}
-        className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
-      >
-        ✕
-      </button>
-
-      {ongSelecionada.logo && (
-        <div className="mb-4 text-center">
-          <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongSelecionada.logo}`}
-            alt={`Logo da ${ongSelecionada.nome}`}
-            className="h-24 mx-auto object-contain"
-          />
-        </div>
-      )}
-
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-extrabold text-gray-800">Informações da ONG</h3>
-        <p className="text-sm text-gray-500 mt-1">Confira os dados completos da instituição</p>
-      </div>
-
-      <div className="space-y-3 text-gray-700 text-sm">
-        {ongSelecionada.nome && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">business</span>
-            <strong className="w-36">Nome:</strong> {ongSelecionada.nome}
-          </p>
-        )}
-        {ongSelecionada.responsibleName && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">person</span>
-            <strong className="w-36">Responsável:</strong> {ongSelecionada.responsibleName}
-          </p>
-        )}
-        {ongSelecionada.cnpj && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">badge</span>
-            <strong className="w-36">CNPJ:</strong> {ongSelecionada.cnpj}
-          </p>
-        )}
-        {ongSelecionada.phone && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">call</span>
-            <strong className="w-36">Telefone:</strong> {ongSelecionada.phone}
-          </p>
-        )}
-        {ongSelecionada.responsibleEmail && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">mail</span>
-            <strong className="w-36">Email Resp.:</strong>
-            <a href={`mailto:${ongSelecionada.responsibleEmail}`} className="text-emerald-600 hover:underline">
-              {ongSelecionada.responsibleEmail}
-            </a>
-          </p>
-        )}
-        {ongSelecionada.email && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">email</span>
-            <strong className="w-36">Email ONG:</strong>
-            <a href={`mailto:${ongSelecionada.email}`} className="text-emerald-600 hover:underline">
-              {ongSelecionada.email}
-            </a>
-          </p>
-        )}
-        {ongSelecionada.instagram && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">photo_camera</span>
-            <strong className="w-36">Instagram:</strong>
-            <a
-              href={`https://instagram.com/${ongSelecionada.instagram.replace("@", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              @{ongSelecionada.instagram.replace("@", "")}
-            </a>
-          </p>
-        )}
-        {ongSelecionada.tiktok && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">smart_display</span>
-            <strong className="w-36">TikTok:</strong> @{ongSelecionada.tiktok}
-          </p>
-        )}
-        {ongSelecionada.website && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">language</span>
-            <strong className="w-36">Site:</strong>
-            <a
-              href={ongSelecionada.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              {ongSelecionada.website}
-            </a>
-          </p>
-        )}
-        {ongSelecionada.cep && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">location_on</span>
-            <strong className="w-36">CEP:</strong> {ongSelecionada.cep}
-          </p>
-        )}
-        {(ongSelecionada.street || ongSelecionada.number || ongSelecionada.complement) && (
-          <p className="flex items-start gap-2">
-            <span className="material-icons text-emerald-600 mt-0.5">home</span>
-            <strong className="w-36">Endereço:</strong> 
-            <span>
-              {ongSelecionada.street}, {ongSelecionada.number} {ongSelecionada.complement && `- ${ongSelecionada.complement}`}<br/>
-              {ongSelecionada.city} - {ongSelecionada.state}
-            </span>
-          </p>
-        )}
-      </div>
-    </div>
-  </div>
-)}
-
-{ongAdocao && (
-  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-    <div className="bg-white w-full max-w-lg p-6 rounded-3xl shadow-xl relative">
-      <button
-        onClick={() => setOngAdocao(null)}
-        className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
-      >
-        ✕
-      </button> 
- 
-      {ongAdocao.logo && (
-        <div className="mb-4 text-center">
-          <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${ongAdocao.logo}`}
-            alt={`Logo da ${ongAdocao.nome}`}
-            className="h-24 mx-auto object-contain"
-          />
-        </div>
-      )}
-
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-extrabold text-gray-800">Informações da ONG</h3>
-        <p className="text-sm text-gray-500 mt-1">Confira os dados completos da instituição</p>
-      </div>
-
-      <div className="space-y-3 text-gray-700 text-sm">
-        {ongAdocao.nome && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">business</span>
-            <strong className="w-36">Nome:</strong> {ongAdocao.nome}
-          </p>
-        )}
-        {ongAdocao.responsibleName && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">person</span>
-            <strong className="w-36">Responsável:</strong> {ongAdocao.responsibleName}
-          </p>
-        )}
-        {ongAdocao.cnpj && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">badge</span>
-            <strong className="w-36">CNPJ:</strong> {ongAdocao.cnpj}
-          </p>
-        )}
-        {ongAdocao.phone && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">call</span>
-            <strong className="w-36">Telefone:</strong> {ongAdocao.phone}
-          </p>
-        )}
-        {ongAdocao.responsibleEmail && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">mail</span>
-            <strong className="w-36">Email Resp.:</strong>
-            <a href={`mailto:${ongAdocao.responsibleEmail}`} className="text-emerald-600 hover:underline">
-              {ongAdocao.responsibleEmail}
-            </a>
-          </p>
-        )}
-        {ongAdocao.email && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">email</span>
-            <strong className="w-36">Email ONG:</strong>
-            <a href={`mailto:${ongAdocao.email}`} className="text-emerald-600 hover:underline">
-              {ongAdocao.email}
-            </a>
-          </p>
-        )}
-        {ongAdocao.instagram && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">photo_camera</span>
-            <strong className="w-36">Instagram:</strong>
-            <a
-              href={`https://instagram.com/${ongAdocao.instagram.replace("@", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              @{ongAdocao.instagram.replace("@", "")}
-            </a>
-          </p>
-        )}
-        {ongAdocao.tiktok && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">smart_display</span>
-            <strong className="w-36">TikTok:</strong> @{ongAdocao.tiktok}
-          </p>
-        )}
-        {ongAdocao.website && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">language</span>
-            <strong className="w-36">Site:</strong>
-            <a
-              href={ongAdocao.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              {ongAdocao.website}
-            </a>
-          </p>
-        )}
-        {ongAdocao.cep && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">location_on</span>
-            <strong className="w-36">CEP:</strong> {ongAdocao.cep}
-          </p>
-        )}
-        {(ongAdocao.street || ongAdocao.number || ongAdocao.complement) && (
-          <p className="flex items-start gap-2">
-            <span className="material-icons text-emerald-600 mt-0.5">home</span>
-            <strong className="w-36">Endereço:</strong> 
-            <span>
-              {ongAdocao.street}, {ongAdocao.number} {ongAdocao.complement && `- ${ongAdocao.complement}`}<br/>
-              {ongAdocao.city} - {ongAdocao.state}
-            </span>
-          </p>
-        )}
-      </div>
-    </div>
-  </div>
-)}
 
       <button 
         ref={buttonRef}
@@ -503,7 +243,15 @@ function Home() {
           <button onClick={() => setFormEnviado(false)} className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded">Fechar</button>
         </div>
       )}
-    </div></>
+    </div>
+    {ongAdocao && (
+  <ModalOng
+    ong={ongAdocao}
+    onClose={() => setOngAdocao(null)}
+  />
+)}
+
+    </>
   );
 }
 

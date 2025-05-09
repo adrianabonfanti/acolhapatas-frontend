@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import HomeLar from "./HomeLar";
+import EditarPerfilLar from "./EditarPerfilLar";
+import NavbarLogada from "../components/NavbarLogada";
 import "../styles/Home.css";
+
 export default function PainelLar() {
   const [user, setUser] = useState(null);
+  const [paginaAtual, setPaginaAtual] = useState("home");
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -21,9 +25,12 @@ export default function PainelLar() {
   }
 
   return (
-    <div className="p-6">
-     
-      <HomeLar />
-    </div>
+    <>
+      <NavbarLogada setActivePage={setPaginaAtual} />
+      <div className="p-6">
+        {paginaAtual === "home" && <HomeLar />}
+        {paginaAtual === "meusDados" && <EditarPerfilLar />}
+      </div>
+    </>
   );
 }
