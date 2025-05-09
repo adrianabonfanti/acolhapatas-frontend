@@ -101,7 +101,7 @@ export default function MeusDadosOng() {
 
       {logoPreview && (
         <div className="mb-6">
-          <img src={logoPreview} alt="Logo atual" className="w-48 h-48 object-cover rounded shadow mb-4" />
+          <img src={logoPreview} alt="Logo atual" className="w-48 h-48  rounded shadow mb-4" />
           <input type="file" onChange={handleLogoChange} />
         </div>
       )}
