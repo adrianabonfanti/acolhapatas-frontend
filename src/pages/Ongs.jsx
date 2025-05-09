@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
+import ModalONG from '../components/ModalOng';
 
 const Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
-   const [ongAdocao, setOngAdocao] = useState(null);
-
+  const [selectedOng, setSelectedOng] = useState(null);
+  const [showModal, setShowModal] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +80,7 @@ await api.post("/contato", {
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
-    <CarouselOngs ongs={ongs} onClickOng={setOngAdocao} />
+    <CarouselOngs ongs={ongs} onClickOng={setSelectedOng} />
   </div>
 </section>
        {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
