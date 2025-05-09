@@ -101,9 +101,28 @@ export default function MeusDadosOng() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       {logoPreview && (
         <div className="mb-6">
-          <img src={logoPreview} alt="Logo atual" className="w-48 h-48  rounded shadow mb-4" />
-          <input type="file" onChange={handleLogoChange} />
-        </div>
+        {logoPreview && (
+          <img
+            src={logoPreview}
+            alt="Logo atual"
+            className="w-48 h-48 object-contain rounded shadow mb-4"
+          />
+        )}
+        <label
+          htmlFor="uploadLogo"
+          className="cursor-pointer inline-block bg-emerald-500 text-white px-4 py-2 rounded hover:bg-emerald-600 transition w-fit text-center text-sm"
+        >
+          Escolher nova logo
+        </label>
+        <input
+          type="file"
+          id="uploadLogo"
+          accept="image/*"
+          onChange={handleLogoChange}
+          className="hidden"
+        />
+      </div>
+      
       )}
 
       <form onSubmit={salvarAlteracoes} className="grid grid-cols-1 md:grid-cols-2 gap-4">
