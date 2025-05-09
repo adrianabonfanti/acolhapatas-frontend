@@ -32,12 +32,15 @@ function Home() {
   
   useEffect(() => {
     api.get("/random/6")
-    .then((res) => setAnimais(res.data));
-    setTotalImagens(res.data.length); // total de imagens esperadas
+      .then((res) => {
+        setAnimais(res.data);
+        setTotalImagens(res.data.length);
+      });
   
-  api.get("/public/ongs")
-    .then((res) => setOngs(res.data));
-  
+    api.get("/public/ongs")
+      .then((res) => {
+        setOngs(res.data);
+      });
   }, []);
 
   useEffect(() => {
