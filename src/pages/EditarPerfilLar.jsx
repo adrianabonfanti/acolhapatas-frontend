@@ -62,9 +62,9 @@ export default function EditarPerfilLar() {
   return (
     <>
   
-  <div className="p-6">
+  <div className="flex-1 flex flex-col">
       {/* Conteúdo principal */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6bg-white border border-emerald-100 rounded-2xl p-6 shadow-md mb-8">
         <h1 className="text-2xl font-bold mb-4">Editar Perfil do Lar Temporário</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
