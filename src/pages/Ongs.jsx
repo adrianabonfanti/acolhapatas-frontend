@@ -80,7 +80,10 @@ await api.post("/contato", {
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
+  <div className="relative z-0">
   <CarouselOngs ongs={ongs} />
+</div>
+
 
   </div>
 </section>
