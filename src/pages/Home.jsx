@@ -196,13 +196,13 @@ function Home() {
 
 
         {/* ONGs Participantes */}
-        <section className="py-12 px-4 sm:px-8 bg-white">
+ {/*        <section className="py-12 px-4 sm:px-8 bg-white">
   <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
     ONGs participantes
   </h2>
   <CarouselOngs ongs={ongs} onClickOng={setOngAdocao} />
 
-</section>
+</section> */}
 
 
       </div>
