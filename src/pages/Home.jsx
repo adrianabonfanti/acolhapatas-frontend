@@ -11,8 +11,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalOng from "../components/ModalOng";
 import AnimalCard from "../components/AnimalCard"; 
-const [imagensCarregadas, setImagensCarregadas] = useState(0);
-const [totalImagens, setTotalImagens] = useState(0);
+
 
 
 function Home() {
@@ -23,7 +22,8 @@ function Home() {
   const [formEnviado, setFormEnviado] = useState(false);
   const [ongAdocao, setOngAdocao] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [imagensCarregadas, setImagensCarregadas] = useState(0);
+  const [totalImagens, setTotalImagens] = useState(0);
   const formRef = useRef();
   const buttonRef = useRef();
   const handleImagemCarregada = () => {
