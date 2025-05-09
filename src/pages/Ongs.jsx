@@ -72,7 +72,7 @@ await api.post("/contato", {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="relative  min-h-screen">
       <div className="flex-1 p-6 flex flex-col">
               {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
