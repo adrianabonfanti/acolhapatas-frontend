@@ -1,10 +1,11 @@
+// ✅ AnimalCard.jsx corrigido
 import React from "react";
 import CheckIcon from '@mui/icons-material/CheckCircle';
 import MedicationIcon from '@mui/icons-material/Medication';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PetsIcon from '@mui/icons-material/Pets';
 
-export default function AnimalCard({ animal, onAdotar }) {
+export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
   return (
     <div className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
       {animal.fotos[0] ? (
@@ -12,11 +13,10 @@ export default function AnimalCard({ animal, onAdotar }) {
           src={animal.fotos[0]}
           alt={animal.nome}
           className="w-full h-60 object-cover"
+          onLoad={onImagemCarregada}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/placeholder.png";
-            onLoad={handleImagemCarregada}
-
           }}
         />
       ) : (
