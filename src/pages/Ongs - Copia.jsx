@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import api from '../services/api';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
 const Ongs = () => {
   const [formData, setFormData] = useState({});
@@ -7,10 +9,6 @@ const Ongs = () => {
   const [ongs, setOngs] = useState([]);
   const [selectedOng, setSelectedOng] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [formEnviado, setFormEnviado] = useState(false);
-  const formRef = useRef();
-  const buttonRef = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +30,14 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-      await axios.post("http://localhost:5000/ongs", data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      // Envia o e-mail para avisar você
+await api.post("/contato", {
+  name: formData.name,
+  email: formData.responsibleEmail,
+  phone: formData.phone,
+  message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
+});
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -44,7 +49,7 @@ const Ongs = () => {
 
   const fetchOngs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/public/ongs");
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
       console.error(error);
@@ -66,17 +71,21 @@ const Ongs = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Área principal */}
       <div className="flex-1 p-6 flex flex-col">
         <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
-              <img
-                src={ong.logo ? `http://localhost:5000/uploads/${ong.logo}` : "/sem_logo.png"}
-                alt={ong.name}
-                className="w-full h-40 object-cover rounded-lg shadow"
-              />
+   <div className="w-full min-h-[120px] max-h-[180px] flex items-center justify-center bg-white rounded-lg shadow p-2">
+  <img
+    src={ong.logo || "/sem_logo.png"}
+    alt={ong.name}
+    className="w-48 rounded shadow mb-4"
+  />
+</div>
+
+
             </div>
           ))}
         </div>
@@ -91,6 +100,7 @@ const Ongs = () => {
               <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
               <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
               <p><strong>Website:</strong> {selectedOng.website}</p>
+              <ContatoFlutuante />
             </div>
           </div>
         )}
@@ -115,50 +125,9 @@ const Ongs = () => {
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange} className="input" />
           <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button>
         </form>
+
+        <ContatoFlutuante />
       </div>
-
-      {/* Publicidade lateral */}
-      <div className="hidden lg:block w-64 bg-gray-100 p-4">
-        <h2 className="text-lg font-bold mb-2">Publicidade</h2>
-        <div className="w-full h-96 bg-gray-300 flex items-center justify-center">
-          <span className="text-gray-600">Seu Anúncio Aqui</span>
-        </div>
-      </div>
-
-      {/* Botão flutuante de contato */}
-      <button
-        ref={buttonRef}
-        onClick={() => setShowForm((prev) => !prev)}
-        className="fixed bottom-6 right-6 bg-emerald-500 text-white p-4 rounded-full shadow-lg text-xl z-50"
-      >
-        💬
-      </button>
-
-      {/* Formulário de contato */}
-      {showForm && (
-        <div ref={formRef} className="fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            setFormEnviado(true);
-            setShowForm(false);
-          }}>
-            <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
-            <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
-            <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
-            <input name="email" type="email" placeholder="E-mail" className="w-full mb-2 p-2 border rounded" required />
-            <textarea name="message" placeholder="Mensagem" className="w-full mb-2 p-2 border rounded" required />
-            <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full">Enviar</button>
-          </form>
-        </div>
-      )}
-
-      {/* Modal de confirmação */}
-      {formEnviado && (
-        <div className="fixed bottom-24 right-6 bg-emerald-500 text-white p-4 rounded-lg shadow-lg w-80 z-50">
-          <p>Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.</p>
-          <button onClick={() => setFormEnviado(false)} className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded">Fechar</button>
-        </div>
-      )}
     </div>
   );
 };

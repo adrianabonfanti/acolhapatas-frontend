@@ -2,6 +2,7 @@ import api from '../services/api';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
+import CarouselOngs from '../components/CarouselOngs';
 
 const Ongs = () => {
   const [formData, setFormData] = useState({});
@@ -74,6 +75,15 @@ await api.post("/contato", {
       <div className="flex-1 p-6 flex flex-col">
         <h1 className="text-3xl font-bold mb-8">ONGs Participantes</h1>
 
+        {/* ONGs Participantes */}
+        <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+    ONGs participantes
+  </h2>
+  <div className="max-w-7xl mx-auto">
+    <CarouselOngs ongs={ongs} onClickOng={setSelectedOng} />
+  </div>
+</section>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {ongs.map((ong) => (
             <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
