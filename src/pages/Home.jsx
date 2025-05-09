@@ -11,6 +11,8 @@ import PetsIcon from '@mui/icons-material/Pets';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalOng from "../components/ModalOng";
 import AnimalCard from "../components/AnimalCard"; 
+const [imagensCarregadas, setImagensCarregadas] = useState(0);
+const [totalImagens, setTotalImagens] = useState(0);
 
 
 function Home() {
@@ -24,10 +26,14 @@ function Home() {
 
   const formRef = useRef();
   const buttonRef = useRef();
-
+  const handleImagemCarregada = () => {
+    setImagensCarregadas((prev) => prev + 1);
+  };
+  
   useEffect(() => {
     api.get("/random/6")
     .then((res) => setAnimais(res.data));
+    setTotalImagens(res.data.length); // total de imagens esperadas
   
   api.get("/public/ongs")
     .then((res) => setOngs(res.data));
@@ -113,6 +119,11 @@ function Home() {
   <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center ">
     Animais disponíveis para adoção responsável
   </h2>
+  {imagensCarregadas < totalImagens && (
+  <div className="flex justify-center items-center h-40">
+    <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+  </div>
+)}
 
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
   {animais.map((animal) => {

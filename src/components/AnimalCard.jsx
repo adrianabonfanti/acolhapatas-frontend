@@ -15,6 +15,8 @@ export default function AnimalCard({ animal, onAdotar }) {
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/placeholder.png";
+            onLoad={handleImagemCarregada}
+
           }}
         />
       ) : (
