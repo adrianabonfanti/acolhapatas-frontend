@@ -96,6 +96,13 @@ font-family: "Poppins";
             scrollbar-width: none;
           }
           
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
           
           
             /* MOBILE - Abaixo de 768px */
