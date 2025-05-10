@@ -136,19 +136,17 @@ export default function Adocao() {
       ) {
         setShowSlideFiltro(false);
       }
-      
     }
-
-    if (showForm) {
+  
+    if (showSlideFiltro) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
-
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showForm]);
+  }, [showSlideFiltro]);
+  
 
   return (
     <>
