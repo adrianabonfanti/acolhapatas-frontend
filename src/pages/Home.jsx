@@ -145,11 +145,11 @@ function Home() {
       key={animal._id}
       animal={animal}
       onAdotar={handleAdotar}
-      onImagemCarregada={handleImagemCarregada}
+      onImagemCarregada={handleImagemCarregada} 
     />
   );
 })}
-
+ 
   </div>
 
   <div className="text-center mt-10">
