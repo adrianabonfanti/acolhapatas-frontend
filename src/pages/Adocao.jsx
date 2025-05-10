@@ -68,21 +68,7 @@ export default function Adocao() {
     carregarOngs();
   }, []);
   
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (filtroRef.current && !filtroRef.current.contains(event.target)) {
-        setShowSlideFiltro(false);
-      }
-    }
-  
-    if (showSlideFiltro) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-  
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showSlideFiltro]);
+
   
   useEffect(() => {
     buscarAnimais();
@@ -126,26 +112,7 @@ export default function Adocao() {
     }
   };
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        filtroRef.current &&
-        !filtroRef.current.contains(event.target) &&
-        filtroButtonRef.current &&
-        !filtroButtonRef.current.contains(event.target)
-      ) {
-        setShowSlideFiltro(false);
-      }
-    }
-  
-    if (showSlideFiltro) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-  
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showSlideFiltro]);
+ 
   
 
   return (
