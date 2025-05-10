@@ -498,7 +498,7 @@ export default function Adocao() {
   onClick={() => setShowSlideFiltro(prev => !prev)}
   className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden"
 >
-  <span className="material-icons text-emerald-700">filter_list</span>
+  <span className="material-icons text-emerald-700">filter_list</span> 
 </button>
 
 
