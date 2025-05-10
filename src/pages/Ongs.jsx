@@ -72,6 +72,17 @@ await api.post("/contato", {
   };
 
   return (
+    <>
+     <header className="page-header headerOng w-full h-60 md:h-72 lg:h-80 flex items-center bg-emerald-50 shadow-inner overflow-hidden page-header">
+  <div className="w-1/2 h-full">
+    
+  </div>
+  <div className="w-1/2 h-full flex items-center justify-center px-6">
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
+      Ongs Participantes
+    </h1>
+  </div>
+</header>
     <div className="relative  min-h-screen">
       <div className="flex-1 p-6 flex flex-col">
               {/* ONGs Participantes */}
@@ -145,7 +156,7 @@ await api.post("/contato", {
 
         <ContatoFlutuante />
       </div>
-    </div>
+    </div></>
   );
 };
 
