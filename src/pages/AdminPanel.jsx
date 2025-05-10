@@ -46,45 +46,55 @@ export default function AdminPanel() {
       {pendentes.length === 0 ? (
         <p className="text-center text-gray-600">Nenhum cadastro pendente.</p>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="md:hidden flex flex-col gap-4">
           {pendentes.map((u) => (
             <div
               key={u._id}
-              className="bg-white rounded-xl shadow-md p-4 border border-gray-200"
+              className="bg-white shadow rounded-md p-4 border border-gray-200"
             >
-              <div className="flex items-center gap-4">
-                {u.foto && (
-                  <img
-                    src={u.foto}
-                    alt="Foto"
-                    className="w-16 h-16 object-cover rounded"
-                  />
-                )}
-                <div className="flex-1">
-                  <p className="font-bold text-lg text-gray-800">{u.nome || u.email}</p>
-                  <p className="text-sm text-gray-600">{u.tipo}</p>
+              <div className="flex justify-between items-start">
+                <div className="flex items-center gap-4">
+                  {u.foto && (
+                    <img
+                      src={u.foto}
+                      alt={`Foto de ${u.nome || u.email}`}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  )}
+                  <div>
+                    <h3 className="text-lg font-bold">{u.nome || u.email}</h3>
+                    <p className="text-sm text-gray-600">{u.tipo}</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="mt-4 flex justify-around border-t pt-3">
-                <button
-                  onClick={() => alert(`Ver detalhes de ${u.email}`)}
-                  className="text-gray-600 hover:text-blue-600"
-                >
-                  <span className="material-icons">search</span>
-                </button>
-                <button
-                  onClick={() => recusar(u._id)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <span className="material-icons">delete</span>
-                </button>
-                <button
-                  onClick={() => aprovar(u._id)}
-                  className="text-emerald-600 hover:text-emerald-800"
-                >
-                  <span className="material-icons">check_circle</span>
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => alert(`Ver detalhes de ${u.email}`)}
+                    className="text-gray-600 hover:text-blue-600 relative group"
+                  >
+                    <span className="material-icons">search</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Ver
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => recusar(u._id)}
+                    className="text-red-600 hover:text-red-800 relative group"
+                  >
+                    <span className="material-icons">delete</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Recusar
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => aprovar(u._id)}
+                    className="text-emerald-600 hover:text-emerald-800 relative group"
+                  >
+                    <span className="material-icons">check_circle</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Aprovar
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -92,4 +102,4 @@ export default function AdminPanel() {
       )}
     </div>
   );
-}
+} 
