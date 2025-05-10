@@ -70,9 +70,9 @@ font-family: "Poppins";
       background-color: #d3c7bd;
         }
         .headerOng {
-          background-image: url(/adote_lado.jpg);
+          background-image: url(/ong.jpg);
           background-position: center;
-          background-color: #d3c7bd;
+          background-color: #d3c7bd; 
             }
         .conteudo-lar {
             padding-inline: 1.5rem;
