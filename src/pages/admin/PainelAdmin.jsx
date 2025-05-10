@@ -95,13 +95,14 @@ export default function PainelAdmin() {
   const renderCard = (item, tipo) => (
     <div key={item._id} className="bg-white p-4 rounded-xl shadow border border-gray-200">
       <div className="flex items-start gap-4">
-        {item.logo || item.foto ? (
-          <img
-            src={item.logo || item.foto}
-            alt="Imagem"
-            className="w-16 h-16 object-cover rounded"
-          />
-        ) : null}
+      {(item.logo || item.foto || (item.fotos && item.fotos[0])) && (
+  <img
+    src={item.logo || item.foto || item.fotos[0]}
+    alt="Imagem"
+    className="w-16 h-16 object-cover rounded"
+  />
+)}
+
         <div className="flex-1">
           <h3 className="text-lg font-bold text-gray-800">{item.name || item.nome || item.email}</h3>
           <p className="text-sm text-gray-600">{item.tipo || item.cidade || item.especie}</p>
