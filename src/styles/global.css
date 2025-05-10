@@ -35,6 +35,7 @@ font-family: "Poppins";
     position: relative;
     border-radius: 0px;
     margin-bottom: 20px;
+    
   }
   
   .page-header .overlay {
@@ -68,11 +69,13 @@ font-family: "Poppins";
       background-image: url(/adote_lado.jpg);
       background-position: center;
       background-color: #d3c7bd;
+      background-size: cover;
         }
         .headerOng {
           background-image: url(/ong.jpg);
           background-position: center;
           background-color: #d3c7bd; 
+          background-size: cover;
             }
         .conteudo-lar {
             padding-inline: 1.5rem;
@@ -123,10 +126,7 @@ font-family: "Poppins";
     header{
       padding:0px;
     }
-    .page-header{
-   
-      background-size: 77%;
-    }
+  
     .headerAdocao {
       background-color:#d4c9be;
       background-size: cover;
