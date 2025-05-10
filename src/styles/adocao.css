@@ -176,11 +176,10 @@
     }
   
     .filtros-container {
-      position: relative;
-        width: 100%;
+    
         padding: 0rem 2rem 1rem;
         box-sizing: border-box;
-        margin-top: -77px;
+       
     }
   
     .lista-animais {
