@@ -6,7 +6,6 @@ import "../styles/adocao.css";
 import "../styles/global.css";
 
 export default function Adocao() {
-  const [showFiltrosMobile, setShowFiltrosMobile] = useState(false);
   const [filtros, setFiltros] = useState({ nome: "", especie: [], sexo: [], idade: [], porte: [], ong: "", cidade: "", estado: "" });
   const [animais, setAnimais] = useState([]);
   const [ongs, setOngs] = useState([]);
@@ -15,7 +14,9 @@ export default function Adocao() {
   const [formEnviado, setFormEnviado] = useState(false);
   const formRef = useRef();
   const buttonRef = useRef();
-
+  const [showSlideFiltro, setShowSlideFiltro] = useState(false);
+  const filtroRef = useRef();
+  
   const buscarAnimais = async () => {
     try {
       const query = new URLSearchParams();
@@ -65,6 +66,21 @@ export default function Adocao() {
     carregarOngs();
   }, []);
   
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (filtroRef.current && !filtroRef.current.contains(event.target)) {
+        setShowSlideFiltro(false);
+      }
+    }
+  
+    if (showSlideFiltro) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSlideFiltro]);
   
   useEffect(() => {
     buscarAnimais();
@@ -143,18 +159,15 @@ export default function Adocao() {
 </header>
 
     <div className="conteudo-adocao">
-      <div className="md:hidden filtroAdocaoMobile">
-  <button
-    onClick={() => setShowFiltrosMobile(!showFiltrosMobile)}
-    className="botao-toggle-filtros"
-  >
-    
-    {showFiltrosMobile ? "Ocultar Filtros" : "Mostrar Filtros"}
-  </button>
-</div>
+  
 
       {/* Sidebar de Filtros */}
-      <div className={`filtros-container ${showFiltrosMobile ? 'block' : 'hidden'} md:block`}>
+      <div
+  ref={filtroRef}
+  className={`filtros-container transition-transform duration-300 ease-in-out fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-40 transform ${
+    showSlideFiltro ? 'translate-x-0' : '-translate-x-full'
+  } md:relative md:translate-x-0 md:block`}
+>
 
         <h2 className="text-xl font-bold mb-4">Filtrar</h2>
 
@@ -475,6 +488,12 @@ export default function Adocao() {
 
 
 
+<button
+  onClick={() => setShowSlideFiltro(!showSlideFiltro)}
+  className="fixed top-28 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden"
+>
+  <span className="material-icons text-emerald-700">filter_list</span>
+</button>
 
 
     </div></>

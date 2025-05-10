@@ -97,7 +97,11 @@ font-family: "Poppins";
             height: 100px;
     width: auto !important;
           }
-         
+          .filtros-container {
+            overflow-y: auto;
+            padding: 1.5rem;
+          }
+          
           
           
             /* MOBILE - Abaixo de 768px */

@@ -50,7 +50,7 @@ function Login() {
           onSubmit={handleLogin}
           className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10 w-80"
         >
-          <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+         
 
           <select
             value={tipoUsuario}
