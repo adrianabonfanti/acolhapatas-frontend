@@ -12,12 +12,8 @@
     width: 280px;
     background: #f5f9fb;
     border-right: 1px solid #ddd;
-    height: auto;
-    max-height: none;
-    position: sticky;
-    top:70px;
     align-self: start;
-    height: fit-content;
+
   }
   
   
