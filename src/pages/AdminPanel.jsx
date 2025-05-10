@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
- 
+
 export default function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
 
@@ -18,7 +18,7 @@ export default function AdminPanel() {
       alert("Erro ao aprovar cadastro.");
     }
   };
-  
+
   const recusar = async (id) => {
     try {
       await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
@@ -28,7 +28,6 @@ export default function AdminPanel() {
       alert("Erro ao recusar cadastro.");
     }
   };
-  
 
   useEffect(() => {
     buscarPendentes(); 
@@ -37,13 +36,13 @@ export default function AdminPanel() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Painel de Aprovação</h1>
-  
+
       {/* Mini dashboard */}
       <div className="bg-emerald-100 text-emerald-800 rounded-lg p-4 mb-6 text-center shadow">
         <p className="text-lg font-semibold">Cadastros Pendentes</p>
         <p className="text-3xl font-bold mt-1">{pendentes.length}</p>
       </div>
-  
+
       {pendentes.length === 0 ? (
         <p className="text-center text-gray-600">Nenhum cadastro pendente.</p>
       ) : (
@@ -66,7 +65,7 @@ export default function AdminPanel() {
                   <p className="text-sm text-gray-600">{u.tipo}</p>
                 </div>
               </div>
-  
+
               <div className="mt-4 flex justify-around border-t pt-3">
                 <button
                   onClick={() => alert(`Ver detalhes de ${u.email}`)}
@@ -93,5 +92,4 @@ export default function AdminPanel() {
       )}
     </div>
   );
-  
 }
