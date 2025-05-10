@@ -93,120 +93,60 @@ export default function PainelAdmin() {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Painel de Administração - AcolhaPatas</h1>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-6 text-center">Painel de Administração - AcolhaPatas</h1>
 
       {/* Dashboard */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-emerald-500 text-white p-6 rounded shadow">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-emerald-500 text-white p-6 rounded shadow text-center">
           <h2 className="text-xl font-bold">ONGs Cadastradas</h2>
           <p className="text-3xl">{ongs.length}</p>
         </div>
-        <div className="bg-emerald-600 text-white p-6 rounded shadow">
+        <div className="bg-emerald-600 text-white p-6 rounded shadow text-center">
           <h2 className="text-xl font-bold">Lares Temporários</h2>
           <p className="text-3xl">{lares.length}</p>
         </div>
-        <div className="bg-emerald-700 text-white p-6 rounded shadow">
+        <div className="bg-emerald-700 text-white p-6 rounded shadow text-center">
           <h2 className="text-xl font-bold">Animais Cadastrados</h2>
           <p className="text-3xl">{animais.length}</p>
         </div>
       </div>
 
-      {/* ONGs */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-4">ONGs</h2>
-        <table className="min-w-full border">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Cidade</th>
-              <th>Responsável</th>
-              <th>Telefone</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ongs.map((ong) => (
-              <tr key={ong._id} className="border-t">
-                <td>{ong.name}</td>
-                <td>{ong.city}</td>
-                <td>{ong.responsibleName}</td>
-                <td>{ong.phone}</td>
-                <td>{ong.approved ? "Aprovado" : "Pendente"}</td>
-                <td className="flex gap-2">
-                  <button onClick={() => abrirModal(ong, "Detalhes da ONG")} title="Ver detalhes">🔍</button>
-                  {!ong.approved && <button onClick={() => aprovarOng(ong._id)} className="bg-green-500 text-white px-2 py-1 rounded">Aprovar</button>}
-                  <button onClick={() => apagarOng(ong._id)} className="bg-red-500 text-white px-2 py-1 rounded">Apagar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      {/* Lares Temporários */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-4">Lares Temporários</h2>
-        <table className="min-w-full border">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Cidade</th>
-              <th>Telefone</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lares.map((lar) => (
-              <tr key={lar._id} className="border-t">
-                <td>{lar.nome}</td>
-                <td>{lar.cidade}</td>
-                <td>{lar.telefone}</td>
-                <td>{lar.approved ? "Aprovado" : "Pendente"}</td>
-                <td className="flex gap-2">
-                  <button onClick={() => abrirModal(lar, "Detalhes do Lar Temporário")} title="Ver detalhes">🔍</button>
-                  {!lar.approved && <button onClick={() => aprovarLar(lar._id)} className="bg-green-500 text-white px-2 py-1 rounded">Aprovar</button>}
-                  <button onClick={() => apagarLar(lar._id)} className="bg-red-500 text-white px-2 py-1 rounded">Apagar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      {/* Animais */}
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Animais</h2>
-        <table className="min-w-full border">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Espécie</th>
-              <th>Idade</th>
-              <th>Porte</th>
-              <th>Sexo</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {animais.map((animal) => (
-              <tr key={animal._id} className="border-t">
-                <td>{animal.nome}</td>
-                <td>{animal.especie}</td>
-                <td>{animal.idade}</td>
-                <td>{animal.porte}</td>
-                <td>{animal.sexo}</td>
-                <td className="flex gap-2">
-                  <button onClick={() => abrirModal(animal, "Detalhes do Animal")} title="Ver detalhes">🔍</button>
-                  <button onClick={() => apagarAnimal(animal._id)} className="bg-red-500 text-white px-2 py-1 rounded">Apagar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      {/* Cards Mobile */}
+      <div className="md:hidden flex flex-col gap-6">
+        {[...ongs, ...lares, ...animais].map((item) => (
+          <div key={item._id} className="bg-white p-4 rounded-xl shadow border border-gray-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-gray-800">{item.name || item.nome || item.email}</h3>
+                <p className="text-sm text-gray-600">
+                  {item.tipo || item.cidade || item.especie || "Cadastro"}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => abrirModal(item, "Detalhes")}
+                        className="text-gray-600 hover:text-blue-600 relative group">
+                  <span className="material-icons">search</span>
+                </button>
+                {item.approved === false && (item.tipo || item.cidade) && (
+                  <button onClick={() => (item.tipo ? aprovarOng(item._id) : aprovarLar(item._id))}
+                          className="text-green-600 hover:text-green-800 relative group">
+                    <span className="material-icons">check_circle</span>
+                  </button>
+                )}
+                <button onClick={() => {
+                  if (item.tipo) apagarOng(item._id);
+                  else if (item.cidade) apagarLar(item._id);
+                  else apagarAnimal(item._id);
+                }}
+                className="text-red-600 hover:text-red-800 relative group">
+                  <span className="material-icons">delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* Modal de Detalhes */}
       {modalAberto && (
