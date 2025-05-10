@@ -46,7 +46,7 @@ function Login() {
   };
 
   return (
-    <div className=" relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" >
+    <div className="relative min-h-screen headerLogin">
       {/* Área principal */}
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <form onSubmit={handleLogin} className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10 w-80">
