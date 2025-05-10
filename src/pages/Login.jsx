@@ -46,7 +46,7 @@ function Login() {
   };
 
   return (
-    <div className="flex min-h-screen paginaLogin">
+    <div className="flex min-h-screen headerLogin">
       {/* Área principal */}
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-80">
