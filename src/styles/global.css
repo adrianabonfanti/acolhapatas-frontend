@@ -55,8 +55,11 @@ font-family: "Poppins";
     
   }
   .page-header h1{
-    font-family: "Poppins";
-    font-weight: 500;
+      font-family: Poppins;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 24%;
+      text-shadow: -1px 2px black;
   }
   .headerLar{
     background-image: url(/lar_lado.jpg);
