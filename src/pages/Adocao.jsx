@@ -162,6 +162,13 @@ export default function Adocao() {
     </h1>
   </div>
 </header>
+<button
+  ref={filtroButtonRef}
+  onClick={() => setShowSlideFiltro((prev) => !prev)}
+  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100"
+>
+  <span className="material-icons text-emerald-700">filter_list</span>
+</button>
 
     <div className="conteudo-adocao flex flex-col md:flex-row relative">
   
@@ -493,13 +500,7 @@ export default function Adocao() {
 
 
 
-<button
-  ref={filtroButtonRef}
-  onClick={() => setShowSlideFiltro(prev => !prev)}
-  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden"
->
-  <span className="material-icons text-emerald-700">filter_list</span> 
-</button>
+
 
 
 
