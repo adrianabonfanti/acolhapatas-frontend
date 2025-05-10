@@ -130,7 +130,7 @@ export default function Adocao() {
 <button
   ref={filtroButtonRef}
   onClick={() => setShowSlideFiltro((prev) => !prev)}
-  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100"
+  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden botaoFiltro"
 >
   <span className="material-icons text-emerald-700">filter_list</span>
 </button>
