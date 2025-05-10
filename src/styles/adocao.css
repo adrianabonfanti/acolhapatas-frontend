@@ -9,15 +9,13 @@
   /* Filtros à esquerda */
   .filtros-container {
     padding: 1.5rem;
-    width: 280px;
+    width: fit-content;
     background: #f5f9fb;
     border-right: 1px solid #ddd;
-    align-self: start;
-
+    position: fixed;
+    top: 58px;
   }
-  
-  
-  
+    
   .filtros-container h2 {
     margin-bottom: 0.3rem;
     font-size: 1.2rem;

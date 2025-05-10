@@ -16,6 +16,8 @@ export default function Adocao() {
   const buttonRef = useRef();
   const [showSlideFiltro, setShowSlideFiltro] = useState(false);
   const filtroRef = useRef();
+  const filtroButtonRef = useRef();
+
   
   const buscarAnimais = async () => {
     try {
@@ -127,11 +129,14 @@ export default function Adocao() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (
-        formRef.current && !formRef.current.contains(event.target) &&
-        buttonRef.current && !buttonRef.current.contains(event.target)
+        filtroRef.current &&
+        !filtroRef.current.contains(event.target) &&
+        filtroButtonRef.current &&
+        !filtroButtonRef.current.contains(event.target)
       ) {
-        setShowForm(false);
+        setShowSlideFiltro(false);
       }
+      
     }
 
     if (showForm) {
@@ -158,7 +163,7 @@ export default function Adocao() {
   </div>
 </header>
 
-    <div className="conteudo-adocao">
+    <div className="conteudo-adocao flex flex-col md:flex-row relative">
   
 
       {/* Sidebar de Filtros */}
@@ -489,11 +494,13 @@ export default function Adocao() {
 
 
 <button
-  onClick={() => setShowSlideFiltro((prev) => !prev)}
-  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden"
+  ref={filtroButtonRef}
+  onClick={() => setShowSlideFiltro(prev => !prev)}
+  className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100"
 >
   <span className="material-icons text-emerald-700">filter_list</span>
 </button>
+
 
 
 
