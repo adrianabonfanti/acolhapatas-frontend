@@ -226,6 +226,18 @@ const handleSubmit = async (e) => {
       <label className="font-medium block mb-1">Quantos animais pode abrigar por vez?</label>
       <input type="number" name="quantidade" min="1" required placeholder="Ex: 1, 2, 3..." className="input" />
     </div>
+    <div className="sm:col-span-2">
+  <label className="block font-medium text-gray-700 mb-1">Foto (obrigatória)</label>
+  <input
+    type="file"
+    name="foto"
+    accept="image/*"
+    onChange={handleFileChange}
+    required
+    className="input w-full"
+  />
+</div>
+
   </div>
 </div>
 
