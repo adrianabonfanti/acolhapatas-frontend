@@ -47,7 +47,7 @@ const handleEnviarContato = async (e) => {
     body.sexo = data.get("sexo"); // Corrigido para incluir o sexo
 
     try {
-      const res = await api.get("/lartemporario");    
+      const res = await api.post("/lartemporario", body);   
       if (res.status === 200) {
         setShowModal(true);
         form.reset();
