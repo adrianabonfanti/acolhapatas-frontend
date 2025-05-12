@@ -39,12 +39,12 @@ const handleFileChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
- 
+  const form = formRef.current;
   const data = new FormData(form);
 
-  data.append("medicacao", data.get("medicacao") === "on");
-  data.append("tratamento", data.get("tratamento") === "on");
-  data.append("necessidadesEspeciais", data.get("necessidadesEspeciais") === "on");
+  data.append("medicacao", form.medicacao.checked);
+  data.append("tratamento", form.tratamento.checked);
+  data.append("necessidadesEspeciais", form.necessidadesEspeciais.checked);
 
   if (!foto) {
     alert("Por favor, envie uma foto sua.");
