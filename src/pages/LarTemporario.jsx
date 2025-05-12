@@ -2,6 +2,7 @@ import api from '../services/api';
 
 import React, { useState, useRef } from "react";
 import "../styles/global.css";
+import upload from "../middlewares/upload.js";
 
 function LarTemporario() {
 
@@ -38,7 +39,7 @@ const handleFileChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const form = e.target;
+ 
   const data = new FormData(form);
 
   data.append("medicacao", data.get("medicacao") === "on");
@@ -49,7 +50,6 @@ const handleSubmit = async (e) => {
     alert("Por favor, envie uma foto sua.");
     return;
   }
-
   data.append("foto", foto);
 
   try {
