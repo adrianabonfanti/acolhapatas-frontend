@@ -48,7 +48,7 @@ const handleEnviarContato = async (e) => {
 
     try {
       const res = await api.post("/lartemporario", body);   
-      if (res.status === 200) {
+      if (res.status === 201) {
         setShowModal(true);
         form.reset();
         await api.post("/contato", {
