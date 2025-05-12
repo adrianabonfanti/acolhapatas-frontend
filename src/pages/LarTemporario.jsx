@@ -1,4 +1,5 @@
 import api from '../services/api';
+
 import React, { useState, useRef } from "react";
 import "../styles/global.css";
 
@@ -9,7 +10,6 @@ function LarTemporario() {
 const [showForm, setShowForm] = useState(false);
 const [formEnviado, setFormEnviado] = useState(false);
 const buttonRef = useRef();
-const [foto, setFoto] = useState(null);
 
 const handleEnviarContato = async (e) => {
   e.preventDefault();
@@ -31,46 +31,40 @@ const handleEnviarContato = async (e) => {
     alert("Erro ao enviar mensagem. Tente novamente.");
   }
 };
-const handleFileChange = (e) => {
-  setFoto(e.target.files[0]);
-};
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const form = formRef.current;
-  const data = new FormData(form);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form); 
+    const body = Object.fromEntries(data.entries());
 
-  data.append("medicacao", form.medicacao.checked);
-  data.append("tratamento", form.tratamento.checked);
-  data.append("necessidadesEspeciais", form.necessidadesEspeciais.checked);
+    body.especie = data.getAll("especie");
+    body.porte = data.getAll("porte");
+    body.idade = data.getAll("idade");
+    body.medicacao = data.get("medicacao") === "on";
+    body.tratamento = data.get("tratamento") === "on";
+    body.necessidadesEspeciais = data.get("necessidadesEspeciais") === "on";
+    body.sexo = data.get("sexo"); // Corrigido para incluir o sexo
 
-  if (!foto) {
-    alert("Por favor, envie uma foto sua.");
-    return;
-  }
-  data.append("foto", foto);
-
-  try {
-    const res = await api.post("/lartemporario", data); // Envio do cadastro
-    if (res.status === 200) {
-      setShowModal(true);
-      form.reset();
-      setFoto(null);
-      await api.post("/contato", {
-        name: data.get("nome"),
-        email: data.get("email"),
-        phone: data.get("telefone"),
-        message: `Novo cadastro de lar temporário:\n\nNome: ${data.get("nome")}\nEmail: ${data.get("email")}\nTelefone: ${data.get("telefone")}\nCidade: ${data.get("cidade")} - ${data.get("estado")}`
-      });
-    } else {
-      alert("Erro ao enviar cadastro.");
+    try {
+      const res = await api.get("/lartemporario");    
+      if (res.status === 200) {
+        setShowModal(true);
+        form.reset();
+        await api.post("/contato", {
+          name: body.nome,
+          email: body.email,
+          phone: body.telefone,
+          message: `Novo cadastro de lar temporário:\n\nNome: ${body.nome}\nEmail: ${body.email}\nTelefone: ${body.telefone}\nCidade: ${body.cidade} - ${body.estado}`
+        });
+      } else {
+        alert("Erro ao enviar cadastro.");
+      }
+    } catch (err) {
+      alert("Erro de conexão com o servidor.");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Erro de conexão com o servidor.");
-  }
-};
-
+    
+  };
 
   const buscarCep = async (e) => {
     const cep = e.target.value.replace(/\D/g, "");
@@ -101,7 +95,7 @@ const handleSubmit = async (e) => {
   </div>
   <div className="w-1/2 h-full flex items-center justify-center px-6">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
-      Lar Temporário
+      Animais para Adoção
     </h1>
   </div>
 </header>
@@ -224,18 +218,6 @@ const handleSubmit = async (e) => {
       <label className="font-medium block mb-1">Quantos animais pode abrigar por vez?</label>
       <input type="number" name="quantidade" min="1" required placeholder="Ex: 1, 2, 3..." className="input" />
     </div>
-    <div className="sm:col-span-2">
-  <label className="block font-medium text-gray-700 mb-1">Foto (obrigatória)</label>
-  <input
-    type="file"
-    name="foto"
-    accept="image/*"
-    onChange={handleFileChange}
-    required
-    className="input w-full"
-  />
-</div>
-
   </div>
 </div>
 
