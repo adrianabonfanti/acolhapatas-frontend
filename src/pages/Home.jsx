@@ -22,6 +22,7 @@ function Home() {
   const [formEnviado, setFormEnviado] = useState(false);
   const [ongAdocao, setOngAdocao] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingDados, setLoadingDados] = useState(true);
   const [imagensCarregadas, setImagensCarregadas] = useState(0);
   const [totalImagens, setTotalImagens] = useState(0);
   const formRef = useRef();
@@ -29,7 +30,25 @@ function Home() {
   const handleImagemCarregada = () => {
     setImagensCarregadas((prev) => prev + 1);
   };
-  
+  useEffect(() => {
+  setLoadingDados(true);
+  Promise.all([
+    api.get("/random/6").then((res) => {
+      setAnimais(res.data);
+      setTotalImagens(res.data.length);
+    }),
+    api.get("/public/ongs").then((res) => {
+      setOngs(res.data);
+    })
+  ])
+    .catch((err) => {
+      console.error("Erro ao carregar dados da home:", err);
+    })
+    .finally(() => {
+      setLoadingDados(false);
+    });
+}, []);
+
   useEffect(() => {
     api.get("/random/6")
       .then((res) => {
@@ -88,7 +107,7 @@ function Home() {
   };
   
   
-
+if (loadingDados) {
   return (
     <>
     <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero_horizontal.jpg")' }}>
@@ -235,6 +254,6 @@ function Home() {
 
     </>
   );
-}
+}}
 
 export default Home;
