@@ -49,7 +49,7 @@ function Home() {
     });
 }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     api.get("/random/6")
       .then((res) => {
         setAnimais(res.data);
@@ -61,7 +61,7 @@ function Home() {
         setOngs(res.data);
       });
   }, []);
-
+ */
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -106,8 +106,14 @@ function Home() {
     }
   };
   
-  
-if (loadingDados) {
+  if (loadingDados) {
+  return (
+    <div className="flex justify-center items-center h-screen bg-white">
+      <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
   return (
     <>
     <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero_horizontal.jpg")' }}>
@@ -254,6 +260,6 @@ if (loadingDados) {
 
     </>
   );
-}}
+}
 
 export default Home;
