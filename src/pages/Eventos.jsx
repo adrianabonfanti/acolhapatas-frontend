@@ -53,7 +53,7 @@ export default function Eventos() {
 
   const aplicarFiltros = (evento) => {
     const ongOk =
-      filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ongId);
+      filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ong?._id);
     const cidadeOk =
       filtros.cidade.trim() === "" ||
       evento.cidade.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
@@ -169,11 +169,12 @@ export default function Eventos() {
               className="w-full p-2 border rounded"
             >
               <option value="">Todos</option>
-              {"AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO"
-                .split(",")
-                .map((uf) => (
-                  `<option key=${uf} value=${uf}>${uf}</option>`
-                )).join("")}
+            { "AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO"
+    .split(",")
+    .map((uf) => (
+      <option key={uf} value={uf}>{uf}</option>
+    )) }
+
             </select>
           </div>
         </aside>
