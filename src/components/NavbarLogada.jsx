@@ -55,9 +55,13 @@ function NavbarLogada({ setActivePage }) {
               <span className="material-icons">pets</span>
               Animais
             </button>
+                    <button onClick={() => setActivePage("eventos")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+              <span className="material-icons">event</span>
+              Eventos
+            </button>
             <button onClick={() => setActivePage("procurar")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">search</span>
-              Buscar
+              Lar
             </button>
             <button onClick={() => setActivePage("meusDados")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">apartment</span>

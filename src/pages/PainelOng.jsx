@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CadastroAnimal from "./CadastroAnimal";
 import BuscarLarTemporario from "./BuscarLarTemporario";
 import MeusDadosOng from "./MeusDadosOng";
+import CadastroEvento from "./CadastroEvento";
 import HomeOng from "./HomeOng";  
 import "../styles/Home.css";
 import NavbarLogada from "../components/NavbarLogada";
@@ -36,6 +37,7 @@ export default function PainelOng() {
           <div className="flex-1 p-6">
             {activePage === "home" && <HomeOng/>}
             {activePage === "animais" && <CadastroAnimal />}
+            {activePage === "eventos" && <CadastroEvento />}
             {activePage === "procurar" && <BuscarLarTemporario />}
             {activePage === "meusDados" && <MeusDadosOng />}
 
