@@ -77,7 +77,10 @@ await api.post("/contato", {
   <div className="w-1/2 h-full">
     
   </div>
-  <div className="w-1/2 h-full flex items-center justify-center px-6">
+  <div className="w-1/2 h-full flex items-center justify-center px-6" style="
+        padding-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
       Ongs Participantes
     </h1>
