@@ -77,10 +77,7 @@ await api.post("/contato", {
   <div className="w-1/2 h-full">
     
   </div>
-  <div className="w-1/2 h-full flex items-center justify-center px-6" style="
-        padding-top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;">
+  <div className="w-1/2 h-full flex items-center justify-center px-6 divOngs">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
       Ongs Participantes
     </h1>
@@ -90,9 +87,7 @@ await api.post("/contato", {
       <div className="flex-1 p-6 flex flex-col">
               {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
-  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center" style="
-    margin-top: 0px;
-">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center tituloOngs" >
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">

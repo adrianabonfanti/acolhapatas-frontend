@@ -107,8 +107,14 @@ font-family: "Poppins";
             overflow-y: auto;
             padding: 1.5rem;
           }
-          
-          
+          .tituloOngs{
+             margin-top: 0px;
+          }
+          .divOngs{
+            padding-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+          }
           
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
