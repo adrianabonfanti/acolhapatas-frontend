@@ -25,8 +25,9 @@ export default function Eventos() {
   const buscarEventos = async () => {
     try {
      const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
-      const hoje = new Date();
-      const eventosFiltrados = response.data.filter((evento) => new Date(evento.data) >= hoje);
+      const hoje = new Date().toISOString().slice(0, 10); // "2025-05-16"
+const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
+
       setEventos(eventosFiltrados.sort((a, b) => new Date(a.data) - new Date(b.data)));
     } catch (err) {
       console.error("Erro ao buscar eventos:", err);
