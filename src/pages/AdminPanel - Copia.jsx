@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
+  const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
   const buscarPendentes = async () => {
     const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/pendentes`);
@@ -29,6 +30,18 @@ export default function AdminPanel() {
     }
   };
 
+  const deletarEvento = async (id) => {
+    if (confirm("Tem certeza que deseja excluir este evento?")) {
+      try {
+        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}`);
+        buscarPendentes();
+      } catch (error) {
+        console.error("Erro ao deletar evento:", error);
+        alert("Erro ao deletar evento.");
+      }
+    }
+  };
+
   useEffect(() => {
     buscarPendentes(); 
   }, []);
@@ -37,7 +50,6 @@ export default function AdminPanel() {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Painel de Aprovação</h1>
 
-      {/* Mini dashboard */}
       <div className="bg-emerald-100 text-emerald-800 rounded-lg p-4 mb-6 text-center shadow">
         <p className="text-lg font-semibold">Cadastros Pendentes</p>
         <p className="text-3xl font-bold mt-1">{pendentes.length}</p>
@@ -68,7 +80,7 @@ export default function AdminPanel() {
                 </div>
                 <div className="flex gap-2">
                   <button
-                    onClick={() => alert(`Ver detalhes de ${u.email}`)}
+                    onClick={() => setEventoSelecionado(u)}
                     className="text-gray-600 hover:text-blue-600 relative group"
                   >
                     <span className="material-icons">search</span>
@@ -77,12 +89,12 @@ export default function AdminPanel() {
                     </span>
                   </button>
                   <button
-                    onClick={() => recusar(u._id)}
+                    onClick={() => deletarEvento(u._id)}
                     className="text-red-600 hover:text-red-800 relative group"
                   >
                     <span className="material-icons">delete</span>
                     <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      Recusar
+                      Excluir
                     </span>
                   </button>
                   <button
@@ -100,6 +112,28 @@ export default function AdminPanel() {
           ))}
         </div>
       )}
+
+      {eventoSelecionado && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white w-96 p-6 rounded-lg shadow-lg relative">
+            <button
+              onClick={() => setEventoSelecionado(null)}
+              className="absolute top-2 right-3 text-gray-600 hover:text-black"
+            >✕</button>
+            <h2 className="text-xl font-bold mb-2">Detalhes do Evento</h2>
+            <p><strong>Nome:</strong> {eventoSelecionado.nome}</p>
+            <p><strong>Data:</strong> {new Date(eventoSelecionado.data).toLocaleDateString("pt-BR")}</p>
+            <p><strong>Horário:</strong> {eventoSelecionado.horaInicio} - {eventoSelecionado.horaFim}</p>
+            <p><strong>Local:</strong> {eventoSelecionado.endereco}</p>
+            <p><strong>Cidade/UF:</strong> {eventoSelecionado.cidade} - {eventoSelecionado.estado}</p>
+            <p><strong>ONG:</strong> {eventoSelecionado.ong?.nome || "-"}</p>
+            <p><strong>Email da ONG:</strong> {eventoSelecionado.ong?.email || "-"}</p>
+            {eventoSelecionado.descricao && (
+              <p className="mt-2 text-sm italic text-gray-700">"{eventoSelecionado.descricao}"</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
-} 
+}
