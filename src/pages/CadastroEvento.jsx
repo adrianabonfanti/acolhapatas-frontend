@@ -33,7 +33,9 @@ export default function CadastroEvento() {
   const [eventos, setEventos] = useState([]);
   const [filtros, setFiltros] = useState({ nome: "", data: "", precisaVoluntario: false });
 
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
+
+const [formData, setFormData] = useState({
     nome: "",
     local: "",
     data: "",
@@ -47,6 +49,7 @@ export default function CadastroEvento() {
   useEffect(() => {
     console.log("useEffect executado");
     buscarEventos();
+    setLoading(false);
   }, []);
 
   const handleFormChange = (e) => {
@@ -99,6 +102,7 @@ export default function CadastroEvento() {
   };
 
   const cadastrarEvento = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const data = new FormData();
@@ -125,8 +129,10 @@ export default function CadastroEvento() {
       }
       limparFormulario();
       buscarEventos();
+    setLoading(false);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
+    setLoading(false);
     }
   };
 
@@ -153,6 +159,7 @@ export default function CadastroEvento() {
         headers: { Authorization: `Bearer ${token}` },
       });
       buscarEventos();
+    setLoading(false);
     } catch (error) {
       console.error("Erro ao apagar evento:", error);
     }
@@ -164,6 +171,7 @@ export default function CadastroEvento() {
         headers: { Authorization: `Bearer ${token}` },
       });
       buscarEventos();
+    setLoading(false);
     } catch (error) {
       console.error("Erro ao clonar evento:", error);
     }
@@ -207,30 +215,37 @@ export default function CadastroEvento() {
       {!modoCadastro && eventos.length > 0 && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           {eventos.map((evento) => (
-            <div key={evento._id} className="bg-white p-4 shadow border rounded">
-              <div className="flex justify-between">
-                <h3 className="text-xl font-bold">{evento.nome}</h3>
-                <div className="flex gap-2">
-                  <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
-                    <span className="material-icons">edit</span>
-                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      Editar
-                    </span>
-                  </button>
-                  <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
-                    <span className="material-icons">delete</span>
-                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      Apagar
-                    </span>
-                  </button>
-                  <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
-                    <span className="material-icons">content_copy</span>
-                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                      Clonar
-                    </span>
-                  </button>
-                </div>
-              </div>
+            
+<div key={evento._id} className="bg-white p-4 shadow border rounded flex gap-4">
+  {evento.imagem && (
+    <img src={evento.imagem} alt="Imagem do Evento" className="w-24 h-24 object-cover rounded" />
+  )}
+  <div className="flex flex-col flex-1 justify-between">
+    <div className="flex justify-between items-start">
+      <h3 className="text-xl font-bold">{evento.nome}</h3>
+      <div className="flex gap-2">
+        <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
+          <span className="material-icons">edit</span>
+        </button>
+        <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
+          <span className="material-icons">delete</span>
+        </button>
+        <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
+          <span className="material-icons">content_copy</span>
+        </button>
+      </div>
+    </div>
+    <p className="text-gray-600">{evento.local}</p>
+    <p className="text-sm text-gray-500">{evento.endereco}</p>
+    <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
+    {evento.precisaVoluntario && (
+      <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded w-fit mt-1">
+        Precisa de voluntário
+      </span>
+    )}
+  </div>
+</div>
+
               <p className="text-gray-600">{evento.local}</p>
               <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
               {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
