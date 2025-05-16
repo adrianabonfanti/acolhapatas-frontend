@@ -185,23 +185,28 @@ export default function CadastroAnimal() {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Buscar Animais</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label className="font-medium block mb-1">Nome:</label>
         <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2 w-full text-gray-700 bg-white" />
+       <label className="font-medium block mb-1">Espécie:</label>
         <select name="especie" value={filtros.especie} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Espécies</option>
           <option value="Cachorro">Cachorro</option>
           <option value="Gato">Gato</option>
         </select>
+        <label className="font-medium block mb-1">Sexo:</label>
         <select name="sexo" value={filtros.sexo} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Sexos</option>
           <option value="femea">Fêmea</option>
 <option value="macho">Macho</option>
         </select>
+        <label className="font-medium block mb-1">Idade:</label>
         <select name="idade" value={filtros.idade} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Idades</option>
           <option value="Filhote">Filhote</option>
           <option value="Adulto">Adulto</option>
           <option value="Idoso">Idoso</option>
         </select>
+        <label className="font-medium block mb-1">Porte:</label>
         <select name="porte" value={filtros.porte} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Portes</option>
           <option value="Pequeno">Pequeno</option>
@@ -238,30 +243,42 @@ export default function CadastroAnimal() {
 
       {modoCadastro && (
         <form onSubmit={cadastrarAnimal} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+          <div>
+          <label className="font-medium block mb-1">Nome:</label>
         <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full bg-white text-gray-700" />
-        <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+      </div> 
+      <div><label className="font-medium block mb-1">Espécies:</label>
+       <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione a Espécie</option>
           <option value="Cachorro">Cachorro</option>
           <option value="Gato">Gato</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Idade:</label>
         <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione a Idade</option>
           <option value="Filhote">Filhote</option>
           <option value="Adulto">Adulto</option>
           <option value="Idoso">Idoso</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Porte:</label>
         <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione o Porte</option>
           <option value="Pequeno">Pequeno</option>
           <option value="Médio">Médio</option>
           <option value="Grande">Grande</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Sexo:</label>
         <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione o Sexo</option>
           <option value="femea">Fêmea</option>
           <option value="macho">Macho</option>
-        </select>
-        <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700 md:col-span-2" />
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Descrição:</label>
+        <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700 md:col-span-2" /></div>
         {["precisaLarTemporario", "castrado", "vacinado", "usaMedicacao", "necessidadesEspeciais", "deficiencia"].map((campo) => (
           <label key={campo} className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input
