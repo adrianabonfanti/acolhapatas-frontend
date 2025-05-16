@@ -173,6 +173,8 @@ font-family: "Poppins";
 .carrossel{
   width: 220px;
 }
-   
+   .menuMobile{
+        height: 25px;
+   }
     
   }
