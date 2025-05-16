@@ -178,11 +178,11 @@ export default function Eventos() {
 
           <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
             {eventos.filter(aplicarFiltros).map((evento) => (
-              <div key={evento._id} className="bg-white rounded-xl shadow p-4">
+              <div key={evento._id} className="bg-white rounded-xl shadow-lg p-4">
                 <img
                   src={evento.imagem}
                   alt={evento.nome}
-                  className="w-full h-48 object-cover rounded mb-2"
+                  className="w-full  rounded mb-2 imagemEvento"
                 />
                 <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
                 <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
