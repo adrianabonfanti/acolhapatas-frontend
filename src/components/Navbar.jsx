@@ -43,6 +43,10 @@ function Navbar() {
     <span className="material-icons">pets</span>
     Adoção
   </Link>
+   <Link to="/eventos" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+    <span className="material-icons">events</span>
+    Eventos
+  </Link>
   <Link to="/lar" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
     <span className="material-icons">volunteer_activism</span>
     Lar

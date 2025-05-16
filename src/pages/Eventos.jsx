@@ -54,11 +54,14 @@ export default function Eventos() {
   const aplicarFiltros = (evento) => {
     const ongOk =
       filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ong?._id);
-    const cidadeOk =
-      filtros.cidade.trim() === "" ||
-      evento.cidade.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
-    const estadoOk =
-      filtros.estado === "" || evento.estado.toUpperCase() === filtros.estado.toUpperCase();
+   const cidadeOk =
+  filtros.cidade.trim() === "" ||
+  evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
+
+const estadoOk =
+  filtros.estado === "Todos" ||
+  evento.estado.toUpperCase() === filtros.estado.toUpperCase();
+
     const dataOk = filtros.data === "" || evento.data.slice(0, 10) === filtros.data;
     return ongOk && cidadeOk && estadoOk && dataOk;
   };
