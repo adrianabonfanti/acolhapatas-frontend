@@ -91,13 +91,27 @@ export default function Eventos() {
         email: modalEvento.emailOng
       });
       setFormEnviado(true);
-      setTimeout(() => setModalEvento(null), 2000);
+      setTimeout(() => {
+        setFormEnviado(false);
+        setModalEvento(null);
+      }, 3000);
     } catch (err) {
       alert("Erro ao enviar. Tente novamente.");
     }
   };
 
   return (
+        <>
+      <header className="page-header headerEventos w-full h-60 md:h-72 lg:h-80 flex items-center bg-emerald-50 shadow-inner overflow-hidden page-header">
+  <div className="w-1/2 h-full">
+    
+  </div>
+  <div className="w-1/2 h-full flex items-center justify-center px-6">
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
+     Eventos
+    </h1>
+  </div>
+</header>
     <div className="p-4">
       <button
         onClick={() => setShowSlideFiltro((prev) => !prev)}
@@ -166,20 +180,46 @@ export default function Eventos() {
         <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
           {eventos.filter(aplicarFiltros).map((evento) => (
             <div key={evento._id} className="bg-white rounded-xl shadow p-4">
-            {/*   <img
-                src={`https://acolhapatas-api.onrender.com/${evento.imagem}`}
+              <img
+                src={evento.imagem}
                 alt={evento.nome}
                 className="w-full h-48 object-cover rounded mb-2"
-              /> */}
-              <img
-  src={evento.imagem}
-  alt={evento.nome}
-  className="w-full h-48 object-cover rounded mb-2"
-/>
-
+              />
               <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
-              <p className="text-sm text-gray-600 mb-1">📅 {evento.data}</p>
-              <p className="text-sm text-gray-600 mb-2">📍 {evento.cidade} - {evento.estado}</p>
+              <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                <span className="material-icons text-base text-emerald-600">calendar_today</span>
+                {evento.data}
+              </p>
+              <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                <span className="material-icons text-base text-emerald-600">access_time</span>
+                {evento.horaInicio} às {evento.horaFim}
+              </p>
+              <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                <span className="material-icons text-base text-emerald-600">place</span>
+                {evento.cidade} - {evento.estado}
+              </p>
+              {evento.ong?.nome && (
+                <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                  <span className="material-icons text-base text-emerald-600">business</span>
+                  ONG: {evento.ong.nome}
+                </p>
+              )}
+              {evento.ong?.instagram && (
+                <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                  <span className="material-icons text-base text-emerald-600">photo_camera</span>
+                  <a
+                    href={`https://instagram.com/${evento.ong.instagram.replace("@", "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-600 hover:underline"
+                  >
+                    @{evento.ong.instagram.replace("@", "")}
+                  </a>
+                </p>
+              )}
+              {evento.descricao && (
+                <p className="text-sm italic text-gray-700 mb-2">"{evento.descricao}"</p>
+              )}
               <div className="flex gap-2">
                 <a
                   href={gerarLinkGoogleCalendar(evento)}
@@ -187,21 +227,39 @@ export default function Eventos() {
                   rel="noopener noreferrer"
                   className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-600"
                 >
-                  Me lembrar
+                  <span className="material-icons align-middle text-sm">event</span> Me lembrar
                 </a>
                 {evento.precisaVoluntario && (
                   <button
                     onClick={() => setModalEvento(evento)}
                     className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600"
                   >
-                    Quero me voluntariar
+                    <span className="material-icons align-middle text-sm">volunteer_activism</span> Quero me voluntariar
                   </button>
                 )}
               </div>
             </div>
           ))}
         </main>
+
+        {modalEvento && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-xl shadow-xl w-80 relative">
+              <button onClick={() => setModalEvento(null)} className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">✕</button>
+              <h3 className="text-lg font-bold mb-4 text-center">Quero ser voluntário</h3>
+              {formEnviado ? (
+                <p className="text-green-600 font-semibold text-center">Mensagem enviada com sucesso!</p>
+              ) : (
+                <form onSubmit={enviarVoluntario} className="space-y-3">
+                  <input type="text" name="nome" placeholder="Seu nome" className="w-full p-2 border rounded" required />
+                  <input type="text" name="telefone" placeholder="Telefone" className="w-full p-2 border rounded" required />
+                  <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded">Confirmar</button>
+                </form>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </div></>
   );
 }
