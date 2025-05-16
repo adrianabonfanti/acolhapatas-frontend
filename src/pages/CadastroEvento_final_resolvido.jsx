@@ -260,11 +260,11 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
     <p className="text-gray-600">{evento.local}</p>
     <p className="text-sm text-gray-500">{evento.endereco}</p>
     <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
-    {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded w-fit">Precisa de voluntário</span>}
+    
   </div>
 </div>
 
-              {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
+              
             </div>
           ))}
         </div>
