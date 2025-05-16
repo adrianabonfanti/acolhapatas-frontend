@@ -84,12 +84,16 @@ export default function Eventos() {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      await api.post("/contato", {
-        name: formData.get("nome"),
-        phone: formData.get("telefone"),
-        message: `Quero ser voluntário para o evento ${modalEvento.nome}\n\nData: ${modalEvento.data}\nLocal: ${modalEvento.endereco || "Endereço não informado"}\nCidade: ${modalEvento.cidade} - ${modalEvento.estado}`,
-        email: modalEvento?.ong?.email || "contato@acolhapatas.org"
-      });
+     const [ano, mes, dia] = modalEvento.data.split("-");
+const dataFormatada = `${dia}/${mes}/${ano}`;
+
+await api.post("/contato", {
+  name: formData.get("nome"),
+  phone: formData.get("telefone"),
+  message: `Quero ser voluntário para o evento ${modalEvento.nome}\n\nData: ${dataFormatada}\nLocal: ${modalEvento.endereco || "Endereço não informado"}\nCidade: ${modalEvento.cidade} - ${modalEvento.estado}`,
+  email: modalEvento?.ong?.email || "contato@acolhapatas.org"
+});
+
       setFormEnviado(true);
       setTimeout(() => {
         setFormEnviado(false);
