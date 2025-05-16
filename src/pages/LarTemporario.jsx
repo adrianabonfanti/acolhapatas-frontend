@@ -189,7 +189,7 @@ const handleEnviarContato = async (e) => {
     Preferências para Hospedagem
   </h2>
 
-  <div className="space-y-6 text-sm text-gray-700">
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
     <div>
       <label className="font-medium block mb-1">Espécie aceita:</label>
       <div className="flex flex-wrap gap-4">
