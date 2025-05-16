@@ -25,6 +25,8 @@ export default function CadastroEvento() {
     return <div className="p-6 text-red-600 font-bold">Token inválido. Faça login novamente.</div>;
   }
 
+  console.log("TOKEN CARREGADO:", token);
+
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
@@ -43,6 +45,7 @@ export default function CadastroEvento() {
   });
 
   useEffect(() => {
+    console.log("useEffect executado");
     buscarEventos();
   }, []);
 
@@ -73,6 +76,7 @@ export default function CadastroEvento() {
       precisaVoluntario: false,
       imagem: null,
     });
+    setModoCadastro(false);
     setModoEdicao(false);
     setEventoSelecionado(null);
   };
@@ -87,6 +91,7 @@ export default function CadastroEvento() {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Eventos encontrados:", response.data);
       setEventos(response.data);
     } catch (error) {
       console.error("Erro ao buscar eventos:", error);
@@ -120,7 +125,6 @@ export default function CadastroEvento() {
       }
       limparFormulario();
       buscarEventos();
-      setModoCadastro(false);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     }
@@ -178,26 +182,7 @@ export default function CadastroEvento() {
       </div>
       <div className="mt-4 flex gap-4">
         <button onClick={buscarEventos} className="bg-blue-500 text-white px-4 py-2 rounded">Procurar</button>
-        <button
-          onClick={() => {
-            setFormData({
-              nome: "",
-              local: "",
-              data: "",
-              horaInicio: "",
-              horaFim: "",
-              descricao: "",
-              precisaVoluntario: false,
-              imagem: null,
-            });
-            setModoEdicao(false);
-            setEventoSelecionado(null);
-            setModoCadastro(true);
-          }}
-          className="bg-emerald-500 text-white px-4 py-2 rounded"
-        >
-          Cadastrar Novo Evento
-        </button>
+        <button onClick={() => { limparFormulario(); setModoCadastro(true); }} className="bg-emerald-500 text-white px-4 py-2 rounded">Cadastrar Novo Evento</button>
       </div>
 
       {modoCadastro && (
@@ -228,12 +213,21 @@ export default function CadastroEvento() {
                 <div className="flex gap-2">
                   <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
                     <span className="material-icons">edit</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Editar
+                    </span>
                   </button>
                   <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
                     <span className="material-icons">delete</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Apagar
+                    </span>
                   </button>
                   <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
                     <span className="material-icons">content_copy</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Clonar
+                    </span>
                   </button>
                 </div>
               </div>
