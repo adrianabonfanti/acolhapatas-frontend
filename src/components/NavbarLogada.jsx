@@ -28,6 +28,7 @@ function NavbarLogada({ setActivePage }) {
             <>
               <button onClick={() => setActivePage("home")} className="hover:text-emerald-600 transition">Início</button>
               <button onClick={() => setActivePage("animais")} className="hover:text-emerald-600 transition">Animais</button>
+                            <button onClick={() => setActivePage("eventos")} className="hover:text-emerald-600 transition">Eventos</button>
               <button onClick={() => setActivePage("procurar")} className="hover:text-emerald-600 transition">Buscar Lar</button>
               <button onClick={() => setActivePage("meusDados")} className="hover:text-emerald-600 transition">Minha ONG</button>
             </>
