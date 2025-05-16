@@ -147,25 +147,25 @@ const handleEnviarContato = async (e) => {
   </h2>
 
   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
-    <h3 class="font-semibold">Nome Completo</h3>
+    <label className="font-medium block mb-1">Nome Completo:</label>
     <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required />
-    <h3 class="font-semibold">CEP</h3>
+    <label className="font-medium block mb-1">CEP:</label>
     <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required />
-    <h3 class="font-semibold">Rua</h3>
+    <label className="font-medium block mb-1">Rua:</label>
     <input name="rua" type="text" placeholder="Rua" className="input w-full" required />
-    <h3 class="font-semibold">Número</h3>
+    <label className="font-medium block mb-1">Número:</label>
     <input name="numero" type="text" placeholder="Número" className="input w-full" required />
-    <h3 class="font-semibold">Complemento</h3>
+   <label className="font-medium block mb-1">Complemento:</label>
     <input name="complemento" type="text" placeholder="Complemento" className="input w-full" />
-    <h3 class="font-semibold">Cidade</h3>
+    <label className="font-medium block mb-1">Cidade:</label>
     <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required />
-    <h3 class="font-semibold">Estado</h3>
+    <label className="font-medium block mb-1">Estado:</label>
     <input name="estado" type="text" placeholder="Estado" className="input w-full" required />
-    <h3 class="font-semibold">Telefone</h3>
+    <label className="font-medium block mb-1">Telefone:</label>
     <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required />
-    <h3 class="font-semibold">E-mail</h3>
+   <label className="font-medium block mb-1">E-mail:</label>
     <input name="email" type="email" placeholder="E-mail" className="input w-full" required />
-    <h3 class="font-semibold">Password</h3>
+    <label className="font-medium block mb-1">Senha:</label>
     <input name="password" type="password" placeholder="Senha" className="input w-full" required />
   </div>
 </div>
