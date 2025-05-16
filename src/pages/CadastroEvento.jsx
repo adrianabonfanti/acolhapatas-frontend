@@ -76,13 +76,16 @@ export default function CadastroEvento() {
     e.preventDefault();
     try {
       const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === "imagem" && formData.imagem) {
-          data.append("imagem", formData.imagem, formData.imagem.name);
-        } else {
-          data.append(key, formData[key]);
-        }
-      });
+    Object.keys(formData).forEach((key) => {
+  if (key === "imagem" && formData.imagem) {
+    data.append("imagem", formData.imagem, formData.imagem.name);
+  } else if (typeof formData[key] === "boolean") {
+    data.append(key, formData[key] ? "true" : "false");
+  } else {
+    data.append(key, formData[key]);
+  }
+});
+
 
       if (modoEdicao && eventoSelecionado) {
         await axios.put(`${import.meta.env.VITE_API_BASE_URL}/eventos/${eventoSelecionado._id}`, data, {
