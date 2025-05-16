@@ -24,7 +24,7 @@ export default function Eventos() {
 
   const buscarEventos = async () => {
     try {
-     const response = await axios.get("https://acolhapatas-api.onrender.com/public/eventos");
+     const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
       const hoje = new Date();
       const eventosFiltrados = response.data.filter((evento) => new Date(evento.data) >= hoje);
       setEventos(eventosFiltrados.sort((a, b) => new Date(a.data) - new Date(b.data)));
