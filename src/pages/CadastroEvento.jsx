@@ -9,6 +9,8 @@ export default function CadastroEvento() {
     nome: "",
     local: "",
     endereco: "",
+    cidade: "",
+    estado: "",
     data: "",
     horaInicio: "",
     horaFim: "",
@@ -64,6 +66,8 @@ export default function CadastroEvento() {
         nome: "",
         local: "",
         endereco: "",
+        cidade: "",
+        estado: "",
         data: "",
         horaInicio: "",
         horaFim: "",
@@ -104,6 +108,8 @@ export default function CadastroEvento() {
       nome: evento.nome || "",
       local: evento.local || "",
       endereco: evento.endereco || "",
+      cidade: evento.cidade || "",
+      estado: evento.estado || "",
       data: evento.data || "",
       horaInicio: evento.horaInicio || "",
       horaFim: evento.horaFim || "",
@@ -167,7 +173,7 @@ export default function CadastroEvento() {
           setModoCadastro(true);
           setModoEdicao(false);
           setFormData({
-            nome: "", local: "", endereco: "", data: "", horaInicio: "", horaFim: "", descricao: "",
+            nome: "", local: "", endereco: "", cidade: "", estado: "", data: "", horaInicio: "", horaFim: "", descricao: "",
             precisaVoluntario: false, imagem: null
           });
         }} className="bg-green-500 text-white px-4 py-2 rounded h-10">
@@ -181,6 +187,27 @@ export default function CadastroEvento() {
           <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required />
           <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full md:w-64" required />
           <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full md:w-64" />
+         <input
+  type="text"
+  name="cidade"
+  value={formData.cidade}
+  onChange={handleFormChange}
+  placeholder="Cidade"
+  className="border p-2"
+/>
+
+<select
+  name="estado"
+  value={formData.estado}
+  onChange={handleFormChange}
+  className="border p-2"
+>
+  <option value="">Estado</option>
+  {["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"].map(uf => (
+    <option key={uf} value={uf}>{uf}</option>
+  ))}
+</select>
+
           <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
           <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
           <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
@@ -222,6 +249,8 @@ export default function CadastroEvento() {
                 </div>
                 <p className="text-gray-600">{evento.local}</p>
                 <p className="text-sm text-gray-500">{evento.endereco}</p>
+                <p className="text-sm text-gray-500">{evento.cidade}</p>
+                <p className="text-sm text-gray-500">{evento.estado}</p>
                 <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
                 {evento.precisaVoluntario && (
                   <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded w-fit mt-1">
