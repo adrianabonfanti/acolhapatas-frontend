@@ -147,19 +147,21 @@ export default function CadastroEvento() {
 
       {/* Filtros */}
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 mb-6">
+         <div><label className="font-medium block mb-1">Nome do Evento:</label>
         <input
           type="text"
           placeholder="Nome do Evento"
           className="border p-2 w-full md:w-64"
           value={filtros.nome}
           onChange={(e) => setFiltros((prev) => ({ ...prev, nome: e.target.value }))}
-        />
+        /></div>
+        <div><label className="font-medium block mb-1">Data:</label>
         <input
           type="date"
           className="border p-2 w-full md:w-64"
           value={filtros.data}
           onChange={(e) => setFiltros((prev) => ({ ...prev, data: e.target.value }))}
-        />
+        /></div>
         <label className="flex items-center gap-1">
           <input
             type="checkbox"
@@ -184,9 +186,13 @@ export default function CadastroEvento() {
       {/* Formulário */}
       {modoCadastro && (
         <form onSubmit={cadastrarEvento} className="grid gap-2 mb-4">
-          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required />
-          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full md:w-64" required />
-          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full md:w-64" />
+          <div><label className="font-medium block mb-1">Nome do Evento:</label>
+          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required /></div>
+          <div><label className="font-medium block mb-1">Local do Evento:</label>
+          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full md:w-64" required /></div>
+          <div><label className="font-medium block mb-1">Endereço do Evento:</label>
+          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full md:w-64" /></div>
+          <div><label className="font-medium block mb-1">Cidade:</label>
          <input
   type="text"
   name="cidade"
@@ -195,7 +201,8 @@ export default function CadastroEvento() {
   placeholder="Cidade"
   className="border p-2"
 />
-
+</div>
+<div><label className="font-medium block mb-1">Estado:</label>
 <select
   name="estado"
   value={formData.estado}
@@ -206,13 +213,16 @@ export default function CadastroEvento() {
   {["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"].map(uf => (
     <option key={uf} value={uf}>{uf}</option>
   ))}
-</select>
-
-          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full md:w-64" />
-          <label className="flex items-center gap-2">
+</select></div>
+<div><label className="font-medium block mb-1">Dia do Evento:</label>
+          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <div><label className="font-medium block mb-1">Hora de Início:</label>
+          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <div><label className="font-medium block mb-1">Hora de Fim:</label>
+          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <div><label className="font-medium block mb-1">Descreva o Evento:</label>
+          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full md:w-64" /></div>
+                    <label className="flex items-center gap-2">
             <input type="checkbox" name="precisaVoluntario" checked={formData.precisaVoluntario} onChange={handleFormChange} />
             Precisa de Voluntário
           </label>
