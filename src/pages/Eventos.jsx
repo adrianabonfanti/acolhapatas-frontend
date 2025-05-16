@@ -51,10 +51,12 @@ export default function Eventos() {
     });
   };
 
-  const aplicarFiltros = (evento) => {
-    const ongOk =
-      filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ong?._id);
-   const cidadeOk =
+ const aplicarFiltros = (evento) => {
+  const ongId = typeof evento.ong === "object" ? evento.ong._id : evento.ong;
+  const ongOk =
+    filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(ongId);
+
+    const cidadeOk =
   filtros.cidade.trim() === "" ||
   evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
 
