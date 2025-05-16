@@ -22,17 +22,17 @@ export default function Eventos() {
     buscarOngs();
   }, []);
 
-  const buscarEventos = async () => {
-    try {
-     const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
-      const hoje = new Date().toISOString().slice(0, 10); // "2025-05-16"
-const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
+const buscarEventos = async () => {
+  try {
+    const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
+    const hoje = new Date().toISOString().slice(0, 10); // "2025-05-16"
+    const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
+    setEventos(eventosFiltrados.sort((a, b) => a.data.localeCompare(b.data)));
+  } catch (err) {
+    console.error("Erro ao buscar eventos:", err);
+  }
+};
 
-      setEventos(eventosFiltrados.sort((a, b) => new Date(a.data) - new Date(b.data)));
-    } catch (err) {
-      console.error("Erro ao buscar eventos:", err);
-    }
-  };
 
   const buscarOngs = async () => {
     try {
