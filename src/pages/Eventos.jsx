@@ -1,7 +1,7 @@
 // Página de Eventos do AcolhaPatas
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import api from "../services/api";
+import api from "../services/api"; 
 
 export default function Eventos() {
   const [eventos, setEventos] = useState([]);
@@ -94,10 +94,19 @@ export default function Eventos() {
   };
 
   return (
+<>
+  <header className="page-header headerEventos w-full h-60 md:h-72 lg:h-80 flex items-center bg-emerald-50 shadow-inner overflow-hidden page-header">
+  <div className="w-1/2 h-full">
+    
+  </div>
+  <div className="w-1/2 h-full flex items-center justify-center px-6">
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
+      Eventos
+    </h1>
+  </div>
+</header>
     <div className="p-4">
-      <header className="page-header headerEventos mb-4">
-        <h1 className="text-4xl font-bold text-emerald-700">Eventos</h1>
-      </header>
+   
 
       <button
         onClick={() => setShowSlideFiltro((prev) => !prev)}
@@ -248,6 +257,6 @@ export default function Eventos() {
           </div>
         </div>
       )}
-    </div>
+    </div></>
   );
 }
