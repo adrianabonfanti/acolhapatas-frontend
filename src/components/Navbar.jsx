@@ -56,7 +56,7 @@ function Navbar() {
     ONGs
   </Link>
    <Link to="/sobre" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
-    <span > <img src="/_menu.png" alt="Logo AcolhaPatas" className="menuMobile" /></span>
+    <span > <img src="/logo_menu.png" alt="Logo AcolhaPatas" className="menuMobile" /></span>
     Sobre
   </Link>
   <Link to="/login" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
