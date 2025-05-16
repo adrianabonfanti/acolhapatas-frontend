@@ -90,7 +90,9 @@ await api.post("/contato", {
       <div className="flex-1 p-6 flex flex-col">
               {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
-  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center" style="
+    margin-top: 0px;
+">
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
