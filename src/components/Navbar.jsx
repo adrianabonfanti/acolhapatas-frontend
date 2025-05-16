@@ -34,7 +34,7 @@ function Navbar() {
       </div>
 
       {/* Menu mobile  */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-md flex justify-around py-2 z-50 md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-md flex justify-around py-2 z-50 md:hidden menuMobile">
   <Link to="/" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
     <span className="material-icons">home</span>
     Início
@@ -56,7 +56,7 @@ function Navbar() {
     ONGs
   </Link>
    <Link to="/sobre" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
-    <span > <img src="/logo_menu.png" alt="Logo AcolhaPatas" className="menuMobile" /></span>
+    <span > <img src="/logo_menu.png" alt="Logo AcolhaPatas" className="menuLogo" /></span>
     Sobre
   </Link>
   <Link to="/login" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
