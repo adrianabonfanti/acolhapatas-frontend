@@ -55,6 +55,10 @@ function Navbar() {
     <span className="material-icons">groups</span>
     ONGs
   </Link>
+   <Link to="/ongs" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+    <span className="material-icons">groups</span>
+    Sobre
+  </Link>
   <Link to="/login" className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
     <span className="material-icons">login</span>
     Entrar
