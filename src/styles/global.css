@@ -88,7 +88,7 @@ font-family: "Poppins";
                 }
                   .headerEventos {
               background-image: url(/eventos.jpg);
-              background-position: center;
+              background-position: top;
               background-color: #d3c7bd; 
               background-size: cover;
                 }
