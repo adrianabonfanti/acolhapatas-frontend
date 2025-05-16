@@ -190,7 +190,7 @@ const estadoOk =
   alt={evento.nome}
   className="w-full h-48 object-cover rounded mb-2"
 />
-
+ 
               <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
               <p className="text-sm text-gray-600 mb-1">
                 📅 {new Date(evento.data).toLocaleString("pt-BR")}
