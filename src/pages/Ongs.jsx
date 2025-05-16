@@ -135,21 +135,37 @@ await api.post("/contato", {
 
         <h2 className="text-2xl font-bold mt-12 mb-4 tituloSeja">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label className="font-medium block mb-1">Nome da ONG:</label>
           <input type="text" name="name" placeholder="Nome da ONG" onChange={handleChange} required className="input" />
+         <label className="font-medium block mb-1">CNPJ:</label>
           <input type="text" name="cnpj" placeholder="CNPJ" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">CEP:</label>
           <input type="text" name="cep" placeholder="CEP" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Rua:</label>
           <input type="text" name="street" placeholder="Rua" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Número:</label>
           <input type="text" name="number" placeholder="Número" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Complemento:</label>
           <input type="text" name="complement" placeholder="Complemento" onChange={handleChange} className="input" />
+          <label className="font-medium block mb-1">Cidade:</label>
           <input type="text" name="city" placeholder="Cidade" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Estado:</label>
           <input type="text" name="state" placeholder="Estado" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Nome do responsável:</label>
           <input type="text" name="responsibleName" placeholder="Nome do responsável" onChange={handleChange} required className="input" />
+         <label className="font-medium block mb-1">E-mail do responsável:</label>
           <input type="email" name="responsibleEmail" placeholder="Email do responsável" onChange={handleChange} required className="input" />
-          <input type="text" name="phone" placeholder="Telefone de contato" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Telefone do responsável:</label>
+          <input type="text" name="phone" placeholder="Telefone do responsável" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Senha:</label>
           <input type="password" name="password" placeholder="Senha" onChange={handleChange} required className="input" />
+          <label className="font-medium block mb-1">Nome Completo:</label>
           <input type="text" name="website" placeholder="Website" onChange={handleChange} className="input" />
+          <label className="font-medium block mb-1">Instagram:</label>
           <input type="text" name="instagram" placeholder="Instagram" onChange={handleChange} className="input" />
+          <label className="font-medium block mb-1">TikTok:</label>
           <input type="text" name="tiktok" placeholder="TikTok" onChange={handleChange} className="input" />
+         <label className="font-medium block mb-1">Logo da ONG:</label>
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange}  className="input" />
           <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button> 
         </form> 
