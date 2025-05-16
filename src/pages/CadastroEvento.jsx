@@ -80,21 +80,22 @@ export default function CadastroEvento() {
   };
 
   const buscarEventos = async () => {
-    try {
-      const query = new URLSearchParams();
-if (filtros.nome.trim() !== "") query.append("nome", filtros.nome);
-if (filtros.data) query.append("data", filtros.data);
-if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtros.precisaVoluntario);
+  try {
+    const query = new URLSearchParams();
+    if (filtros.nome.trim() !== "") query.append("nome", filtros.nome);
+    if (filtros.data) query.append("data", filtros.data);
+    if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtros.precisaVoluntario);
 
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setEventos(response.data);
+    setModoCadastro(false); // ⬅️ Adicione isso aqui
+  } catch (error) {
+    console.error("Erro ao buscar eventos:", error);
+  }
+};
 
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setEventos(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar eventos:", error);
-    }
-  };
 
   const cadastrarEvento = async (e) => {
     e.preventDefault();
