@@ -6,11 +6,26 @@ import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function CadastroEvento() {
   const userStr = localStorage.getItem("user");
-  if (!userStr) return null;
+  if (!userStr) {
+    console.warn("Usuário não logado");
+    return <div className="p-6 text-red-600 font-bold">Você precisa estar logado para acessar esta página.</div>;
+  }
 
-  const user = JSON.parse(userStr);
-  const token = user?.token;
-  if (!token) return null;
+  let user = {};
+  try {
+    user = JSON.parse(userStr);
+  } catch (e) {
+    console.error("Erro ao interpretar o user do localStorage:", e);
+    return <div className="p-6 text-red-600 font-bold">Erro ao interpretar dados do usuário. Faça login novamente.</div>;
+  }
+
+  const token = user.token;
+  if (!token) {
+    console.error("Token ausente dentro do user");
+    return <div className="p-6 text-red-600 font-bold">Token inválido. Faça login novamente.</div>;
+  }
+
+  console.log("TOKEN CARREGADO:", token);
 
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
@@ -30,6 +45,7 @@ export default function CadastroEvento() {
   });
 
   useEffect(() => {
+    console.log("useEffect executado");
     buscarEventos();
   }, []);
 
@@ -75,6 +91,7 @@ export default function CadastroEvento() {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Eventos encontrados:", response.data);
       setEventos(response.data);
     } catch (error) {
       console.error("Erro ao buscar eventos:", error);
@@ -219,6 +236,12 @@ export default function CadastroEvento() {
               {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
             </div>
           ))}
+        </div>
+      )}
+
+      {!modoCadastro && eventos.length === 0 && (
+        <div className="mt-8 text-center text-gray-600">
+          Nenhum evento encontrado. Clique em "Cadastrar Novo Evento" para começar.
         </div>
       )}
 
