@@ -9,19 +9,12 @@
   /* Filtros à esquerda */
   .filtros-container {
     padding: 1.5rem;
-    width: 280px;
+    width: fit-content;
     background: #f5f9fb;
     border-right: 1px solid #ddd;
-    height: auto;
-    max-height: none;
-    position: sticky;
-    top:70px;
-    align-self: start;
-    height: fit-content;
+ 
   }
-  
-  
-  
+    
   .filtros-container h2 {
     margin-bottom: 0.3rem;
     font-size: 1.2rem;
@@ -183,13 +176,12 @@
     }
   
     .filtros-container {
-      position: relative;
-        width: 100%;
+      top: 9%;
         padding: 0rem 2rem 1rem;
         box-sizing: border-box;
-        margin-top: -77px;
+       
     }
-  
+    
     .lista-animais {
       width: 100%;
       padding: 1rem 0;
@@ -205,6 +197,9 @@
       width: 100%;
       max-width: 100%;
       margin: 0 auto;
+    }
+    .botaoFiltro{
+     
     }
   }
       

@@ -147,15 +147,25 @@ const handleEnviarContato = async (e) => {
   </h2>
 
   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+    <h3 class="font-semibold">Nome Completo</h3>
     <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required />
+    <h3 class="font-semibold">CEP</h3>
     <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required />
+    <h3 class="font-semibold">Rua</h3>
     <input name="rua" type="text" placeholder="Rua" className="input w-full" required />
+    <h3 class="font-semibold">Número</h3>
     <input name="numero" type="text" placeholder="Número" className="input w-full" required />
+    <h3 class="font-semibold">Complemento</h3>
     <input name="complemento" type="text" placeholder="Complemento" className="input w-full" />
+    <h3 class="font-semibold">Cidade</h3>
     <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required />
+    <h3 class="font-semibold">Estado</h3>
     <input name="estado" type="text" placeholder="Estado" className="input w-full" required />
+    <h3 class="font-semibold">Telefone</h3>
     <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required />
+    <h3 class="font-semibold">E-mail</h3>
     <input name="email" type="email" placeholder="E-mail" className="input w-full" required />
+    <h3 class="font-semibold">Password</h3>
     <input name="password" type="password" placeholder="Senha" className="input w-full" required />
   </div>
 </div>

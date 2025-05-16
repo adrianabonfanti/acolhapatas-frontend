@@ -95,7 +95,7 @@ const handleEnviarContato = async (e) => {
   </div>
   <div className="w-1/2 h-full flex items-center justify-center px-6">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
-      Animais para Adoção
+     Lar Temporário
     </h1>
   </div>
 </header>

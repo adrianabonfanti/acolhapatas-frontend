@@ -4,10 +4,21 @@ import axios from "axios";
 export default function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
+  const [eventos, setEventos] = useState([]);
+  const [detalhesEvento, setDetalhesEvento] = useState(null);
 
   const buscarPendentes = async () => {
     const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/pendentes`);
     setPendentes(res.data);
+  };
+
+  const buscarEventos = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos/public`);
+      setEventos(res.data);
+    } catch (error) {
+      console.error("Erro ao buscar eventos:", error);
+    }
   };
 
   const aprovar = async (id) => {
@@ -25,7 +36,7 @@ export default function AdminPanel() {
       await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
       buscarPendentes();
     } catch (error) {
-      console.error("Erro ao recusar:", error);
+      console.error("Erro ao recusar cadastro:", error);
       alert("Erro ao recusar cadastro.");
     }
   };
@@ -34,7 +45,7 @@ export default function AdminPanel() {
     if (confirm("Tem certeza que deseja excluir este evento?")) {
       try {
         await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}`);
-        buscarPendentes();
+        buscarEventos();
       } catch (error) {
         console.error("Erro ao deletar evento:", error);
         alert("Erro ao deletar evento.");
@@ -44,6 +55,7 @@ export default function AdminPanel() {
 
   useEffect(() => {
     buscarPendentes(); 
+    buscarEventos();
   }, []);
 
   return (
@@ -113,23 +125,46 @@ export default function AdminPanel() {
         </div>
       )}
 
-      {eventoSelecionado && (
+      <h2 className="text-xl font-bold mt-8 mb-4 text-center">Eventos Cadastrados</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {eventos.map((evento) => (
+          <div key={evento._id} className="bg-white rounded-xl shadow p-4">
+            <h3 className="text-lg font-bold text-emerald-800">{evento.nome}</h3>
+            <p className="text-sm text-gray-700">{new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}</p>
+            <p className="text-sm text-gray-600">{evento.cidade} - {evento.estado}</p>
+            <div className="flex gap-2 mt-2">
+              <button
+                onClick={() => setDetalhesEvento(evento)}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+              >
+                <span className="material-icons text-sm align-middle">search</span>
+              </button>
+              <button
+                onClick={() => deletarEvento(evento._id)}
+                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+              >
+                <span className="material-icons text-sm align-middle">delete</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {detalhesEvento && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white w-96 p-6 rounded-lg shadow-lg relative">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
             <button
-              onClick={() => setEventoSelecionado(null)}
+              onClick={() => setDetalhesEvento(null)}
               className="absolute top-2 right-3 text-gray-600 hover:text-black"
             >✕</button>
-            <h2 className="text-xl font-bold mb-2">Detalhes do Evento</h2>
-            <p><strong>Nome:</strong> {eventoSelecionado.nome}</p>
-            <p><strong>Data:</strong> {new Date(eventoSelecionado.data).toLocaleDateString("pt-BR")}</p>
-            <p><strong>Horário:</strong> {eventoSelecionado.horaInicio} - {eventoSelecionado.horaFim}</p>
-            <p><strong>Local:</strong> {eventoSelecionado.endereco}</p>
-            <p><strong>Cidade/UF:</strong> {eventoSelecionado.cidade} - {eventoSelecionado.estado}</p>
-            <p><strong>ONG:</strong> {eventoSelecionado.ong?.nome || "-"}</p>
-            <p><strong>Email da ONG:</strong> {eventoSelecionado.ong?.email || "-"}</p>
-            {eventoSelecionado.descricao && (
-              <p className="mt-2 text-sm italic text-gray-700">"{eventoSelecionado.descricao}"</p>
+            <h2 className="text-xl font-bold mb-2">{detalhesEvento.nome}</h2>
+            <p><strong>Data:</strong> {new Date(detalhesEvento.data).toLocaleDateString("pt-BR")}</p>
+            <p><strong>Horário:</strong> {detalhesEvento.horaInicio} - {detalhesEvento.horaFim}</p>
+            <p><strong>Endereço:</strong> {detalhesEvento.endereco}</p>
+            <p><strong>Cidade:</strong> {detalhesEvento.cidade} - {detalhesEvento.estado}</p>
+            <p><strong>Descrição:</strong> {detalhesEvento.descricao}</p>
+            {detalhesEvento.ong?.nome && (
+              <p><strong>ONG:</strong> {detalhesEvento.ong.nome}</p>
             )}
           </div>
         </div>

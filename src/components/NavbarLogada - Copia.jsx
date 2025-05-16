@@ -28,6 +28,7 @@ function NavbarLogada({ setActivePage }) {
             <>
               <button onClick={() => setActivePage("home")} className="hover:text-emerald-600 transition">Início</button>
               <button onClick={() => setActivePage("animais")} className="hover:text-emerald-600 transition">Animais</button>
+                            <button onClick={() => setActivePage("eventos")} className="hover:text-emerald-600 transition">Eventos</button>
               <button onClick={() => setActivePage("procurar")} className="hover:text-emerald-600 transition">Buscar Lar</button>
               <button onClick={() => setActivePage("meusDados")} className="hover:text-emerald-600 transition">Minha ONG</button>
             </>
@@ -54,9 +55,13 @@ function NavbarLogada({ setActivePage }) {
               <span className="material-icons">pets</span>
               Animais
             </button>
+                    <button onClick={() => setActivePage("eventos")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
+              <span className="material-icons">event</span>
+              Eventos
+            </button>
             <button onClick={() => setActivePage("procurar")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">search</span>
-              Buscar
+              Lar
             </button>
             <button onClick={() => setActivePage("meusDados")} className="flex flex-col items-center text-xs text-gray-600 hover:text-emerald-600">
               <span className="material-icons">apartment</span>

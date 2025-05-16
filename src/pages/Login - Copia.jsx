@@ -11,7 +11,6 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     const rota = tipoUsuario === "ong" ? "login-ong" : "login-lar";
 
     try {
@@ -34,10 +33,9 @@ function Login() {
         localStorage.setItem("user", JSON.stringify({ id: data.id, token: data.token, tipo: "ong" }));
         window.open("/painel-ong", "_blank");
       } else {
-        // Armazena todos os dados do lar, exceto senha
-  const { password, ...larSemSenha } = data.lar || {};
-  localStorage.setItem("user", JSON.stringify({ tipo: "lar", ...larSemSenha }));
-  window.open("/painel-lar", "_blank");
+        const { password, ...larSemSenha } = data.lar || {};
+        localStorage.setItem("user", JSON.stringify({ tipo: "lar", ...larSemSenha }));
+        window.open("/painel-lar", "_blank");
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -46,11 +44,13 @@ function Login() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      {/* Área principal */}
+    <div className="relative min-h-screen overflow-x-hidden headerLogin">
       <div className="flex-1 flex flex-col items-center justify-center p-6">
-        <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-80">
-          <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <form
+          onSubmit={handleLogin}
+          className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10 w-80"
+        >
+         
 
           <select
             value={tipoUsuario}
@@ -80,15 +80,15 @@ function Login() {
             className="w-full mb-6 p-2 border rounded"
           />
 
-          <button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded">
+          <button
+            type="submit"
+            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded"
+          >
             Entrar
           </button>
         </form>
       </div>
 
-    
-
-      {/* Botão flutuante de contato */}
       <button
         ref={buttonRef}
         onClick={() => setShowForm((prev) => !prev)}
@@ -97,29 +97,39 @@ function Login() {
         💬
       </button>
 
-      {/* Formulário de contato */}
       {showForm && (
-        <div ref={formRef} className="fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50">
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            setFormEnviado(true);
-            setShowForm(false);
-          }}>
+        <div
+          ref={formRef}
+          className="fixed bottom-24 right-6 bg-white p-6 rounded-lg shadow-lg w-80 z-50 max-h-screen overflow-auto"
+        >
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setFormEnviado(true);
+              setShowForm(false);
+            }}
+          >
             <h3 className="text-lg font-semibold mb-2">Entre em contato</h3>
             <input name="name" type="text" placeholder="Seu nome" className="w-full mb-2 p-2 border rounded" required />
             <input name="phone" type="text" placeholder="Telefone" className="w-full mb-2 p-2 border rounded" required />
             <input name="email" type="email" placeholder="E-mail" className="w-full mb-2 p-2 border rounded" required />
             <textarea name="message" placeholder="Mensagem" className="w-full mb-2 p-2 border rounded" required />
-            <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full">Enviar</button>
+            <button type="submit" className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full">
+              Enviar
+            </button>
           </form>
         </div>
       )}
 
-      {/* Modal de confirmação */}
       {formEnviado && (
         <div className="fixed bottom-24 right-6 bg-emerald-500 text-white p-4 rounded-lg shadow-lg w-80 z-50">
           <p>Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.</p>
-          <button onClick={() => setFormEnviado(false)} className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded">Fechar</button>
+          <button
+            onClick={() => setFormEnviado(false)}
+            className="mt-2 w-full bg-white text-emerald-500 font-semibold p-2 rounded"
+          >
+            Fechar
+          </button>
         </div>
       )}
     </div>

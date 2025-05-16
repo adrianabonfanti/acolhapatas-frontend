@@ -72,11 +72,22 @@ await api.post("/contato", {
   };
 
   return (
+    <>
+     <header className="page-header headerOng w-full h-60 md:h-72 lg:h-80 flex items-center bg-emerald-50 shadow-inner overflow-hidden page-header">
+  <div className="w-1/2 h-full">
+    
+  </div>
+  <div className="w-1/2 h-full flex items-center justify-center px-6 divOngs">
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
+      Ongs Participantes
+    </h1>
+  </div>
+</header>
     <div className="relative  min-h-screen">
       <div className="flex-1 p-6 flex flex-col">
               {/* ONGs Participantes */}
         <section className="py-12 px-4 sm:px-8 bg-white overflow-hidden">
-  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+  <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center tituloOngs" >
     ONGs participantes
   </h2>
   <div className="max-w-7xl mx-auto">
@@ -122,7 +133,7 @@ await api.post("/contato", {
           </div>
         )} */}
 
-        <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
+        <h2 className="text-2xl font-bold mt-12 mb-4 tituloSeja">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" name="name" placeholder="Nome da ONG" onChange={handleChange} required className="input" />
           <input type="text" name="cnpj" placeholder="CNPJ" onChange={handleChange} required className="input" />
@@ -139,13 +150,13 @@ await api.post("/contato", {
           <input type="text" name="website" placeholder="Website" onChange={handleChange} className="input" />
           <input type="text" name="instagram" placeholder="Instagram" onChange={handleChange} className="input" />
           <input type="text" name="tiktok" placeholder="TikTok" onChange={handleChange} className="input" />
-          <input type="file" name="logo" accept="image/*" onChange={handleFileChange} className="input" />
-          <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button>
-        </form>
+          <input type="file" name="logo" accept="image/*" onChange={handleFileChange}  className="input" />
+          <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button> 
+        </form> 
 
         <ContatoFlutuante />
       </div>
-    </div>
+    </div></>
   );
 };
 

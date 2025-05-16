@@ -35,6 +35,7 @@ font-family: "Poppins";
     position: relative;
     border-radius: 0px;
     margin-bottom: 20px;
+    
   }
   
   .page-header .overlay {
@@ -54,23 +55,43 @@ font-family: "Poppins";
     
   }
   .page-header h1{
-    font-family: "Poppins";
-    font-weight: 500;
+      font-family: Poppins;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 24%;
+      text-shadow: -1px 2px black;
   }
   .headerLar{
-    background-image: url(/lar_lado.png);
-    background-size: 50%;
-    background-position: left;
+    background-image: url(/lar_lado.jpg);
+    background-size: cover;
+    background-position-y: 2%;
     background-repeat: no-repeat;
     background-color: #d2bdb0;
     }
     .headerAdocao {
-      background-image: url(/adote_lado.png);
-      background-size: 61%;
-      background-position: left;
-      background-repeat: no-repeat;
+      background-image: url(/adote_lado.jpg);
+      background-position: center;
       background-color: #d3c7bd;
+      background-size: cover;
         }
+        .headerOng {
+          background-image: url(/ong.jpg);
+          background-position: center;
+          background-color: #d3c7bd; 
+          background-size: cover;
+            }
+            .headerLogin {
+              background-image: url(/login.jpg);
+              background-position: center;
+              background-color: #d3c7bd; 
+              background-size: cover;
+                }
+                  .headerEventos {
+              background-image: url(/eventos.jpg);
+              background-position: top;
+              background-color: #d3c7bd; 
+              background-size: cover;
+                }
         .conteudo-lar {
             padding-inline: 1.5rem;
             margin-top: 1rem;
@@ -82,9 +103,21 @@ font-family: "Poppins";
             height: 100px;
     width: auto !important;
           }
-         
-          
-          
+          .filtros-container {
+            overflow-y: auto;
+            padding: 1.5rem;
+          }
+          .tituloOngs{
+                 margin-top: -50px;
+          }
+          .divOngs{
+            padding-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+          }
+          .tituloSeja{
+                margin-top: -30px;
+          }
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{
@@ -120,14 +153,14 @@ font-family: "Poppins";
     header{
       padding:0px;
     }
-    .page-header{
-      height: 150px;
-      background-size: 77%;
-    }
+  
     .headerAdocao {
       background-color:#d4c9be;
-      background-size: 77%;
+      background-size: cover;
      
+       }
+       .headerLar{
+        background-position-y: 19%;
        }
     .logoHeader{
       height: 60px;
@@ -140,6 +173,10 @@ font-family: "Poppins";
 .carrossel{
   width: 220px;
 }
-   
-    
+   .menuLogo{
+        height: 25px;
+   }
+    .menuMobile{
+      vertical-align: middle;
+    }
   }
