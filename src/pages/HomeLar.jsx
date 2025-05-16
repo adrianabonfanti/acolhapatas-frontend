@@ -36,7 +36,7 @@ export default function HomeLar() {
       }
       if (lar.necessidadesEspeciais) {
         query.necessidadesEspeciais = true;
-      }
+      } 
       if (lar.medicacao) {
         query.medicacao = true;
       }
