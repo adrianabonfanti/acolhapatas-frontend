@@ -21,6 +21,7 @@ function Navbar() {
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
           <Link to="/" className="hover:text-emerald-600 transition">Início</Link>
           <Link to="/adocao" className="hover:text-emerald-600 transition">Adoção</Link>
+          <Link to="/eventos" className="hover:text-emerald-600 transition">Eventos</Link>
           <Link to="/lar" className="hover:text-emerald-600 transition">Seja um lar</Link>
           <Link to="/ongs" className="hover:text-emerald-600 transition">ONGs</Link>
           <Link to="/sobre" className="hover:text-emerald-600 transition">Sobre</Link>
