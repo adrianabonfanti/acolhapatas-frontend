@@ -76,16 +76,15 @@ export default function CadastroEvento() {
     e.preventDefault();
     try {
       const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-  if (key === "imagem" && formData.imagem) {
-    data.append("imagem", formData.imagem, formData.imagem.name);
-  } else if (typeof formData[key] === "boolean") {
-    data.append(key, formData[key] ? "true" : "false");
-  } else {
-    data.append(key, formData[key]);
-  }
-});
-
+      Object.keys(formData).forEach((key) => {
+        if (key === "imagem" && formData.imagem) {
+          data.append("imagem", formData.imagem, formData.imagem.name);
+        } else if (typeof formData[key] === "boolean") {
+          data.append(key, formData[key] ? "true" : "false");
+        } else {
+          data.append(key, formData[key]);
+        }
+      });
 
       if (modoEdicao && eventoSelecionado) {
         await axios.put(`${import.meta.env.VITE_API_BASE_URL}/eventos/${eventoSelecionado._id}`, data, {
@@ -144,9 +143,7 @@ export default function CadastroEvento() {
     }
   };
 
-  useEffect(() => {
-    buscarEventos();
-  }, []);
+  // Removido o useEffect que buscava automaticamente os eventos ao carregar a página
 
   return (
     <div className="p-6">
@@ -208,7 +205,7 @@ export default function CadastroEvento() {
                       Clonar
                     </span>
                   </button>
-                   </div>
+                </div>
               </div>
               <p className="text-gray-600">{evento.local}</p>
               <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
