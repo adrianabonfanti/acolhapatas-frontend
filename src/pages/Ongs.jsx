@@ -133,7 +133,7 @@ await api.post("/contato", {
           </div>
         )} */}
 
-        <h2 className="text-2xl font-bold mt-12 mb-4">Seja uma ONG participante</h2>
+        <h2 className="text-2xl font-bold mt-12 mb-4 tituloSeja">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" name="name" placeholder="Nome da ONG" onChange={handleChange} required className="input" />
           <input type="text" name="cnpj" placeholder="CNPJ" onChange={handleChange} required className="input" />

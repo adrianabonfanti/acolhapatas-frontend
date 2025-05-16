@@ -108,14 +108,16 @@ font-family: "Poppins";
             padding: 1.5rem;
           }
           .tituloOngs{
-             margin-top: 0px;
+                 margin-top: -50px;
           }
           .divOngs{
             padding-top: 0px;
     margin-bottom: 0px;
     padding-bottom: 0px;
           }
-          
+          .tituloSeja{
+                margin-top: -30px;
+          }
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{
