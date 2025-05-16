@@ -147,26 +147,36 @@ const handleEnviarContato = async (e) => {
   </h2>
 
   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+    <div>
     <label className="font-medium block mb-1">Nome Completo:</label>
-    <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required />
+    <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required /></div>
+     <div>
     <label className="font-medium block mb-1">CEP:</label>
-    <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required />
+    <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required /></div>
+     <div>
     <label className="font-medium block mb-1">Rua:</label>
-    <input name="rua" type="text" placeholder="Rua" className="input w-full" required />
+    <input name="rua" type="text" placeholder="Rua" className="input w-full" required /></div>
+     <div>
     <label className="font-medium block mb-1">Número:</label>
-    <input name="numero" type="text" placeholder="Número" className="input w-full" required />
+    <input name="numero" type="text" placeholder="Número" className="input w-full" required /></div>
+     <div>
    <label className="font-medium block mb-1">Complemento:</label>
-    <input name="complemento" type="text" placeholder="Complemento" className="input w-full" />
+    <input name="complemento" type="text" placeholder="Complemento" className="input w-full" /></div>
+     <div>
     <label className="font-medium block mb-1">Cidade:</label>
-    <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required />
+    <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required /></div>
+     <div>
     <label className="font-medium block mb-1">Estado:</label>
-    <input name="estado" type="text" placeholder="Estado" className="input w-full" required />
+    <input name="estado" type="text" placeholder="Estado" className="input w-full" required /></div>
+     <div>
     <label className="font-medium block mb-1">Telefone:</label>
-    <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required />
+    <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required /></div>
+     <div>
    <label className="font-medium block mb-1">E-mail:</label>
-    <input name="email" type="email" placeholder="E-mail" className="input w-full" required />
+    <input name="email" type="email" placeholder="E-mail" className="input w-full" required /></div>
+     <div>
     <label className="font-medium block mb-1">Senha:</label>
-    <input name="password" type="password" placeholder="Senha" className="input w-full" required />
+    <input name="password" type="password" placeholder="Senha" className="input w-full" required /></div>
   </div>
 </div>
 
