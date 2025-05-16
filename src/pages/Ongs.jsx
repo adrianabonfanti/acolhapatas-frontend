@@ -151,8 +151,8 @@ await api.post("/contato", {
           <input type="text" name="instagram" placeholder="Instagram" onChange={handleChange} className="input" />
           <input type="text" name="tiktok" placeholder="TikTok" onChange={handleChange} className="input" />
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange}  className="input" />
-          <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button>
-        </form>
+          <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button> 
+        </form> 
 
         <ContatoFlutuante />
       </div>
