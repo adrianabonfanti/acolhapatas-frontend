@@ -1,4 +1,3 @@
-
 // Página de Eventos do AcolhaPatas
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -26,7 +25,6 @@ export default function Eventos() {
   const buscarEventos = async () => {
     try {
       const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
-      console.log("Eventos retornados da API:", response.data);
       const hoje = new Date().toISOString().slice(0, 10);
       const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
       setEventos(eventosFiltrados.sort((a, b) => a.data.localeCompare(b.data)));
@@ -101,8 +99,20 @@ export default function Eventos() {
 
   return (
     <div className="p-4">
+      <button
+        onClick={() => setShowSlideFiltro((prev) => !prev)}
+        className="fixed top-4 left-4 z-50 bg-white border border-emerald-300 p-2 rounded-full shadow-md hover:bg-emerald-100 md:hidden"
+      >
+        <span className="material-icons text-emerald-700">filter_list</span>
+      </button>
+
       <div className="flex flex-col md:flex-row">
-        <aside className="w-64 bg-white shadow-lg p-4 rounded-lg">
+        <div
+          ref={filtroRef}
+          className={`transition-transform duration-300 ease-in-out fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-40 transform ${
+            showSlideFiltro ? "translate-x-0" : "-translate-x-full"
+          } md:relative md:translate-x-0 md:block p-4 rounded-lg`}
+        >
           <h2 className="text-xl font-semibold mb-4">Filtrar</h2>
           <div className="campoFiltro mb-3">
             <h3 className="font-semibold">ONG</h3>
@@ -151,16 +161,22 @@ export default function Eventos() {
               ))}
             </select>
           </div>
-        </aside>
+        </div>
 
         <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
           {eventos.filter(aplicarFiltros).map((evento) => (
             <div key={evento._id} className="bg-white rounded-xl shadow p-4">
-              <img
+            {/*   <img
                 src={`https://acolhapatas-api.onrender.com/${evento.imagem}`}
                 alt={evento.nome}
                 className="w-full h-48 object-cover rounded mb-2"
-              />
+              /> */}
+              <img
+  src={evento.imagem}
+  alt={evento.nome}
+  className="w-full h-48 object-cover rounded mb-2"
+/>
+
               <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
               <p className="text-sm text-gray-600 mb-1">📅 {evento.data}</p>
               <p className="text-sm text-gray-600 mb-2">📍 {evento.cidade} - {evento.estado}</p>
