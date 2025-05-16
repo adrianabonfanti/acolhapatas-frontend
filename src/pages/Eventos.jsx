@@ -53,7 +53,7 @@ export default function Eventos() {
 
   const aplicarFiltros = (evento) => {
     const ongOk =
-      filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ong?._id);
+      filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(evento.ongId);
     const cidadeOk =
       filtros.cidade.trim() === "" ||
       evento.cidade.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
