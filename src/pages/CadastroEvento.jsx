@@ -1,11 +1,16 @@
+
 // CadastroEvento.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 
 export default function CadastroEvento() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userStr = localStorage.getItem("user");
+  if (!userStr) return null;
+
+  const user = JSON.parse(userStr);
   const token = user?.token;
+  if (!token) return null;
 
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
@@ -23,6 +28,10 @@ export default function CadastroEvento() {
     precisaVoluntario: false,
     imagem: null,
   });
+
+  useEffect(() => {
+    buscarEventos();
+  }, []);
 
   const handleFormChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -142,8 +151,6 @@ export default function CadastroEvento() {
       console.error("Erro ao clonar evento:", error);
     }
   };
-
-  // Removido o useEffect que buscava automaticamente os eventos ao carregar a página
 
   return (
     <div className="p-6">
