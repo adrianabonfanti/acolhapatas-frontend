@@ -140,7 +140,7 @@ export default function CadastroEvento() {
       <h2 className="text-2xl font-bold mb-4">Buscar Eventos</h2>
 
       {/* Filtros */}
-      <div className="flex flex-col md:flex-row flex-wrap gap-4 mb-6 items-end">
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 mb-6">
         <input
           type="text"
           placeholder="Nome do Evento"
@@ -170,7 +170,7 @@ export default function CadastroEvento() {
             nome: "", local: "", endereco: "", data: "", horaInicio: "", horaFim: "", descricao: "",
             precisaVoluntario: false, imagem: null
           });
-        }} className="bg-green-500 text-white px-4 py-2 rounded">
+        }} className="bg-green-500 text-white px-4 py-2 rounded h-10">
           {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar Novo Evento"}
         </button>
       </div>
@@ -190,7 +190,7 @@ export default function CadastroEvento() {
             Precisa de Voluntário
           </label>
           <input type="file" name="imagem" accept="image/*" onChange={handleFormChange} className="border p-2 w-full md:w-64" />
-          <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded">
+          <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded h-10">
             {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar"}
           </button>
         </form>
