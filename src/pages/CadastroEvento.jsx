@@ -187,10 +187,25 @@ export default function CadastroEvento() {
               <div className="flex justify-between">
                 <h3 className="text-xl font-bold">{evento.nome}</h3>
                 <div className="flex gap-2">
-                  <button onClick={() => editarEvento(evento)} className="text-blue-500">✏️</button>
-                  <button onClick={() => deletarEvento(evento._id)} className="text-red-500">🗑️</button>
-                  <button onClick={() => clonarEvento(evento._id)} className="text-gray-500">📄</button>
-                </div>
+                  <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
+                    <span className="material-icons">edit</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Editar
+                    </span>
+                  </button>
+                  <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
+                    <span className="material-icons">delete</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Apagar
+                    </span>
+                  </button>
+                  <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
+                    <span className="material-icons">content_copy</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Clonar
+                    </span>
+                  </button>
+                   </div>
               </div>
               <p className="text-gray-600">{evento.local}</p>
               <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
