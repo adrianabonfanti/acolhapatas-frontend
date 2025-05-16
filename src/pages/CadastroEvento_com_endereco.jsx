@@ -134,8 +134,8 @@ export default function CadastroEvento() {
     setModoEdicao(true);
     setFormData({
       nome: evento.nome || "",
+      endereco: evento.endereco || '','
       local: evento.local || "",
-      endereco: evento.endereco || "",
       data: evento.data || "",
       horaInicio: evento.horaInicio || "",
       horaFim: evento.horaFim || "",
@@ -186,7 +186,6 @@ export default function CadastroEvento() {
             setFormData({
               nome: "",
               local: "",
-              endereco: "",
               data: "",
               horaInicio: "",
               horaFim: "",
@@ -251,6 +250,7 @@ export default function CadastroEvento() {
                 </div>
               </div>
               <p className="text-gray-600">{evento.local}</p>
+<p className="text-sm text-gray-500">{evento.endereco}</p>
               <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
               {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
             </div>
