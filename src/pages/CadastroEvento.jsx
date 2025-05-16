@@ -25,18 +25,17 @@ export default function CadastroEvento() {
     return <div className="p-6 text-red-600 font-bold">Token inválido. Faça login novamente.</div>;
   }
 
+  console.log("TOKEN CARREGADO:", token);
+
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
   const [eventos, setEventos] = useState([]);
   const [filtros, setFiltros] = useState({ nome: "", data: "", precisaVoluntario: false });
 
-  const [loading, setLoading] = useState(false);
-
-const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     nome: "",
     local: "",
-    endereco: "", 
     data: "",
     horaInicio: "",
     horaFim: "",
@@ -46,8 +45,8 @@ const [formData, setFormData] = useState({
   });
 
   useEffect(() => {
+    console.log("useEffect executado");
     buscarEventos();
-    setLoading(false);
   }, []);
 
   const handleFormChange = (e) => {
@@ -70,7 +69,6 @@ const [formData, setFormData] = useState({
     setFormData({
       nome: "",
       local: "",
-      endereco: evento.endereco || "",
       data: "",
       horaInicio: "",
       horaFim: "",
@@ -78,6 +76,7 @@ const [formData, setFormData] = useState({
       precisaVoluntario: false,
       imagem: null,
     });
+    setModoCadastro(false);
     setModoEdicao(false);
     setEventoSelecionado(null);
   };
@@ -85,23 +84,21 @@ const [formData, setFormData] = useState({
   const buscarEventos = async () => {
     try {
       const query = new URLSearchParams();
-if (filtros.nome.trim() !== "") query.append("nome", filtros.nome);
-if (filtros.data) query.append("data", filtros.data);
-if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtros.precisaVoluntario);
-
+      if (filtros.nome) query.append("nome", filtros.nome);
+      if (filtros.data) query.append("data", filtros.data);
+      if (filtros.precisaVoluntario) query.append("precisaVoluntario", filtros.precisaVoluntario);
 
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("Eventos encontrados:", response.data);
       setEventos(response.data);
-    setModoCadastro(false);
     } catch (error) {
       console.error("Erro ao buscar eventos:", error);
     }
   };
 
   const cadastrarEvento = async (e) => {
-    setLoading(true);
     e.preventDefault();
     try {
       const data = new FormData();
@@ -128,11 +125,8 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
       }
       limparFormulario();
       buscarEventos();
-    setLoading(false);
-      setModoCadastro(false);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
-    setLoading(false);
     }
   };
 
@@ -143,7 +137,6 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
     setFormData({
       nome: evento.nome || "",
       local: evento.local || "",
-      endereco: evento.endereco || "",
       data: evento.data || "",
       horaInicio: evento.horaInicio || "",
       horaFim: evento.horaFim || "",
@@ -160,7 +153,6 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
         headers: { Authorization: `Bearer ${token}` },
       });
       buscarEventos();
-    setLoading(false);
     } catch (error) {
       console.error("Erro ao apagar evento:", error);
     }
@@ -172,7 +164,6 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
         headers: { Authorization: `Bearer ${token}` },
       });
       buscarEventos();
-    setLoading(false);
     } catch (error) {
       console.error("Erro ao clonar evento:", error);
     }
@@ -191,42 +182,13 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
       </div>
       <div className="mt-4 flex gap-4">
         <button onClick={buscarEventos} className="bg-blue-500 text-white px-4 py-2 rounded">Procurar</button>
-        <button
-          onClick={() => {
-            setFormData({
-              nome: "",
-              local: "",
-              endereco: "",
-              data: "",
-              horaInicio: "",
-              horaFim: "",
-              descricao: "",
-              precisaVoluntario: false,
-              imagem: null,
-            });
-            setModoEdicao(false);
-            setEventoSelecionado(null);
-            setModoCadastro(true);
-          }}
-          className="bg-emerald-500 text-white px-4 py-2 rounded"
-        >
-          Cadastrar Novo Evento
-        </button>
+        <button onClick={() => { limparFormulario(); setModoCadastro(true); }} className="bg-emerald-500 text-white px-4 py-2 rounded">Cadastrar Novo Evento</button>
       </div>
 
       {modoCadastro && (
         <form onSubmit={cadastrarEvento} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
           <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full" required />
           <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full" required />
-         <input
-  type="text"
-  name="endereco"
-  value={formData.endereco}
-  onChange={handleFormChange}
-  placeholder="Endereço completo do evento"
-  className="border p-2 w-full"
-  required
-/>
           <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full" required />
           <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full" required />
           <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full" required />
@@ -237,7 +199,7 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
           </label>
           <input type="file" name="imagem" onChange={handleFormChange} className="md:col-span-2" />
           <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
-            {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar Evento"}
+            {modoEdicao ? "Salvar Alterações" : "Cadastrar Evento"}
           </button>
         </form>
       )}
@@ -245,26 +207,31 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
       {!modoCadastro && eventos.length > 0 && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           {eventos.map((evento) => (
-            <div key={evento._id} className="bg-white p-4 shadow border rounded flex gap-4">
-              {evento.imagem && (
-  <img src={evento.imagem} alt="Evento" className="w-24 h-24 object-cover rounded" />
-)}
-<div className="flex flex-col flex-1 justify-between">
+            <div key={evento._id} className="bg-white p-4 shadow border rounded">
+              <div className="flex justify-between">
                 <h3 className="text-xl font-bold">{evento.nome}</h3>
                 <div className="flex gap-2">
                   <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
                     <span className="material-icons">edit</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Editar
+                    </span>
                   </button>
                   <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
                     <span className="material-icons">delete</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Apagar
+                    </span>
                   </button>
                   <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
                     <span className="material-icons">content_copy</span>
+                    <span className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                      Clonar
+                    </span>
                   </button>
                 </div>
               </div>
               <p className="text-gray-600">{evento.local}</p>
-              <p className="text-sm text-gray-500">{evento.endereco}</p>
               <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
               {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
             </div>
