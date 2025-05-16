@@ -185,10 +185,11 @@ export default function Eventos() {
                   className="w-full  rounded mb-2 imagemEvento"
                 />
                 <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
-                <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
-                  <span className="material-icons text-base text-emerald-600">calendar_today</span>
-                  {evento.data}
-                </p>
+              <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+  <span className="material-icons text-base text-emerald-600">calendar_today</span>
+  {new Date(evento.data).toLocaleDateString("pt-BR")}
+</p>
+
                 <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
                   <span className="material-icons text-base text-emerald-600">access_time</span>
                   {evento.horaInicio} às {evento.horaFim}

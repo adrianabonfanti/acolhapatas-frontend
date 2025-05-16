@@ -251,7 +251,10 @@ export default function CadastroEvento() {
                 <p className="text-sm text-gray-500">{evento.endereco}</p>
                 <p className="text-sm text-gray-500">{evento.cidade}</p>
                 <p className="text-sm text-gray-500">{evento.estado}</p>
-                <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
+                <p className="text-sm">
+  {new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}
+</p>
+
                 {evento.precisaVoluntario && (
                   <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded w-fit mt-1">
                     Precisa de voluntário
