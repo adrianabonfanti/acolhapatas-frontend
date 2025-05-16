@@ -246,25 +246,27 @@ if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtr
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           {eventos.map((evento) => (
             <div key={evento._id} className="bg-white p-4 shadow border rounded flex gap-4">
-              
-<div className="flex items-start gap-4">
-  {evento.imagem && (
-    <img
-      src={evento.imagem}
-      alt="Imagem do Evento"
-      className="w-16 h-16 object-cover rounded"
-    />
-  )}
-  <div className="flex flex-col justify-between flex-1">
-    <h3 className="text-lg font-bold">{evento.nome}</h3>
-    <p className="text-gray-600">{evento.local}</p>
-    <p className="text-sm text-gray-500">{evento.endereco}</p>
-    <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
-    
-  </div>
-</div>
-
-              
+              {evento.imagem && (
+  <img src={evento.imagem} alt="Evento" className="w-24 h-24 object-cover rounded" />
+)}
+<div className="flex flex-col flex-1 justify-between">
+                <h3 className="text-xl font-bold">{evento.nome}</h3>
+                <div className="flex gap-2">
+                  <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800 relative group">
+                    <span className="material-icons">edit</span>
+                  </button>
+                  <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800 relative group">
+                    <span className="material-icons">delete</span>
+                  </button>
+                  <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800 relative group">
+                    <span className="material-icons">content_copy</span>
+                  </button>
+                </div>
+              </div>
+              <p className="text-gray-600">{evento.local}</p>
+              <p className="text-sm text-gray-500">{evento.endereco}</p>
+              <p className="text-sm">{evento.data} • {evento.horaInicio} - {evento.horaFim}</p>
+              {evento.precisaVoluntario && <span className="text-xs bg-yellow-300 text-black px-2 py-1 rounded">Precisa de voluntário</span>}
             </div>
           ))}
         </div>
