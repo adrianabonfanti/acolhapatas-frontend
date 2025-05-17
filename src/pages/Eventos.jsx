@@ -144,15 +144,14 @@ await api.post("/contato", {
                   />
                   {ong.name}
                 </label> */
-                  <div className="campoFiltro">
-          <h3 className="font-semibold">ONG</h3>
+            
           <select value={filtros.ong} onChange={(e) => setFiltros({ ...filtros, ong: e.target.value })}>
   <option value="">Todas</option>
   {ongs.map((ong) => (
     <option key={ong._id} value={ong._id}>{ong.name}</option>
   ))}
 </select>
-        </div>
+      
               ))}
             </div>
             <div className="campoFiltro mb-3">
