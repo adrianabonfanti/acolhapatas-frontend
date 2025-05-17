@@ -136,7 +136,7 @@ const handleEnviarContato = async (e) => {
 
         <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
           {/* Dados Pessoais */}
-          <div className="bg-white  rounded-2xl p-6 shadow-md mb-8">
+          <div className="bg-white  rounded-2xl p-6  mb-8">
   <h2 className="text-xl font-semibold text-emerald-700 flex items-center gap-2 mb-4">
     <span className="material-icons text-2xl">person</span>
     Dados Pessoais
@@ -179,7 +179,7 @@ const handleEnviarContato = async (e) => {
 
 
           {/* Preferências de Animal */}
-          <div className="bg-white  rounded-2xl p-6 shadow-md mb-8">
+          <div className="bg-white  rounded-2xl p-6  mb-8">
   <h2 className="text-xl font-semibold text-emerald-700 flex items-center gap-2 mb-4">
     <span className="material-icons text-2xl">pets</span>
     Preferências para Hospedagem
