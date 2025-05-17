@@ -5,7 +5,7 @@ export default function ModalOng({ ong, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white w-full max-w-lg p-6 rounded-3xl shadow-xl relative">
+      <div className="bg-white  p-6 rounded-3xl shadow-xl relative">
         <button
           onClick={onClose}
           className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
