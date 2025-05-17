@@ -192,4 +192,7 @@ input[type="checkbox"] {
     .menuMobile{
       vertical-align: middle;
     }
+        .filtros-container {
+        top: 8%;
+        }
   }
