@@ -105,10 +105,7 @@ const handleEnviarContato = async (e) => {
       <div className="flex-1 flex flex-col">
       
         <section className="mb-12">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
-      O que é ser um lar
-    </h1>
-
+      <h2 class="text-2xl font-bold mb-4">O que é ser um lar temporário</h2>
           <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
             {["home", "pets", "event", "chat"].map((icon, i) => {
               const titles = [
