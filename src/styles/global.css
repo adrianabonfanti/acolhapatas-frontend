@@ -131,6 +131,9 @@ font-family: "Poppins";
 input[type="checkbox"] {
   width:auto;
 }
+.caixaLar span{
+font-size:22px;
+}
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{

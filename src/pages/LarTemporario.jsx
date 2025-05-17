@@ -123,7 +123,7 @@ const handleEnviarContato = async (e) => {
               return (
                 <div
                   key={i}
-                  className="min-w-[250px] max-w-[300px] bg-white border border-emerald-100 shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
+                  className="caixaLar min-w-[250px] max-w-[300px] bg-white border border-emerald-100 shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
                 >
                   <span className="material-icons text-emerald-600 text-4xl">{icon}</span>
                   <h3 className="font-semibold text-lg">{titles[i]}</h3>
