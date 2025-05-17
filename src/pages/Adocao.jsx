@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../styles/adocao.css";
 import "../styles/global.css";
+import ModalOng from './ModalOng';
 
 export default function Adocao() {
   const [filtros, setFiltros] = useState({ nome: "", especie: [], sexo: [], idade: [], porte: [], ong: "", cidade: "", estado: "" });
@@ -341,126 +342,8 @@ export default function Adocao() {
       )}
 
       {/* Modal da ONG */}
-      {ongAdocao && (
-  <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-    <div className="bg-white w-full max-w-lg p-6 rounded-3xl shadow-xl relative">
-      <button
-        onClick={() => setOngAdocao(null)}
-        className="absolute top-4 right-5 text-gray-400 hover:text-gray-700 text-xl"
-      >
-        ✕
-      </button>
-      {ongAdocao.logo && (
-  <div className="mb-4 text-center">
-    <img
-      src={ongAdocao.logo}
-      alt={`Logo da ${ongAdocao.nome}`}
-      className="h-24 mx-auto object-contain"
-    />
-  </div>
-)}
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-extrabold text-gray-800">Informações da ONG</h3>
-        <p className="text-sm text-gray-500 mt-1">Confira os dados completos da instituição</p>
-      </div>
+      {ongAdocao && <ModalOng ong={ongAdocao} onClose={() => setOngAdocao(null)} />}
 
-      <div className="space-y-3 text-gray-700 text-sm">
-        {ongAdocao.nome && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">business</span>
-            <strong className="w-36">Nome:</strong> {ongAdocao.nome}
-          </p>
-        )}
-        {ongAdocao.responsibleName && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">person</span>
-            <strong className="w-36">Responsável:</strong> {ongAdocao.responsibleName}
-          </p>
-        )}
-        {ongAdocao.cnpj && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">badge</span>
-            <strong className="w-36">CNPJ:</strong> {ongAdocao.cnpj}
-          </p>
-        )}
-        {ongAdocao.phone && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">call</span>
-            <strong className="w-36">Telefone:</strong> {ongAdocao.phone}
-          </p>
-        )}
-        {ongAdocao.responsibleEmail && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">mail</span>
-            <strong className="w-36">Email Resp.:</strong>
-            <a href={`mailto:${ongAdocao.responsibleEmail}`} className="text-emerald-600 hover:underline">
-              {ongAdocao.responsibleEmail}
-            </a>
-          </p>
-        )}
-        {ongAdocao.email && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">email</span>
-            <strong className="w-36">Email ONG:</strong>
-            <a href={`mailto:${ongAdocao.email}`} className="text-emerald-600 hover:underline">
-              {ongAdocao.email}
-            </a>
-          </p>
-        )}
-        {ongAdocao.instagram && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">photo_camera</span>
-            <strong className="w-36">Instagram:</strong>
-            <a
-              href={`https://instagram.com/${ongAdocao.instagram.replace("@", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              @{ongAdocao.instagram.replace("@", "")}
-            </a>
-          </p>
-        )}
-        {ongAdocao.tiktok && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">smart_display</span>
-            <strong className="w-36">TikTok:</strong> @{ongAdocao.tiktok}
-          </p>
-        )}
-        {ongAdocao.website && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">language</span>
-            <strong className="w-36">Site:</strong>
-            <a
-              href={ongAdocao.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-600 hover:underline"
-            >
-              {ongAdocao.website}
-            </a>
-          </p>
-        )}
-        {ongAdocao.cep && (
-          <p className="flex items-center gap-2">
-            <span className="material-icons text-emerald-600">location_on</span>
-            <strong className="w-36">CEP:</strong> {ongAdocao.cep}
-          </p>
-        )}
-        {(ongAdocao.street || ongAdocao.number || ongAdocao.complement) && (
-          <p className="flex items-start gap-2">
-            <span className="material-icons text-emerald-600 mt-0.5">home</span>
-            <strong className="w-36">Endereço:</strong> 
-            <span>
-              {ongAdocao.street}, {ongAdocao.number} {ongAdocao.complement && `- ${ongAdocao.complement}`}<br/>
-              {ongAdocao.city} - {ongAdocao.state}
-            </span>
-          </p>
-        )}
-      </div>
-    </div>
-  </div>
-)}
 
 
 
