@@ -134,7 +134,7 @@ await api.post("/contato", {
             <div className="campoFiltro mb-3">
               <h3 className="font-semibold">ONG</h3>
               {ongs.map((ong) => (
-                <label key={ong._id} className="block text-sm">
+             /*    <label key={ong._id} className="block text-sm">
                   <input
                     type="checkbox"
                     value={ong._id}
@@ -143,7 +143,16 @@ await api.post("/contato", {
                     className="mr-2"
                   />
                   {ong.name}
-                </label>
+                </label> */
+                  <div className="campoFiltro">
+          <h3 className="font-semibold">ONG</h3>
+          <select value={filtros.ong} onChange={(e) => setFiltros({ ...filtros, ong: e.target.value })}>
+  <option value="">Todas</option>
+  {ongs.map((ong) => (
+    <option key={ong._id} value={ong._id}>{ong.name}</option>
+  ))}
+</select>
+        </div>
               ))}
             </div>
             <div className="campoFiltro mb-3">

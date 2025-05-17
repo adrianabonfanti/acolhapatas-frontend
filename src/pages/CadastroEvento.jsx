@@ -146,7 +146,7 @@ export default function CadastroEvento() {
       <h2 className="text-2xl font-bold mb-4">Buscar Eventos</h2>
 
       {/* Filtros */}
-      <div className="filtros-container flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 mb-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 mb-6">
          <div><label className="font-medium block mb-1">Nome do Evento:</label>
         <input
           type="text"
