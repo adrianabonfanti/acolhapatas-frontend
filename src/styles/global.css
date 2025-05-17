@@ -132,7 +132,8 @@ input[type="checkbox"] {
   width:auto;
 }
 .caixaLar span{
-font-size:22px;
+    font-size: 51px;
+    margin-left: 31%;
 }
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
