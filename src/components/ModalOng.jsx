@@ -4,7 +4,7 @@ export default function ModalOng({ ong, onClose }) {
   if (!ong) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-left  z-50">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white w-full max-w-lg p-6 rounded-3xl shadow-xl relative">
         <button
           onClick={onClose}
@@ -30,31 +30,31 @@ export default function ModalOng({ ong, onClose }) {
 
         <div className="space-y-3 text-gray-700 text-sm">
           {ong.nome && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">business</span>
               <strong className="w-36">Nome:</strong> {ong.nome}
             </p>
           )}
           {ong.responsibleName && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">person</span>
               <strong className="w-36">Responsável:</strong> {ong.responsibleName}
             </p>
           )}
           {ong.cnpj && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">badge</span>
               <strong className="w-36">CNPJ:</strong> {ong.cnpj}
             </p>
           )}
           {ong.phone && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">call</span>
               <strong className="w-36">Telefone:</strong> {ong.phone}
             </p>
           )}
           {ong.responsibleEmail && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">mail</span>
               <strong className="w-36">Email Resp.:</strong>
               <a href={`mailto:${ong.responsibleEmail}`} className="text-emerald-600 hover:underline">
@@ -63,7 +63,7 @@ export default function ModalOng({ ong, onClose }) {
             </p>
           )}
           {ong.email && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">email</span>
               <strong className="w-36">Email ONG:</strong>
               <a href={`mailto:${ong.email}`} className="text-emerald-600 hover:underline">
@@ -72,7 +72,7 @@ export default function ModalOng({ ong, onClose }) {
             </p>
           )}
           {ong.instagram && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">photo_camera</span>
               <strong className="w-36">Instagram:</strong>
               <a
@@ -86,13 +86,13 @@ export default function ModalOng({ ong, onClose }) {
             </p>
           )}
           {ong.tiktok && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">smart_display</span>
               <strong className="w-36">TikTok:</strong> @{ong.tiktok}
             </p>
           )}
           {ong.website && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">language</span>
               <strong className="w-36">Site:</strong>
               <a
@@ -106,7 +106,7 @@ export default function ModalOng({ ong, onClose }) {
             </p>
           )}
           {ong.cep && (
-            <p className="flex  gap-2">
+            <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">location_on</span>
               <strong className="w-36">CEP:</strong> {ong.cep}
             </p>
