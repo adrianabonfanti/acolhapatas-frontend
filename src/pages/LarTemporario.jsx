@@ -105,7 +105,7 @@ const handleEnviarContato = async (e) => {
       <div className="flex-1 flex flex-col">
       
         <section className="mb-12">
-      <h2 class="text-2xl font-bold mb-4">O que é ser um lar temporário</h2>
+      <h2 class="text-2xl font-bold mb-4">O que é ser um lar temporário?</h2>
           <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
             {["home", "pets", "event", "chat"].map((icon, i) => {
               const titles = [
@@ -137,6 +137,7 @@ const handleEnviarContato = async (e) => {
         <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
           {/* Dados Pessoais */}
           <div className="bg-white  rounded-2xl p-6  mb-8">
+             <h2 class="text-2xl font-bold mb-4">Seja um lar temporário</h2>
   <h2 className="text-xl font-semibold text-emerald-700 flex items-center gap-2 mb-4">
     <span className="material-icons text-2xl">person</span>
     Dados Pessoais
