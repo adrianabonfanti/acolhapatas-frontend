@@ -106,7 +106,7 @@ const handleEnviarContato = async (e) => {
       
         <section className="mb-12">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">
-      O que é ser um lar temporário?
+      O que é ser um lar
     </h1>
 
           <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
@@ -126,7 +126,7 @@ const handleEnviarContato = async (e) => {
               return (
                 <div
                   key={i}
-                  className="min-w-[250px] max-w-[300px] bg-white  shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
+                  className="min-w-[250px] max-w-[300px] bg-white border border-emerald-100 shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
                 >
                   <span className="material-icons text-emerald-600 text-4xl">{icon}</span>
                   <h3 className="font-semibold text-lg">{titles[i]}</h3>
