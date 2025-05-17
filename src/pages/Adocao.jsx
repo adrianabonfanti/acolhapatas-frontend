@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../styles/adocao.css";
 import "../styles/global.css";
-import ModalOng from './ModalOng';
+import ModalOng from "../components/ModalOng";
 
 export default function Adocao() {
   const [filtros, setFiltros] = useState({ nome: "", especie: [], sexo: [], idade: [], porte: [], ong: "", cidade: "", estado: "" });
