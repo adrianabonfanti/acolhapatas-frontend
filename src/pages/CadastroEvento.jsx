@@ -151,14 +151,14 @@ export default function CadastroEvento() {
         <input
           type="text"
           placeholder="Nome do Evento"
-          className="border p-2 w-full md:w-64"
+          className="border p-2 w-full "
           value={filtros.nome}
           onChange={(e) => setFiltros((prev) => ({ ...prev, nome: e.target.value }))}
         /></div>
         <div><label className="font-medium block mb-1">Data:</label>
         <input
           type="date"
-          className="border p-2 w-full md:w-64"
+          className="border p-2 w-full "
           value={filtros.data}
           onChange={(e) => setFiltros((prev) => ({ ...prev, data: e.target.value }))}
         /></div>
@@ -187,11 +187,11 @@ export default function CadastroEvento() {
       {modoCadastro && (
         <form onSubmit={cadastrarEvento} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div><label className="font-medium block mb-1">Nome do Evento:</label>
-          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required /></div>
+          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Local do Evento:</label>
-          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full md:w-64" required /></div>
+          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Endereço do Evento:</label>
-          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full md:w-64" /></div>
+          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full " /></div>
           <div><label className="font-medium block mb-1">Cidade:</label>
          <input
   type="text"
@@ -215,18 +215,18 @@ export default function CadastroEvento() {
   ))}
 </select></div>
 <div><label className="font-medium block mb-1">Dia do Evento:</label>
-          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Hora de Início:</label>
-          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Hora de Fim:</label>
-          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full md:w-64" required /></div>
+          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Descreva o Evento:</label>
-          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full md:w-64" /></div>
+          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full " /></div>
                     <label className="flex items-center gap-2">
             <input type="checkbox" name="precisaVoluntario" checked={formData.precisaVoluntario} onChange={handleFormChange} />
             Precisa de Voluntário
           </label>
-          <input type="file" name="imagem" accept="image/*" onChange={handleFormChange} className="border p-2 w-full md:w-64" />
+          <input type="file" name="imagem" accept="image/*" onChange={handleFormChange} className="border p-2 w-full " />
           <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded h-10">
             {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar"}
           </button>
