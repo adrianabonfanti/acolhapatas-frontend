@@ -79,7 +79,7 @@ await api.post("/contato", {
   </div>
   <div className="w-1/2 h-full flex items-center justify-center px-6 divOngs">
    
-    <h2 class="text-2xl font-bold mb-4">Ongs Participantes</h2>
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">ONGs Participantes</h1>
   </div>
 </header>
     <div className="relative  min-h-screen">
