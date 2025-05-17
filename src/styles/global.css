@@ -192,7 +192,10 @@ input[type="checkbox"] {
     .menuMobile{
       vertical-align: middle;
     }
-        .filtros-container {
+        /* .filtros-container {
         top: 8%;
+        } */
+        .campoFiltro:first-of-type{
+              margin-top: 21%;
         }
   }
