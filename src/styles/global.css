@@ -135,6 +135,11 @@ input[type="checkbox"] {
     font-size: 51px;
     margin-left: 31%;
 }
+.logoCarrossel{
+    height: 190px;
+    width: auto !important;
+    max-width: 300px;
+}
             /* MOBILE - Abaixo de 768px */
   @media (max-width: 768px) {
     body{

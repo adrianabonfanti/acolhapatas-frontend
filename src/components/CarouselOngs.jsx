@@ -16,7 +16,7 @@ export default function CarouselOngs({ ongs, onClickOng }) {
             <img
               src={ong.logo}
               alt={ong.nome}
-              className="w-full h-24 object-contain mb-2"
+              className="w-full mb-2 logoCarrossel"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "/placeholder.png";
