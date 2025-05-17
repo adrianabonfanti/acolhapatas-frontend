@@ -185,7 +185,7 @@ export default function CadastroEvento() {
 
       {/* Formulário */}
       {modoCadastro && (
-        <form onSubmit={cadastrarEvento} className="grid gap-2 mb-4">
+        <form onSubmit={cadastrarEvento} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div><label className="font-medium block mb-1">Nome do Evento:</label>
           <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required /></div>
           <div><label className="font-medium block mb-1">Local do Evento:</label>
@@ -236,7 +236,7 @@ export default function CadastroEvento() {
       {/* Lista de eventos */}
       
       {!modoCadastro && (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {eventos.map((evento) => (
             <div key={evento._id} className="bg-white p-4 shadow border rounded flex gap-4">
               {evento.imagem && (
