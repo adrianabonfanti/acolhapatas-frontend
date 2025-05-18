@@ -70,6 +70,37 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
 
     return ongOk && cidadeOk && estadoOk && dataOk;
   };
+const enviarVoluntario = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  try {
+    const [ano, mes, dia] = modalEvento.data.split("-");
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    // 1. Salvar no banco de dados
+    await api.post("/voluntarios", {
+      nome: formData.get("nome"),
+      telefone: formData.get("telefone"),
+      evento: modalEvento._id
+    });
+
+    // 2. Enviar e-mail para ONG
+    await api.post("/contato", {
+      name: formData.get("nome"),
+      phone: formData.get("telefone"),
+      message: `Quero ser voluntário para o evento ${modalEvento.nome}\n\nData: ${dataFormatada}\nLocal: ${modalEvento.endereco || "Endereço não informado"}\nCidade: ${modalEvento.cidade} - ${modalEvento.estado}`,
+      email: modalEvento?.ong?.email || "contato@acolhapatas.org"
+    });
+
+    setFormEnviado(true);
+    setTimeout(() => {
+      setFormEnviado(false);
+      setModalEvento(null);
+    }, 3000);
+  } catch (err) {
+    alert("Erro ao enviar. Tente novamente.");
+  }
+};
 
   const gerarLinkGoogleCalendar = (evento) => {
     const inicio = new Date(evento.data + "T" + (evento.horaInicio || "10:00"));
