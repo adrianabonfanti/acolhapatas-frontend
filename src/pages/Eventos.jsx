@@ -18,7 +18,7 @@ export default function Eventos() {
   const [modalInteresse, setModalInteresse] = useState(false);
 const [interesseEnviado, setInteresseEnviado] = useState(false);
 
-  const filtroRef = useRef();
+  const filtroRef = useRef(); 
 
   useEffect(() => {
     buscarEventos();
