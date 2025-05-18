@@ -15,6 +15,7 @@ export default function CadastroEvento() {
     horaInicio: "",
     horaFim: "",
     descricao: "",
+    informacoesVoluntario: "",
     precisaVoluntario: false,
     imagem: null,
   });
@@ -23,6 +24,8 @@ export default function CadastroEvento() {
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
   const [filtros, setFiltros] = useState({ nome: "", data: "", precisaVoluntario: false });
   const [loading, setLoading] = useState(false);
+const [voluntarios, setVoluntarios] = useState([]);
+const [modalVoluntarios, setModalVoluntarios] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -40,6 +43,17 @@ export default function CadastroEvento() {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
+const abrirModalVoluntarios = async (eventoId) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${eventoId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setVoluntarios(response.data);
+    setModalVoluntarios(eventoId);
+  } catch (err) {
+    console.error("Erro ao buscar voluntários:", err);
+  }
+};
 
   const cadastrarEvento = async (e) => {
     e.preventDefault();
@@ -72,6 +86,7 @@ export default function CadastroEvento() {
         horaInicio: "",
         horaFim: "",
         descricao: "",
+        informacoesVoluntario: evento.informacoesVoluntario || "",
         precisaVoluntario: false,
         imagem: null,
       });
@@ -114,6 +129,7 @@ export default function CadastroEvento() {
       horaInicio: evento.horaInicio || "",
       horaFim: evento.horaFim || "",
       descricao: evento.descricao || "",
+      informacoesVoluntario: evento.informacoesVoluntario || "",
       precisaVoluntario: !!evento.precisaVoluntario,
       imagem: null,
     });
@@ -130,16 +146,25 @@ export default function CadastroEvento() {
     }
   };
 
-  const clonarEvento = async (id) => {
-    try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}/clonar`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      buscarEventos();
-    } catch (error) {
-      console.error("Erro ao clonar evento:", error);
-    }
-  };
+const clonarEvento = (evento) => {
+  setModoCadastro(true);
+  setModoEdicao(false); // garante que será um novo evento
+  setEventoSelecionado(null); // remove vínculo com outro evento
+  setFormData({
+    nome: evento.nome || "",
+    local: evento.local || "",
+    endereco: evento.endereco || "",
+    cidade: evento.cidade || "",
+    estado: evento.estado || "",
+    data: "", // <- zerado como solicitado
+    horaInicio: evento.horaInicio || "",
+    horaFim: evento.horaFim || "",
+    descricao: evento.descricao || "",
+    precisaVoluntario: !!evento.precisaVoluntario,
+    imagem: null, // imagem não será copiada
+  });
+};
+
 
   return (
     <div className="p-4">
@@ -222,6 +247,17 @@ export default function CadastroEvento() {
           <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full " required /></div>
           <div><label className="font-medium block mb-1">Descreva o Evento:</label>
           <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full " /></div>
+          <div>
+  <label className="font-medium block mb-1">Instruções para Voluntários:</label>
+  <textarea
+    name="informacoesVoluntario"
+    value={formData.informacoesVoluntario}
+    onChange={handleFormChange}
+    placeholder="Ex: Chegar 15 min antes, trazer documento com foto..."
+    className="border p-2 w-full"
+  />
+</div>
+
                     <label className="flex items-center gap-2">
             <input type="checkbox" name="precisaVoluntario" checked={formData.precisaVoluntario} onChange={handleFormChange} />
             Precisa de Voluntário
@@ -249,12 +285,18 @@ export default function CadastroEvento() {
                     <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800">
                       <span className="material-icons">edit</span>
                     </button>
+                    <button onClick={() => abrirModalVoluntarios(evento._id)} className="text-purple-600 hover:text-purple-800" title="Ver voluntários">
+  <span className="material-icons">groups</span>
+  <span className="text-xs ml-1">{evento.voluntariosCount || 0}</span>
+</button>
+
                     <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800">
                       <span className="material-icons">delete</span>
                     </button>
-                    <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800">
-                      <span className="material-icons">content_copy</span>
-                    </button>
+                    <button onClick={() => clonarEvento(evento)} className="text-gray-600 hover:text-gray-800" title="Clonar evento">
+  <span className="material-icons">content_copy</span>
+</button>
+
                   </div>
                 </div>
                 <p className="text-gray-600">{evento.local}</p>
@@ -275,6 +317,41 @@ export default function CadastroEvento() {
           ))}
         </div>
       )}
+{modalVoluntarios && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl shadow-xl w-96 relative">
+      <button onClick={() => setModalVoluntarios(null)} className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">✕</button>
+      <h3 className="text-lg font-bold mb-4 text-center">Voluntários Cadastrados</h3>
+
+      {voluntarios.length === 0 ? (
+        <p className="text-gray-500 text-sm text-center">Nenhum voluntário ainda.</p>
+      ) : (
+        <ul className="space-y-2">
+          {voluntarios.map((v) => (
+            <li key={v._id} className="flex justify-between items-center border p-2 rounded">
+              <div>
+                <p className="font-semibold">{v.nome}</p>
+                <p className="text-sm text-gray-600">{v.telefone}</p>
+              </div>
+              <button
+                onClick={async () => {
+                  await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${v._id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                  });
+                  abrirModalVoluntarios(modalVoluntarios); // recarrega
+                }}
+                className="text-red-600 hover:text-red-800"
+                title="Excluir voluntário"
+              >
+                <span className="material-icons">delete</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+)}
 
       <ContatoFlutuante />
     </div>
