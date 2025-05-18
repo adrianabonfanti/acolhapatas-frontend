@@ -271,7 +271,7 @@ const enviarVoluntario = async (e) => {
                       onClick={() => setModalEvento(evento)}
                       className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600"
                     >
-                      <span className="material-icons align-middle text-sm">volunteer_activism</span> Quero me voluntariar
+                      <span className="material-icons align-middle text-sm">volunteer_activism</span> Me voluntariar
                     </button>
                   )}
                 </div>
