@@ -90,7 +90,15 @@ const abrirModalVoluntarios = async (eventoId) => {
         precisaVoluntario: false,
         imagem: null,
       });
-      buscarTodosEventos();
+      // Fecha o formulário
+      setModoCadastro(false);
+      setModoEdicao(false);
+      setEventoSelecionado(null);
+
+      // Aguarda um pequeno tempo para o backend finalizar gravação
+      setTimeout(() => {
+        buscarTodosEventos();
+      }, 400);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     } finally {
