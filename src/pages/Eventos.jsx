@@ -234,10 +234,10 @@ const enviarVoluntario = async (e) => {
                   <span className="material-icons text-base text-emerald-600">place</span>
                   {evento.endereco}, {evento.cidade} - {evento.estado}
                 </p>
-                {evento.ong?.nome && (
+                {(evento.ong?.nome || evento.ong?.name) && (
                   <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
   <span className="material-icons text-base text-emerald-600">business</span>
-  ONG: {evento.ong?.nome || JSON.stringify(evento.ong)}
+    ONG: {evento.ong?.nome || evento.ong?.name}
 </p>
 
                 )}
