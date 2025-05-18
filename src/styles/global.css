@@ -141,7 +141,7 @@ input[type="checkbox"] {
     width: auto !important;
     max-width: 300px;
 }
-.botoesEvento{
+.botoesEvento span{
       color: #008947;
 }
             /* MOBILE - Abaixo de 768px */
