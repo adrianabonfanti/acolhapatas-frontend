@@ -48,7 +48,7 @@ function Login() {
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         <form
           onSubmit={handleLogin}
-          className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10 w-80"
+          className="backTextoHome relative z-10 max-w-3xl mx-4 px-6 py-10 rounded-3xl text-center space-y-6 backdrop-blur-sm bg-white/10 w-80 caixaLogin"
         >
          
 
