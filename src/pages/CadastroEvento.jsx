@@ -304,7 +304,11 @@ const clonarEvento = (evento) => {
                 <p className="text-sm text-gray-500">{evento.cidade}</p>
                 <p className="text-sm text-gray-500">{evento.estado}</p>
                 <p className="text-sm">
-  {new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}
+ {(() => {
+  const [ano, mes, dia] = evento.data.split("-");
+  return `${dia}/${mes}/${ano}`;
+})()}
+ • {evento.horaInicio} - {evento.horaFim}
 </p>
 
                 {evento.precisaVoluntario && (
