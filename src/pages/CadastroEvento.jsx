@@ -98,7 +98,7 @@ const abrirModalVoluntarios = async (eventoId) => {
       // Aguarda um pequeno tempo para o backend finalizar gravação
       setTimeout(() => {
         buscarTodosEventos();
-      }, 400);
+      }, 800);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     } finally {
@@ -124,9 +124,13 @@ const abrirModalVoluntarios = async (eventoId) => {
   };
 const buscarTodosEventos = async () => {
   try {
+    // Limpa os filtros antes de buscar
+    setFiltros({ nome: "", data: "", precisaVoluntario: false });
+
     const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
     setEventos(response.data);
     setModoCadastro(false);
     setModoEdicao(false);
@@ -136,25 +140,6 @@ const buscarTodosEventos = async () => {
   }
 };
 
-  const editarEvento = (evento) => {
-    setEventoSelecionado(evento);
-    setModoCadastro(true);
-    setModoEdicao(true);
-    setFormData({
-      nome: evento.nome || "",
-      local: evento.local || "",
-      endereco: evento.endereco || "",
-      cidade: evento.cidade || "",
-      estado: evento.estado || "",
-      data: evento.data || "",
-      horaInicio: evento.horaInicio || "",
-      horaFim: evento.horaFim || "",
-      descricao: evento.descricao || "",
-      informacoesVoluntario: evento.informacoesVoluntario || "",
-      precisaVoluntario: !!evento.precisaVoluntario,
-      imagem: null,
-    });
-  };
 
   const deletarEvento = async (id) => {
     try {
