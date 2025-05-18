@@ -7,7 +7,7 @@ export default function Eventos() {
   const [eventos, setEventos] = useState([]);
   const [ongs, setOngs] = useState([]);
   const [filtros, setFiltros] = useState({
-    ongsSelecionadas: [],
+    ong: "",
     data: "",
     cidade: "",
     estado: ""
@@ -55,21 +55,22 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
   };
 
   const aplicarFiltros = (evento) => {
-    const ongId = typeof evento.ong === "object" ? evento.ong._id : evento.ong;
-    const ongOk = filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(ongId);
+  const ongId = typeof evento.ong === "object" ? evento.ong._id : evento.ong;
+  const ongOk = !filtros.ong || filtros.ong === ongId;
 
-    const cidadeOk =
-      filtros.cidade.trim() === "" ||
-      evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
+  const cidadeOk =
+    filtros.cidade.trim() === "" ||
+    evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
 
-    const estadoOk =
-      filtros.estado === "" ||
-      evento.estado?.toUpperCase() === filtros.estado.toUpperCase();
+  const estadoOk =
+    filtros.estado === "" ||
+    evento.estado?.toUpperCase() === filtros.estado.toUpperCase();
 
-    const dataOk = filtros.data === "" || evento.data === filtros.data;
+  const dataOk = filtros.data === "" || evento.data === filtros.data;
 
-    return ongOk && cidadeOk && estadoOk && dataOk;
-  };
+  return ongOk && cidadeOk && estadoOk && dataOk;
+};
+
 const enviarVoluntario = async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
