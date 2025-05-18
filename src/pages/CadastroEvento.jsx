@@ -69,9 +69,22 @@ const abrirModalVoluntarios = async (eventoId) => {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos`, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos`, data, {
+  headers: { Authorization: `Bearer ${token}` },
+});
+
+// adiciona o novo evento direto na lista
+setEventos((prev) => [response.data, ...prev]);
+
+// reseta estado
+setModoCadastro(false);
+setModoEdicao(false);
+setFormData({
+  nome: "", local: "", endereco: "", cidade: "", estado: "", data: "", horaInicio: "", horaFim: "", descricao: "",
+  informacoesVoluntario: "", precisaVoluntario: false, imagem: null,
+});
+setEventoSelecionado(null);
+
       }
 
       setModoCadastro(false);
