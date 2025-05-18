@@ -90,7 +90,7 @@ const abrirModalVoluntarios = async (eventoId) => {
         precisaVoluntario: false,
         imagem: null,
       });
-      buscarEventos();
+      buscarTodosEventos();
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     } finally {
@@ -114,6 +114,19 @@ const abrirModalVoluntarios = async (eventoId) => {
       console.error("Erro ao buscar eventos:", error);
     }
   };
+const buscarTodosEventos = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setEventos(response.data);
+    setModoCadastro(false);
+    setModoEdicao(false);
+    setEventoSelecionado(null);
+  } catch (error) {
+    console.error("Erro ao buscar todos os eventos:", error);
+  }
+};
 
   const editarEvento = (evento) => {
     setEventoSelecionado(evento);
