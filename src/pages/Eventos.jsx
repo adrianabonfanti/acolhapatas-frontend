@@ -97,7 +97,7 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
       </header>
 <button
   onClick={() => setModalInteresse(true)}
-  className="fixed bottom-4 right-4 z-50 bg-emerald-600 text-white p-3 rounded-full shadow-lg hover:bg-emerald-700 flex items-center gap-2"
+  className="fixed bottom-4 right-4 z-50 bg-emerald-600 text-white p-3 rounded-full shadow-lg hover:bg-emerald-700 flex items-center gap-2 botaoReceberEventos"
 >
   <span className="material-icons">email</span>
   Receber novos eventos

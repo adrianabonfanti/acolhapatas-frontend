@@ -208,4 +208,9 @@ input[type="checkbox"] {
         .campoFiltro:first-of-type{
               margin-top: 21%;
         }
+        .botaoReceberEventos{
+              bottom: 70px;
+    font-size: 13px;
+    padding: 8px 17px;
+        }
   }
