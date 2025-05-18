@@ -298,7 +298,7 @@ const clonarEvento = (evento) => {
                 <img src={evento.imagem} alt="Imagem do Evento" className="w-24 h-24 object-cover rounded" />
               )}
               <div className="">
-                <div className="flex justify-between items-start">
+                <div className="">
                   <h3 className="text-xl font-bold tituloEvento">{evento.nome}</h3>
                   <div className="flex gap-2 botoesEvento">
                     <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800">
