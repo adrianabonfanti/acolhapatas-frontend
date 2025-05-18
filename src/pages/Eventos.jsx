@@ -262,14 +262,14 @@ const enviarVoluntario = async (e) => {
                     href={gerarLinkGoogleCalendar(evento)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-600 items-center"
                   >
                     <span className="material-icons align-middle text-sm">event</span> Me lembrar
                   </a>
                   {evento.precisaVoluntario && (
                     <button
                       onClick={() => setModalEvento(evento)}
-                      className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600"
+                      className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600 items-center"
                     >
                       <span className="material-icons align-middle text-sm">volunteer_activism</span> Me voluntariar
                     </button>
