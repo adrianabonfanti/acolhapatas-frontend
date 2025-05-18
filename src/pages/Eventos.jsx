@@ -218,7 +218,11 @@ const enviarVoluntario = async (e) => {
                 <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
               <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
   <span className="material-icons text-base text-emerald-600">calendar_today</span>
-  {new Date(evento.data).toLocaleDateString("pt-BR")}
+ {(() => {
+  const [ano, mes, dia] = evento.data.split("-");
+  return `${dia}/${mes}/${ano}`;
+})()}
+
 </p>
 
                 <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
