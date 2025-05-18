@@ -236,9 +236,10 @@ const enviarVoluntario = async (e) => {
                 </p>
                 {evento.ong?.nome && (
                   <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
-                    <span className="material-icons text-base text-emerald-600">business</span>
-                    ONG: {evento.ong.nome}
-                  </p>
+  <span className="material-icons text-base text-emerald-600">business</span>
+  ONG: {evento.ong?.nome || JSON.stringify(evento.ong)}
+</p>
+
                 )}
                 {evento.ong?.instagram && (
                   <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
