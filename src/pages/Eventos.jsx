@@ -338,7 +338,7 @@ const enviarVoluntario = async (e) => {
           <input type="text" name="nome" placeholder="Seu nome" className="w-full p-2 border rounded" required />
           <input type="email" name="email" placeholder="Seu e-mail" className="w-full p-2 border rounded" required />
           
-          <label className="block font-semibold">ONGs de interesse</label>
+          <label className="block font-semibold">ONGs de interesse (deixa em branco para selecionar todas ONGs)</label>
           <select name="ongs" multiple className="w-full p-2 border rounded h-24 overflow-auto">
             {ongs.map((ong) => (
               <option key={ong._id} value={ong._id}>{ong.name}</option>
