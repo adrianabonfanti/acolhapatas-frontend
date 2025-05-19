@@ -134,8 +134,14 @@ const [loading, setLoading] = useState(false);
       }
     });
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    data.append("ong", user?._id);
+   const user = JSON.parse(localStorage.getItem("user"));
+if (user && user._id) {
+  data.append("ong", user._id);
+} else {
+  alert("Erro: ONG não encontrada. Faça login novamente.");
+  return;
+}
+
 
     if (modoEdicao && animalSelecionado) {
       await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
