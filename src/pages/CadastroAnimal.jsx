@@ -143,7 +143,7 @@ const [loading, setLoading] = useState(false);
       });
       alert("Animal atualizado com sucesso!");
     } else {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animais`, data, {
         
         headers: {
           Authorization: `Bearer ${token}`,
