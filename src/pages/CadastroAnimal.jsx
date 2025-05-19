@@ -137,18 +137,31 @@ const [loading, setLoading] = useState(false);
 const user = JSON.parse(localStorage.getItem("user"));
 data.append("ong", user?._id);
 
-    if (modoEdicao && animalSelecionado) {
-  // Cria um objeto limpo, removendo campo de imagem
-  const jsonData = { ...formData };
-  delete jsonData.fotos; // remove o campo 'fotos' do envio no PUT
+   if (modoEdicao && animalSelecionado) {
+  const data = new FormData();
 
-  await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, jsonData, {
+  Object.keys(formData).forEach((key) => {
+    if (key === "fotos") {
+      if (formData.fotos && typeof formData.fotos !== "string") {
+        data.append("fotos", formData.fotos, formData.fotos.name);
+      }
+    } else {
+      data.append(key, formData[key]);
+    }
+  });
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  data.append("ong", user?._id);
+
+  await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   alert("Animal atualizado com sucesso!");
 }
+
  else {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
         
