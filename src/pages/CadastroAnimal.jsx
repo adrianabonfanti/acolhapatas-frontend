@@ -73,7 +73,7 @@ export default function CadastroAnimal() {
     deficiencia: animal.deficiencia === "true" || animal.deficiencia === true,
     precisaLarTemporario: animal.precisaLarTemporario === "true" || animal.precisaLarTemporario === true,
 
-      fotos: null,
+      fotos: animal.fotos?.[0] || null,
     });
   };
 
@@ -298,6 +298,17 @@ export default function CadastroAnimal() {
             {campo.charAt(0).toUpperCase() + campo.slice(1).replace(/([A-Z])/g, ' $1')}
           </label>
         ))}
+        {typeof formData.fotos === "string" && (
+  <div className="mb-2">
+    <label className="font-medium block mb-1">Imagem atual:</label>
+    <img
+      src={formData.fotos}
+      alt="Imagem atual"
+      className="w-40 h-40 object-cover rounded"
+    />
+  </div>
+)}
+
         <input type="file" name="fotos" onChange={handleFormChange} className="md:col-span-2 w-full bg-white text-gray-700" />
         <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
           {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
