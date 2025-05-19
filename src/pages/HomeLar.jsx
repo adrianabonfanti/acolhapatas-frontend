@@ -39,9 +39,7 @@ export default function HomeLar() {
 }
 if (lar.medicacao) {
   query.usaMedicacao = true;
-}
-
-
+} 
       console.log("ENVIANDO PARA API:", query);
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
         params: query
