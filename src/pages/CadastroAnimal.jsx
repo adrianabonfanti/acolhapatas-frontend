@@ -138,13 +138,18 @@ const user = JSON.parse(localStorage.getItem("user"));
 data.append("ong", user?._id);
 
     if (modoEdicao && animalSelecionado) {
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Animal atualizado com sucesso!");
-    } else {
+  // Cria um objeto limpo, removendo campo de imagem
+  const jsonData = { ...formData };
+  delete jsonData.fotos; // remove o campo 'fotos' do envio no PUT
+
+  await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, jsonData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  alert("Animal atualizado com sucesso!");
+}
+ else {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
         
         headers: {
