@@ -121,56 +121,35 @@ const [loading, setLoading] = useState(false);
 
   const cadastrarAnimal = async (e) => {
   e.preventDefault();
-  setLoading(true); // INÍCIO
+  setLoading(true);
   try {
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
-    if (key === "fotos") {
-  if (formData.fotos && typeof formData.fotos !== "string") {
-    data.append("fotos", formData.fotos, formData.fotos.name);
-  }
-} else {
-  data.append(key, formData[key]);
-}
-
-    });
-const user = JSON.parse(localStorage.getItem("user"));
-data.append("ong", user?._id);
-
-   if (modoEdicao && animalSelecionado) {
-  const data = new FormData();
-
-  Object.keys(formData).forEach((key) => {
-    if (key === "fotos") {
-      if (formData.fotos && typeof formData.fotos !== "string") {
-        data.append("fotos", formData.fotos, formData.fotos.name);
+      if (key === "fotos") {
+        if (formData.fotos && typeof formData.fotos !== "string") {
+          data.append("fotos", formData.fotos, formData.fotos.name);
+        }
+      } else {
+        data.append(key, formData[key]);
       }
-    } else {
-      data.append(key, formData[key]);
-    }
-  });
+    });
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  data.append("ong", user?._id);
+    const user = JSON.parse(localStorage.getItem("user"));
+    data.append("ong", user?._id);
 
-  await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  alert("Animal atualizado com sucesso!");
-}
-
- else {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
-        
+    if (modoEdicao && animalSelecionado) {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-     
-
+      alert("Animal atualizado com sucesso!");
+    } else {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       alert("Animal cadastrado com sucesso!");
     }
 
@@ -180,9 +159,10 @@ data.append("ong", user?._id);
     console.error("Erro ao cadastrar/editar animal:", error);
     alert("Erro ao salvar animal.");
   } finally {
-    setLoading(false); // FIM
+    setLoading(false);
   }
 };
+
 
   
   const deletarAnimal = async (id) => {
