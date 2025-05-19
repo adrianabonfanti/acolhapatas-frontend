@@ -12,14 +12,15 @@ export default function AdminPanel() {
     setPendentes(res.data);
   };
 
-  const buscarEventos = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos/public`);
-      setEventos(res.data);
-    } catch (error) {
-      console.error("Erro ao buscar eventos:", error);
-    }
-  };
+const buscarEventos = async () => {
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos/todos`);
+    setEventos(res.data);
+  } catch (error) {
+    console.error("Erro ao buscar eventos:", error);
+  }
+};
+
 
   const aprovar = async (id) => {
     try {

@@ -1,6 +1,6 @@
-import React from "react";
+const React = require("react");
 
-export default function ModalOng({ ong, onClose }) {
+function ModalOng({ ong, onClose }) {
   if (!ong) return null;
 
   return (
@@ -132,3 +132,6 @@ export default function ModalOng({ ong, onClose }) {
     </div>
   );
 }
+
+module.exports = ModalOng;
+

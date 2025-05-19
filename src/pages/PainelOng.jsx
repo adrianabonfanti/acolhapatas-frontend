@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CadastroAnimal from "./CadastroAnimal";
-import BuscarLarTemporario from "./BuscarLarTemporario";
-import MeusDadosOng from "./MeusDadosOng";
-import CadastroEvento from "./CadastroEvento";
-import HomeOng from "./HomeOng";  
-import "../styles/Home.css";
-import NavbarLogada from "../components/NavbarLogada";
-export default function PainelOng() {
+const { useState, useEffect } = require("react");
+const { useNavigate } = require("react-router-dom");
+const CadastroAnimal = require("./CadastroAnimal");
+const BuscarLarTemporario = require("./BuscarLarTemporario");
+const MeusDadosOng = require("./MeusDadosOng");
+const CadastroEvento = require("./CadastroEvento");
+const HomeOng = require("./HomeOng");
+require("../styles/Home.css");
+const NavbarLogada = require("../components/NavbarLogada");
+
+function PainelOng() {
   const navigate = useNavigate();
   const [activePage, setActivePage] = useState("home");
 
@@ -17,7 +18,6 @@ export default function PainelOng() {
       navigate("/login");
     }
   }, [navigate]);
-  
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -29,23 +29,21 @@ export default function PainelOng() {
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col">
         {/* Menu no topo */}
-       
         <NavbarLogada setActivePage={setActivePage} />
 
         {/* Conteúdo dinâmico */}
         <div className="flex flex-1">
           <div className="flex-1 p-6">
-            {activePage === "home" && <HomeOng/>}
+            {activePage === "home" && <HomeOng />}
             {activePage === "animais" && <CadastroAnimal />}
             {activePage === "eventos" && <CadastroEvento />}
             {activePage === "procurar" && <BuscarLarTemporario />}
             {activePage === "meusDados" && <MeusDadosOng />}
-
           </div>
-
-        
         </div>
       </div>
     </div>
   );
 }
+
+module.exports = PainelOng;

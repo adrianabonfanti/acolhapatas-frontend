@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import ModalONG from "./ModalOng";
+const { useState } = require("react");
+const ModalONG = require("./ModalOng");
 
-export default function CarouselOngs({ ongs, onClickOng }) {
+
+const { useState } = require("react");
+const ModalONG = require("./ModalOng");
+
+function CarouselOngs({ ongs, onClickOng }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
@@ -35,3 +39,6 @@ export default function CarouselOngs({ ongs, onClickOng }) {
     </div>
   );
 }
+
+module.exports = CarouselOngs;
+

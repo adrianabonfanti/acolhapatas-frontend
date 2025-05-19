@@ -1,6 +1,6 @@
-import { Navigate } from "react-router-dom";
+const { Navigate } = require("react-router-dom");
 
-export default function PrivateRoute({ children }) {
+function PrivateRoute({ children }) {
   const token = localStorage.getItem("adminToken");
 
   if (!token) {
@@ -9,3 +9,6 @@ export default function PrivateRoute({ children }) {
 
   return children;
 }
+
+module.exports = PrivateRoute;
+

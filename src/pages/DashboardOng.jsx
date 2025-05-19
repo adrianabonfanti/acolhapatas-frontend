@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+const { useEffect, useState } = require("react");
+const axios = require("axios");
 
-export default function DashboardOng() {
+
+function DashboardOng() {
   const [animais, setAnimais] = useState([]);
 
   useEffect(() => { 
@@ -9,7 +10,8 @@ export default function DashboardOng() {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, {
+        const response = await axios.get(`${process.env.VITE_API_BASE_URL}/ongs/animais`, {
+
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,3 +88,4 @@ export default function DashboardOng() {
     </div>
   );
 }
+module.exports = DashboardOng;

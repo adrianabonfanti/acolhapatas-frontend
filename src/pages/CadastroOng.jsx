@@ -1,7 +1,8 @@
-import { useState } from "react";
-import axios from "axios";
+const { useState } = require("react");
+const axios = require("axios");
 
-export default function CadastroOng() {
+
+function CadastroOng() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -20,10 +21,11 @@ export default function CadastroOng() {
     if (formData.logo) data.append("logo", formData.logo);
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+     await axios.post(`${process.env.VITE_API_BASE_URL}/ongs`, data);
 
-      // Envio de e-mail para a Adriana
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/contato`, {
+// Envio de e-mail para a Adriana
+await axios.post(`${process.env.VITE_API_BASE_URL}/contato`, {
+
         name: formData.name,
         email: "sistema@acolhapatas.org",
         phone: formData.phone,
@@ -91,3 +93,4 @@ export default function CadastroOng() {
     </div>
   );
 }
+module.exports = CadastroOng;

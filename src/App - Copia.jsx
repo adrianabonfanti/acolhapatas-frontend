@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import "./styles/global.css";
 import LarTemporario from "./pages/LarTemporario";
 import Adocao from "./pages/Adocao";
+import Eventos from "./pages/Eventos";
 import Sobre from "./pages/Sobre";
 import Ongs from "./pages/Ongs";
 import BuscarLarTemporario from "./pages/BuscarLarTemporario";
@@ -28,6 +29,7 @@ function App() {
         {/* Rotas públicas (com Navbar) */}
         <Route path="/" element={<><Navbar /><Home /></>} />
         <Route path="/adocao" element={<><Navbar /><Adocao /></>} />
+        <Route path="/eventos" element={<><Navbar /><Eventos /></>} />
         <Route path="/lar" element={<><Navbar /><LarTemporario /></>} />
         <Route path="/sobre" element={<><Navbar /><Sobre /></>} />
         <Route path="/ongs" element={<><Navbar /><Ongs /></>} />

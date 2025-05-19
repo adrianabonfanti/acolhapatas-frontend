@@ -1,10 +1,10 @@
-import api from '../services/api';
+const api = require("../services/api");
+const { useState, useEffect } = require("react");
+const axios = require("axios");
+const ContatoFlutuante = require("../components/ContatoFlutuante");
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-import ContatoFlutuante from '../components/ContatoFlutuante';
 
-export default function HomeLar() {
+function HomeLar() {
   const [animais, setAnimais] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
   const [animalSelecionado, setAnimalSelecionado] = useState(null);
@@ -41,7 +41,8 @@ if (lar.medicacao) {
   query.usaMedicacao = true;
 } 
       console.log("ENVIANDO PARA API:", query);
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
+     const response = await axios.get(`${process.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
+
         params: query
       });
       
@@ -173,3 +174,4 @@ if (lar.medicacao) {
     </>
   );
 }
+module.exports = HomeLar;

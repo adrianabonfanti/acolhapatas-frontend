@@ -1,9 +1,9 @@
-import api from '../services/api';
+const api = require("../services/api");
+const { useState, useEffect, useRef } = require("react");
+const { useNavigate } = require("react-router-dom");
+const ContatoFlutuante = require("../components/ContatoFlutuante");
 
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import ContatoFlutuante from '../components/ContatoFlutuante';
-export default function HomeOng() {
+ function HomeOng() {
   const navigate = useNavigate();
   const [animais, setAnimais] = useState([]);
   const [totalAnimais, setTotalAnimais] = useState(0);
@@ -119,3 +119,4 @@ export default function HomeOng() {
     </div>
   );
 }
+module.exports = HomeOng

@@ -1,11 +1,12 @@
 // ✅ AnimalCard.jsx corrigido
-import React from "react";
-import CheckIcon from '@mui/icons-material/CheckCircle';
-import MedicationIcon from '@mui/icons-material/Medication';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
-import PetsIcon from '@mui/icons-material/Pets';
+const React = require("react");
+const CheckIcon = require('@mui/icons-material/CheckCircle').default;
+const MedicationIcon = require('@mui/icons-material/Medication').default;
+const VaccinesIcon = require('@mui/icons-material/Vaccines').default;
+const PetsIcon = require('@mui/icons-material/Pets').default;
 
-export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
+
+function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
   return (
     <div className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
       {animal.fotos[0] ? (
@@ -70,3 +71,5 @@ export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
     </div>
   );
 }
+
+module.exports = AnimalCard;

@@ -1,16 +1,29 @@
-import api from '../services/api';
+const api = require("../services/api");
 
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/Home.css";
-import { CheckCircle, LocalHospital, Pets, Vaccines, Medication, AccessibilityNew } from '@mui/icons-material';
-import CheckIcon from '@mui/icons-material/CheckCircle';
-import MedicationIcon from '@mui/icons-material/Medication';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
-import PetsIcon from '@mui/icons-material/Pets';
-import CarouselOngs from '../components/CarouselOngs';
-import ModalOng from "../components/ModalOng";
-import AnimalCard from "../components/AnimalCard"; 
+const React = require("react");
+const { useEffect, useState, useRef } = require("react");
+const { useNavigate } = require("react-router-dom");
+
+require("../styles/Home.css");
+
+const { 
+  CheckCircle, 
+  LocalHospital, 
+  Pets, 
+  Vaccines, 
+  Medication, 
+  AccessibilityNew 
+} = require("@mui/icons-material");
+
+const CheckIcon = require("@mui/icons-material/CheckCircle");
+const MedicationIcon = require("@mui/icons-material/Medication");
+const VaccinesIcon = require("@mui/icons-material/Vaccines");
+const PetsIcon = require("@mui/icons-material/Pets");
+
+const CarouselOngs = require("../components/CarouselOngs");
+const ModalOng = require("../components/ModalOng");
+const AnimalCard = require("../components/AnimalCard");
+
 
 
 
@@ -262,4 +275,5 @@ function Home() {
   );
 }
 
-export default Home;
+module.exports = Home;
+

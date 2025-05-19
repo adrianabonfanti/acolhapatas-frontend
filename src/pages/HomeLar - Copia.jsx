@@ -34,12 +34,12 @@ export default function HomeLar() {
       if (lar.sexo && lar.sexo !== "") {
         query.sexo = lar.sexo;
       }
-      if (lar.necessidadesEspeciais) {
-        query.necessidadesEspeciais = true;
-      }
-      if (lar.medicacao) {
-        query.medicacao = true;
-      }
+    if (lar.necessidadesEspeciais) {
+  query.deficiencia = true;
+}
+if (lar.medicacao) {
+  query.usaMedicacao = true;
+} 
       console.log("ENVIANDO PARA API:", query);
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/animais-filtrados-por-lar`, {
         params: query

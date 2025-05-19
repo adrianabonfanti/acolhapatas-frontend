@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+const { Link, useNavigate } = require("react-router-dom");
 
-export default function NavbarLar() {
+function NavbarLar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -20,3 +20,5 @@ export default function NavbarLar() {
     </nav>
   );
 }
+
+module.exports = NavbarLar;

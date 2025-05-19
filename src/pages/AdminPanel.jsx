@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+const { useEffect, useState } = require("react");
+const axios = require("axios");
 
-export default function AdminPanel() {
+function AdminPanel() {
   const [pendentes, setPendentes] = useState([]);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
   const [eventos, setEventos] = useState([]);
   const [detalhesEvento, setDetalhesEvento] = useState(null);
 
+const API_BASE_URL = process.env.VITE_API_BASE_URL;
+
   const buscarPendentes = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/pendentes`);
+    const res = await axios.get(`${API_BASE_URL}/admin/pendentes`);
     setPendentes(res.data);
   };
 
-const buscarEventos = async () => {
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos/todos`);
-    setEventos(res.data);
-  } catch (error) {
-    console.error("Erro ao buscar eventos:", error);
-  }
-};
-
+  const buscarEventos = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/eventos/todos`);
+      setEventos(res.data);
+    } catch (error) {
+      console.error("Erro ao buscar eventos:", error);
+    }
+  };
 
   const aprovar = async (id) => {
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/aprovar/${id}`);
+      await axios.post(`${API_BASE_URL}/admin/aprovar/${id}`);
       buscarPendentes();
     } catch (error) {
       console.error("Erro ao aprovar:", error);
@@ -34,7 +35,7 @@ const buscarEventos = async () => {
 
   const recusar = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
+      await axios.delete(`${API_BASE_URL}/admin/recusar/${id}`);
       buscarPendentes();
     } catch (error) {
       console.error("Erro ao recusar cadastro:", error);
@@ -45,7 +46,7 @@ const buscarEventos = async () => {
   const deletarEvento = async (id) => {
     if (confirm("Tem certeza que deseja excluir este evento?")) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}`);
+        await axios.delete(`${API_BASE_URL}/eventos/${id}`);
         buscarEventos();
       } catch (error) {
         console.error("Erro ao deletar evento:", error);
@@ -55,7 +56,7 @@ const buscarEventos = async () => {
   };
 
   useEffect(() => {
-    buscarPendentes(); 
+    buscarPendentes();
     buscarEventos();
   }, []);
 
@@ -73,10 +74,7 @@ const buscarEventos = async () => {
       ) : (
         <div className="md:hidden flex flex-col gap-4">
           {pendentes.map((u) => (
-            <div
-              key={u._id}
-              className="bg-white shadow rounded-md p-4 border border-gray-200"
-            >
+            <div key={u._id} className="bg-white shadow rounded-md p-4 border border-gray-200">
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-4">
                   {u.foto && (
@@ -131,8 +129,12 @@ const buscarEventos = async () => {
         {eventos.map((evento) => (
           <div key={evento._id} className="bg-white rounded-xl shadow p-4">
             <h3 className="text-lg font-bold text-emerald-800">{evento.nome}</h3>
-            <p className="text-sm text-gray-700">{new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}</p>
-            <p className="text-sm text-gray-600">{evento.cidade} - {evento.estado}</p>
+            <p className="text-sm text-gray-700">
+              {new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}
+            </p>
+            <p className="text-sm text-gray-600">
+              {evento.cidade} - {evento.estado}
+            </p>
             <div className="flex gap-2 mt-2">
               <button
                 onClick={() => setDetalhesEvento(evento)}
@@ -157,7 +159,9 @@ const buscarEventos = async () => {
             <button
               onClick={() => setDetalhesEvento(null)}
               className="absolute top-2 right-3 text-gray-600 hover:text-black"
-            >✕</button>
+            >
+              ✕
+            </button>
             <h2 className="text-xl font-bold mb-2">{detalhesEvento.nome}</h2>
             <p><strong>Data:</strong> {new Date(detalhesEvento.data).toLocaleDateString("pt-BR")}</p>
             <p><strong>Horário:</strong> {detalhesEvento.horaInicio} - {detalhesEvento.horaFim}</p>
@@ -173,3 +177,5 @@ const buscarEventos = async () => {
     </div>
   );
 }
+
+module.exports = AdminPanel;

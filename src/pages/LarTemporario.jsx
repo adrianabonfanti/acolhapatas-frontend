@@ -1,7 +1,8 @@
-import api from '../services/api';
+const api = require("../services/api");
+const React = require("react");
+const { useState, useRef } = require("react");
+require("../styles/global.css");
 
-import React, { useState, useRef } from "react";
-import "../styles/global.css";
 
 function LarTemporario() {
 
@@ -293,5 +294,5 @@ const handleEnviarContato = async (e) => {
     </div></>
   );
 }
+module.exports = LarTemporario;
 
-export default LarTemporario;

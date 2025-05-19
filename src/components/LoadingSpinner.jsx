@@ -1,7 +1,6 @@
-// src/components/LoadingSpinner.jsx
-import React from "react";
+const React = require("react");
 
-export default function LoadingSpinner({ size = "md", color = "emerald", overlay = false }) {
+function LoadingSpinner({ size = "md", color = "emerald", overlay = false }) {
   const sizeClasses = {
     sm: "w-4 h-4",
     md: "w-6 h-6",
@@ -24,3 +23,5 @@ export default function LoadingSpinner({ size = "md", color = "emerald", overlay
 
   return spinner;
 }
+
+module.exports = LoadingSpinner;

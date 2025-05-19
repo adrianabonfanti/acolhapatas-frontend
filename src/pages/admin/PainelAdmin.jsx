@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+const { useState, useEffect } = require("react");
+const axios = require("axios");
 
-export default function PainelAdmin() {
+function PainelAdmin() {
   const [ongs, setOngs] = useState([]);
   const [lares, setLares] = useState([]);
   const [animais, setAnimais] = useState([]);
@@ -12,7 +12,8 @@ export default function PainelAdmin() {
   const adminToken = localStorage.getItem("adminToken");
 
   const axiosAuth = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/`,
+   baseURL: `${process.env.VITE_API_BASE_URL}/`,
+
     headers: {
       Authorization: `Bearer ${adminToken}`,
     },
@@ -204,3 +205,4 @@ function formatarCampo(campo) {
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase());
 }
+module.exports = PainelAdmin;

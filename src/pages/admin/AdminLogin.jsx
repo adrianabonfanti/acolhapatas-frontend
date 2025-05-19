@@ -1,8 +1,7 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
-export default function AdminLogin() {
+const { useState } = require("react");
+const axios = require("axios");
+const { useNavigate } = require("react-router-dom");
+function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ export default function AdminLogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/login`, {
+      const response = await axios.post(`${process.env.VITE_API_BASE_URL}/admin/login`, {
         email,
         password,
       });
@@ -48,3 +47,5 @@ export default function AdminLogin() {
     </div>
   );
 }
+
+module.exports = AdminLogin;

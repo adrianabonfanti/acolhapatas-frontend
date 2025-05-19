@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+const { Outlet } = require("react-router-dom");
+const Navbar = require("../components/Navbar");
 
-export default function PublicLayout() {
+function PublicLayout() {
   return (
     <>
       <Navbar />
@@ -9,3 +9,5 @@ export default function PublicLayout() {
     </>
   );
 }
+
+module.exports = PublicLayout;

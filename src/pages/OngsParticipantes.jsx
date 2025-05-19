@@ -1,4 +1,5 @@
-import React from "react";
+const React = require("react");
+
 
 function OngsParticipantes() {
   return (
@@ -89,4 +90,4 @@ function OngsParticipantes() {
   );
 }
 
-export default OngsParticipantes;
+module.exports = OngsParticipantes

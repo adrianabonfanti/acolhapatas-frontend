@@ -1,7 +1,6 @@
-// src/layouts/PainelLayout.jsx
-import { Outlet, Link } from "react-router-dom";
+const { Outlet, Link } = require("react-router-dom");
 
-export default function PainelLayout() {
+function PainelLayout() {
   return (
     <div>
       <nav>
@@ -13,3 +12,5 @@ export default function PainelLayout() {
     </div>
   );
 }
+
+module.exports = PainelLayout;

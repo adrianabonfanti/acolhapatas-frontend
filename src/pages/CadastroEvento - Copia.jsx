@@ -15,6 +15,7 @@ export default function CadastroEvento() {
     horaInicio: "",
     horaFim: "",
     descricao: "",
+    informacoesVoluntario: "",
     precisaVoluntario: false,
     imagem: null,
   });
@@ -23,6 +24,8 @@ export default function CadastroEvento() {
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
   const [filtros, setFiltros] = useState({ nome: "", data: "", precisaVoluntario: false });
   const [loading, setLoading] = useState(false);
+const [voluntarios, setVoluntarios] = useState([]);
+const [modalVoluntarios, setModalVoluntarios] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -40,6 +43,17 @@ export default function CadastroEvento() {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
+const abrirModalVoluntarios = async (eventoId) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${eventoId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setVoluntarios(response.data);
+    setModalVoluntarios(eventoId);
+  } catch (err) {
+    console.error("Erro ao buscar voluntários:", err);
+  }
+};
 
   const cadastrarEvento = async (e) => {
     e.preventDefault();
@@ -55,9 +69,22 @@ export default function CadastroEvento() {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos`, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos`, data, {
+  headers: { Authorization: `Bearer ${token}` },
+});
+
+// adiciona o novo evento direto na lista
+setEventos((prev) => [response.data, ...prev]);
+
+// reseta estado
+setModoCadastro(false);
+setModoEdicao(false);
+setFormData({
+  nome: "", local: "", endereco: "", cidade: "", estado: "", data: "", horaInicio: "", horaFim: "", descricao: "",
+  informacoesVoluntario: "", precisaVoluntario: false, imagem: null,
+});
+setEventoSelecionado(null);
+
       }
 
       setModoCadastro(false);
@@ -72,10 +99,19 @@ export default function CadastroEvento() {
         horaInicio: "",
         horaFim: "",
         descricao: "",
+        informacoesVoluntario: evento.informacoesVoluntario || "",
         precisaVoluntario: false,
         imagem: null,
       });
-      buscarEventos();
+      // Fecha o formulário
+      setModoCadastro(false);
+      setModoEdicao(false);
+      setEventoSelecionado(null);
+
+      // Aguarda um pequeno tempo para o backend finalizar gravação
+      setTimeout(() => {
+        buscarTodosEventos();
+      }, 800);
     } catch (error) {
       console.error("Erro ao cadastrar evento:", error);
     } finally {
@@ -99,25 +135,24 @@ export default function CadastroEvento() {
       console.error("Erro ao buscar eventos:", error);
     }
   };
+const buscarTodosEventos = async () => {
+  try {
+    // Limpa os filtros antes de buscar
+    setFiltros({ nome: "", data: "", precisaVoluntario: false });
 
-  const editarEvento = (evento) => {
-    setEventoSelecionado(evento);
-    setModoCadastro(true);
-    setModoEdicao(true);
-    setFormData({
-      nome: evento.nome || "",
-      local: evento.local || "",
-      endereco: evento.endereco || "",
-      cidade: evento.cidade || "",
-      estado: evento.estado || "",
-      data: evento.data || "",
-      horaInicio: evento.horaInicio || "",
-      horaFim: evento.horaFim || "",
-      descricao: evento.descricao || "",
-      precisaVoluntario: !!evento.precisaVoluntario,
-      imagem: null,
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos`, {
+      headers: { Authorization: `Bearer ${token}` },
     });
-  };
+
+    setEventos(response.data);
+    setModoCadastro(false);
+    setModoEdicao(false);
+    setEventoSelecionado(null);
+  } catch (error) {
+    console.error("Erro ao buscar todos os eventos:", error);
+  }
+};
+
 
   const deletarEvento = async (id) => {
     try {
@@ -130,16 +165,25 @@ export default function CadastroEvento() {
     }
   };
 
-  const clonarEvento = async (id) => {
-    try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}/clonar`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      buscarEventos();
-    } catch (error) {
-      console.error("Erro ao clonar evento:", error);
-    }
-  };
+const clonarEvento = (evento) => {
+  setModoCadastro(true);
+  setModoEdicao(false); // garante que será um novo evento
+  setEventoSelecionado(null); // remove vínculo com outro evento
+  setFormData({
+    nome: evento.nome || "",
+    local: evento.local || "",
+    endereco: evento.endereco || "",
+    cidade: evento.cidade || "",
+    estado: evento.estado || "",
+    data: "", // <- zerado como solicitado
+    horaInicio: evento.horaInicio || "",
+    horaFim: evento.horaFim || "",
+    descricao: evento.descricao || "",
+    precisaVoluntario: !!evento.precisaVoluntario,
+    imagem: null, // imagem não será copiada
+  });
+};
+
 
   return (
     <div className="p-4">
@@ -147,19 +191,21 @@ export default function CadastroEvento() {
 
       {/* Filtros */}
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8 mb-6">
+         <div><label className="font-medium block mb-1">Nome do Evento:</label>
         <input
           type="text"
           placeholder="Nome do Evento"
-          className="border p-2 w-full md:w-64"
+          className="border p-2 w-full "
           value={filtros.nome}
           onChange={(e) => setFiltros((prev) => ({ ...prev, nome: e.target.value }))}
-        />
+        /></div>
+        <div><label className="font-medium block mb-1">Data:</label>
         <input
           type="date"
-          className="border p-2 w-full md:w-64"
+          className="border p-2 w-full "
           value={filtros.data}
           onChange={(e) => setFiltros((prev) => ({ ...prev, data: e.target.value }))}
-        />
+        /></div>
         <label className="flex items-center gap-1">
           <input
             type="checkbox"
@@ -183,10 +229,14 @@ export default function CadastroEvento() {
 
       {/* Formulário */}
       {modoCadastro && (
-        <form onSubmit={cadastrarEvento} className="grid gap-2 mb-4">
-          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full md:w-64" required />
-          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full md:w-64" required />
-          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full md:w-64" />
+        <form onSubmit={cadastrarEvento} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label className="font-medium block mb-1">Nome do Evento:</label>
+          <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full " required /></div>
+          <div><label className="font-medium block mb-1">Local do Evento:</label>
+          <input type="text" name="local" value={formData.local} onChange={handleFormChange} placeholder="Local" className="border p-2 w-full " required /></div>
+          <div><label className="font-medium block mb-1">Endereço do Evento:</label>
+          <input type="text" name="endereco" value={formData.endereco} onChange={handleFormChange} placeholder="Endereço" className="border p-2 w-full " /></div>
+          <div><label className="font-medium block mb-1">Cidade:</label>
          <input
   type="text"
   name="cidade"
@@ -195,7 +245,8 @@ export default function CadastroEvento() {
   placeholder="Cidade"
   className="border p-2"
 />
-
+</div>
+<div><label className="font-medium block mb-1">Estado:</label>
 <select
   name="estado"
   value={formData.estado}
@@ -206,17 +257,31 @@ export default function CadastroEvento() {
   {["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"].map(uf => (
     <option key={uf} value={uf}>{uf}</option>
   ))}
-</select>
+</select></div>
+<div><label className="font-medium block mb-1">Dia do Evento:</label>
+          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full " required /></div>
+          <div><label className="font-medium block mb-1">Hora de Início:</label>
+          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full " required /></div>
+          <div><label className="font-medium block mb-1">Hora de Fim:</label>
+          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full " required /></div>
+          <div><label className="font-medium block mb-1">Descreva o Evento:</label>
+          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full " /></div>
+          <div>
+  <label className="font-medium block mb-1">Instruções para Voluntários:</label>
+  <textarea
+    name="informacoesVoluntario"
+    value={formData.informacoesVoluntario}
+    onChange={handleFormChange}
+    placeholder="Ex: Chegar 15 min antes, trazer documento com foto..."
+    className="border p-2 w-full"
+  />
+</div>
 
-          <input type="date" name="data" value={formData.data} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <input type="time" name="horaInicio" value={formData.horaInicio} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <input type="time" name="horaFim" value={formData.horaFim} onChange={handleFormChange} className="border p-2 w-full md:w-64" required />
-          <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full md:w-64" />
-          <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2">
             <input type="checkbox" name="precisaVoluntario" checked={formData.precisaVoluntario} onChange={handleFormChange} />
             Precisa de Voluntário
           </label>
-          <input type="file" name="imagem" accept="image/*" onChange={handleFormChange} className="border p-2 w-full md:w-64" />
+          <input type="file" name="imagem" accept="image/*" onChange={handleFormChange} className="border p-2 w-full " />
           <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded h-10">
             {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar"}
           </button>
@@ -226,25 +291,31 @@ export default function CadastroEvento() {
       {/* Lista de eventos */}
       
       {!modoCadastro && (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {eventos.map((evento) => (
             <div key={evento._id} className="bg-white p-4 shadow border rounded flex gap-4">
               {evento.imagem && (
                 <img src={evento.imagem} alt="Imagem do Evento" className="w-24 h-24 object-cover rounded" />
               )}
-              <div className="flex flex-col flex-1 justify-between">
-                <div className="flex justify-between items-start">
-                  <h3 className="text-xl font-bold">{evento.nome}</h3>
-                  <div className="flex gap-2">
+              <div className="">
+                <div className="">
+                  <h3 className="text-xl font-bold tituloEvento">{evento.nome}</h3>
+                  <div className="flex gap-2 botoesEvento">
                     <button onClick={() => editarEvento(evento)} className="text-blue-600 hover:text-blue-800">
                       <span className="material-icons">edit</span>
                     </button>
+                    <button onClick={() => abrirModalVoluntarios(evento._id)} className="text-purple-600 hover:text-purple-800" title="Ver voluntários">
+  <span className="material-icons">groups</span>
+  <span className="text-xs ml-1">{evento.voluntariosCount || 0}</span>
+</button>
+
                     <button onClick={() => deletarEvento(evento._id)} className="text-red-600 hover:text-red-800">
                       <span className="material-icons">delete</span>
                     </button>
-                    <button onClick={() => clonarEvento(evento._id)} className="text-gray-600 hover:text-gray-800">
-                      <span className="material-icons">content_copy</span>
-                    </button>
+                    <button onClick={() => clonarEvento(evento)} className="text-gray-600 hover:text-gray-800" title="Clonar evento">
+  <span className="material-icons">content_copy</span>
+</button>
+
                   </div>
                 </div>
                 <p className="text-gray-600">{evento.local}</p>
@@ -252,7 +323,11 @@ export default function CadastroEvento() {
                 <p className="text-sm text-gray-500">{evento.cidade}</p>
                 <p className="text-sm text-gray-500">{evento.estado}</p>
                 <p className="text-sm">
-  {new Date(evento.data).toLocaleDateString("pt-BR")} • {evento.horaInicio} - {evento.horaFim}
+ {(() => {
+  const [ano, mes, dia] = evento.data.split("-");
+  return `${dia}/${mes}/${ano}`;
+})()}
+ • {evento.horaInicio} - {evento.horaFim}
 </p>
 
                 {evento.precisaVoluntario && (
@@ -265,6 +340,41 @@ export default function CadastroEvento() {
           ))}
         </div>
       )}
+{modalVoluntarios && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl shadow-xl w-96 relative">
+      <button onClick={() => setModalVoluntarios(null)} className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">✕</button>
+      <h3 className="text-lg font-bold mb-4 text-center">Voluntários Cadastrados</h3>
+
+      {voluntarios.length === 0 ? (
+        <p className="text-gray-500 text-sm text-center">Nenhum voluntário ainda.</p>
+      ) : (
+        <ul className="space-y-2">
+          {voluntarios.map((v) => (
+            <li key={v._id} className="flex justify-between items-center border p-2 rounded">
+              <div>
+                <p className="font-semibold">{v.nome}</p>
+                <p className="text-sm text-gray-600">{v.telefone}</p>
+              </div>
+              <button
+                onClick={async () => {
+                  await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${v._id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                  });
+                  abrirModalVoluntarios(modalVoluntarios); // recarrega
+                }}
+                className="text-red-600 hover:text-red-800"
+                title="Excluir voluntário"
+              >
+                <span className="material-icons">delete</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+)}
 
       <ContatoFlutuante />
     </div>

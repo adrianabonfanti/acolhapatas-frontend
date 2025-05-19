@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react"; 
-import api from "../services/api";
+const { useState, useRef, useEffect } = require("react");
+const api = require("../services/api");
+
 
 const ContatoFlutuante = () => {
   const [mostrarForm, setMostrarForm] = useState(false);
@@ -83,4 +84,5 @@ const ContatoFlutuante = () => {
   );
 };
 
-export default ContatoFlutuante;
+module.exports = ContatoFlutuante;
+

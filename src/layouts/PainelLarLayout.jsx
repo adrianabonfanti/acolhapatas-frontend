@@ -1,6 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-export default function PainelLarLayout() {
+const { Outlet, Link } = require("react-router-dom");
+const Navbar = require("../components/Navbar");
+
+function PainelLarLayout() {
   return (
     <div>
       <nav className="bg-green-600 text-white p-4 flex justify-center gap-8">
@@ -12,3 +13,5 @@ export default function PainelLarLayout() {
     </div>
   );
 }
+
+module.exports = PainelLarLayout;
