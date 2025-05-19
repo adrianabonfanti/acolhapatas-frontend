@@ -1,12 +1,12 @@
-const { useState, useEffect, useRef } = require("react");
-const axios = require("axios");
-const api = require("../services/api");
-require("../styles/adocao.css");
-require("../styles/global.css");
-const ModalOng = require("../components/ModalOng");
+import api from '../services/api';
 
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import "../styles/adocao.css";
+import "../styles/global.css";
+import ModalOng from "../components/ModalOng";
 
-function Adocao() {
+export default function Adocao() {
   const [filtros, setFiltros] = useState({ nome: "", especie: [], sexo: [], idade: [], porte: [], ong: "", cidade: "", estado: "" });
   const [animais, setAnimais] = useState([]);
   const [ongs, setOngs] = useState([]);
@@ -356,4 +356,3 @@ function Adocao() {
     </div></>
   );
 }
-module.exports = Adocao;

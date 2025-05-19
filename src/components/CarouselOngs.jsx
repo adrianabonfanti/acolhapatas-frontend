@@ -1,11 +1,7 @@
-const { useState } = require("react");
-const ModalONG = require("./ModalOng");
+import React, { useState } from "react";
+import ModalONG from "./ModalOng";
 
-
-const { useState } = require("react");
-const ModalONG = require("./ModalOng");
-
-function CarouselOngs({ ongs, onClickOng }) {
+export default function CarouselOngs({ ongs, onClickOng }) {
   const [ongSelecionada, setOngSelecionada] = useState(null);
 
   return (
@@ -20,7 +16,7 @@ function CarouselOngs({ ongs, onClickOng }) {
             <img
               src={ong.logo}
               alt={ong.nome}
-              className="w-full mb-2 logoCarrossel"
+              className="w-full h-24 object-contain mb-2"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "/placeholder.png";
@@ -39,6 +35,3 @@ function CarouselOngs({ ongs, onClickOng }) {
     </div>
   );
 }
-
-module.exports = CarouselOngs;
-

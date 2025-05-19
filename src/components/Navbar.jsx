@@ -1,8 +1,7 @@
-const { useState } = require("react");
-const { Link } = require("react-router-dom");
-const MenuIcon = require("@mui/icons-material/Menu");
-const CloseIcon = require("@mui/icons-material/Close");
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,5 +69,4 @@ function Navbar() {
   );
 }
 
-module.exports = Navbar;
-
+export default Navbar;

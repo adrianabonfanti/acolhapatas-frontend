@@ -1,10 +1,10 @@
-const { useState, useEffect } = require("react");
-const HomeLar = require("./HomeLar");
-const EditarPerfilLar = require("./EditarPerfilLar");
-const NavbarLogada = require("../components/NavbarLogada");
-require("../styles/Home.css");
+import { useState, useEffect } from "react";
+import HomeLar from "./HomeLar";
+import EditarPerfilLar from "./EditarPerfilLar";
+import NavbarLogada from "../components/NavbarLogada";
+import "../styles/Home.css";
 
-function PainelLar() {
+export default function PainelLar() {
   const [user, setUser] = useState(null);
   const [paginaAtual, setPaginaAtual] = useState("home");
 
@@ -34,4 +34,3 @@ function PainelLar() {
     </>
   );
 }
-module.exports = PainelLar;

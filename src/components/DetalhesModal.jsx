@@ -1,7 +1,6 @@
-const React = require("react");
+import React from "react";
 
-
-function DetalhesModal({ isOpen, onClose, data, title }) {
+export default function DetalhesModal({ isOpen, onClose, data, title }) {
   if (!isOpen) return null;
 
   return (
@@ -25,9 +24,6 @@ function DetalhesModal({ isOpen, onClose, data, title }) {
     </div>
   );
 }
-
-module.exports = DetalhesModal;
-
 
 function formatarCampo(campo) {
   // Deixa as chaves bonitinhas para exibir

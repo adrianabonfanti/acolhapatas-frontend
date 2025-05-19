@@ -1,10 +1,9 @@
-const { useState, useEffect } = require("react");
-const axios = require("axios");
-const { useNavigate } = require("react-router-dom");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
-
-function EditarPerfilLar() {
+export default function EditarPerfilLar() {
   const [form, setForm] = useState({
     nome: "",
     telefone: "",
@@ -49,7 +48,8 @@ function EditarPerfilLar() {
   const salvarAlteracoes = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`${process.env.VITE_API_BASE_URL}/lartemporario/editar`, form, {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/lartemporario/editar`, form, {
+
         headers: { Authorization: `Bearer ${token}` },
       });
       setMensagem("Perfil atualizado com sucesso!");
@@ -158,4 +158,3 @@ function EditarPerfilLar() {
 
   );
 }
-module.exports = EditarPerfilLar;

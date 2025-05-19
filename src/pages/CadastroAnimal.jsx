@@ -1,8 +1,7 @@
-const { useState, useEffect } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
-
-function CadastroAnimal() {
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
+export default function CadastroAnimal() {
 const token = localStorage.getItem("token");
 
 const [loading, setLoading] = useState(false);
@@ -111,8 +110,7 @@ const [loading, setLoading] = useState(false);
       if (filtros.idade) query.append("idade", filtros.idade);
       if (filtros.porte) query.append("porte", filtros.porte);
 
-    const response = await axios.get(`${process.env.VITE_API_BASE_URL}/animals?${query.toString()}`, {
-
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/animals?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAnimais(response.data);
@@ -147,8 +145,7 @@ if (user && (user._id || user.id)) {
 
 
     if (modoEdicao && animalSelecionado) {
-     await axios.put(`${process.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
-
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -156,8 +153,7 @@ if (user && (user._id || user.id)) {
       
       alert("Animal atualizado com sucesso!");
 } else {
-  const response = await axios.post(`${process.env.VITE_API_BASE_URL}/ongs/animais`, data, {
-
+  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -184,8 +180,7 @@ if (user && (user._id || user.id)) {
     if (!window.confirm("Tem certeza que deseja apagar este animal?")) return;
   
     try {
-      await axios.delete(`${process.env.VITE_API_BASE_URL}/animals/${id}`, {
-
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/animals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Animal apagado com sucesso!");
@@ -470,4 +465,3 @@ if (user && (user._id || user.id)) {
     </div>
   );
 }
-module.exports = CadastroAnimal;

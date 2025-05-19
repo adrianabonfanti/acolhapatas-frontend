@@ -1,10 +1,8 @@
-const api = require("../services/api");
-const React = require("react");
-const { useState, useRef } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
-
-function Sobre() {
+import api from '../services/api';
+import React, { useState, useRef } from "react";
+import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
+export default function Sobre() {
   const [showForm, setShowForm] = useState(false);
   const [formEnviado, setFormEnviado] = useState(false);
   const formRef = useRef();
@@ -42,5 +40,3 @@ function Sobre() {
     </div>
   );
 }
-
-module.exports = Sobre;

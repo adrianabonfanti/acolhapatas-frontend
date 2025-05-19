@@ -1,9 +1,8 @@
-const { useState } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
+import { useState } from "react";
+import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 
-
-function BuscarLarTemporario() {
+export default function BuscarLarTemporario() {
   const [filtros, setFiltros] = useState({
     nome: "",
     cidade: "",
@@ -37,8 +36,7 @@ function BuscarLarTemporario() {
  
       const token = localStorage.getItem("token");
 
-     const response = await axios.get(`${process.env.VITE_API_BASE_URL}/lartemporario?${query.toString()}`, {
-
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/lartemporario?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -135,4 +133,3 @@ function BuscarLarTemporario() {
     </div>
   );
 }
-module.exports = BuscarLarTemporario;

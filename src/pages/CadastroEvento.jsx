@@ -1,9 +1,9 @@
-const { useState, useEffect } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
 
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ContatoFlutuante from "../components/ContatoFlutuante";
 
-function CadastroEvento() {
+export default function CadastroEvento() {
   const [eventos, setEventos] = useState([]);
   const [formData, setFormData] = useState({
     nome: "",
@@ -45,7 +45,7 @@ const [modalVoluntarios, setModalVoluntarios] = useState(null);
   };
 const abrirModalVoluntarios = async (eventoId) => {
   try {
-  const response = await axios.get(`${process.env.VITE_API_BASE_URL}/voluntarios/${eventoId}`, {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${eventoId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setVoluntarios(response.data);
@@ -65,11 +65,11 @@ const abrirModalVoluntarios = async (eventoId) => {
       });
 
       if (modoEdicao && eventoSelecionado) {
-     await axios.put(`${process.env.VITE_API_BASE_URL}/eventos/${eventoSelecionado._id}`, data, {
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/eventos/${eventoSelecionado._id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-       const response = await axios.post(`${process.env.VITE_API_BASE_URL}/eventos`, data, {
+       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/eventos`, data, {
   headers: { Authorization: `Bearer ${token}` },
 });
 
@@ -126,8 +126,7 @@ setEventoSelecionado(null);
       if (filtros.data) query.append("data", filtros.data);
       if (filtros.precisaVoluntario !== false) query.append("precisaVoluntario", filtros.precisaVoluntario);
 
-     const response = await axios.get(`${process.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
-
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEventos(response.data);
@@ -141,7 +140,7 @@ const buscarTodosEventos = async () => {
     // Limpa os filtros antes de buscar
     setFiltros({ nome: "", data: "", precisaVoluntario: false });
 
-    const response = await axios.get(`${process.env.VITE_API_BASE_URL}/eventos`, {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -157,7 +156,7 @@ const buscarTodosEventos = async () => {
 
   const deletarEvento = async (id) => {
     try {
-      await axios.delete(`${process.env.VITE_API_BASE_URL}/eventos/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       buscarEventos();
@@ -359,7 +358,7 @@ const clonarEvento = (evento) => {
               </div>
               <button
                 onClick={async () => {
-                 await axios.delete(`${process.env.VITE_API_BASE_URL}/voluntarios/${v._id}`, {
+                  await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/voluntarios/${v._id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                   });
                   abrirModalVoluntarios(modalVoluntarios); // recarrega
@@ -381,4 +380,3 @@ const clonarEvento = (evento) => {
     </div>
   );
 }
-module.exports = CadastroEvento;

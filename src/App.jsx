@@ -1,23 +1,26 @@
-const React = require("react");
-const { BrowserRouter: Router, Routes, Route } = require("react-router-dom");
-const Home = require("./pages/Home");
-const Login = require("./pages/Login");
-const PainelOng = require("./pages/PainelOng");
-const PainelLar = require("./pages/PainelLar");
-const Navbar = require("./components/Navbar");
-require("./styles/global.css");
-const LarTemporario = require("./pages/LarTemporario");
-const Adocao = require("./pages/Adocao");
-const Eventos = require("./pages/Eventos");
-const Sobre = require("./pages/Sobre");
-const Ongs = require("./pages/Ongs");
-const BuscarLarTemporario = require("./pages/BuscarLarTemporario");
-const HomeOng = require("./pages/HomeOng");
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import PainelOng from "./pages/PainelOng";
+import PainelLar from "./pages/PainelLar";
+import Navbar from "./components/Navbar";
+import "./styles/global.css";
+import LarTemporario from "./pages/LarTemporario";
+import Adocao from "./pages/Adocao";
+import Eventos from "./pages/Eventos";
+import Sobre from "./pages/Sobre";
+import Ongs from "./pages/Ongs";
+import BuscarLarTemporario from "./pages/BuscarLarTemporario";
+import HomeOng from "./pages/HomeOng"; 
 
-const PainelAdmin = require("./pages/admin/PainelAdmin");
-const AdminLogin = require("./pages/admin/AdminLogin");
-const PrivateRoute = require("./components/PrivateRoute");
-const EditarPerfilLar = require("./pages/EditarPerfilLar");
+import PainelAdmin from "./pages/admin/PainelAdmin";
+import AdminLogin from "./pages/admin/AdminLogin";
+import PrivateRoute from "./components/PrivateRoute";
+import EditarPerfilLar from "./pages/EditarPerfilLar";
+
+
+
 
 function App() {
   return (
@@ -50,5 +53,4 @@ function App() {
   );
 }
 
-module.exports = App;
-
+export default App;

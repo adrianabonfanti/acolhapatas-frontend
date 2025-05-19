@@ -1,6 +1,6 @@
-const { useParams } = require("react-router-dom");
+import { useParams } from "react-router-dom";
 
-function Ong() {
+export default function Ong() {
   const { id } = useParams();
 
   return (
@@ -11,6 +11,3 @@ function Ong() {
     </div>
   );
 }
-
-module.exports = Ong;
-

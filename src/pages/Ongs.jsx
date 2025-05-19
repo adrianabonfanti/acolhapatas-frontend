@@ -1,10 +1,9 @@
-const api = require("../services/api");
-const React = require("react");
-const { useState, useEffect } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
-const CarouselOngs = require("../components/CarouselOngs");
-const ModalONG = require("../components/ModalOng");
+import api from '../services/api';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante';
+import CarouselOngs from '../components/CarouselOngs';
+import ModalONG from '../components/ModalOng';
 
 const Ongs = () => {
   const [formData, setFormData] = useState({});
@@ -33,8 +32,7 @@ const Ongs = () => {
         data.append("logo", logo);
       }
 
-      await axios.post(`${process.env.VITE_API_BASE_URL}/ongs`, data);
-
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
       // Envia o e-mail para avisar você
 await api.post("/contato", {
   name: formData.name,
@@ -42,7 +40,6 @@ await api.post("/contato", {
   phone: formData.phone,
   message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
 });
-
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
@@ -54,8 +51,7 @@ await api.post("/contato", {
 
   const fetchOngs = async () => {
     try {
-      const response = await axios.get(`${process.env.VITE_API_BASE_URL}/public/ongs`);
-
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
       setOngs(response.data);
     } catch (error) {
       console.error(error);

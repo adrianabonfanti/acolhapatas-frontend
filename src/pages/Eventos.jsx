@@ -1,10 +1,9 @@
 // Página de Eventos do AcolhaPatas
-const { useEffect, useState, useRef } = require("react");
-const axios = require("axios");
-const api = require("../services/api");
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import api from "../services/api";
 
-
-function Eventos() {
+export default function Eventos() {
   const [eventos, setEventos] = useState([]);
   const [ongs, setOngs] = useState([]);
   const [filtros, setFiltros] = useState({
@@ -362,5 +361,4 @@ const enviarVoluntario = async (e) => {
     </div>
   );
 }
-module.exports = Eventos;
- 
+

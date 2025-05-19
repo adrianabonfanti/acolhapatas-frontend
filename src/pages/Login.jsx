@@ -1,7 +1,5 @@
-const React = require("react");
-const { useState, useRef } = require("react");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
-
+import React, { useState, useRef } from "react";
+import ContatoFlutuante from '../components/ContatoFlutuante';
 function Login() {
   const [tipoUsuario, setTipoUsuario] = useState("ong");
   const [email, setEmail] = useState("");
@@ -16,8 +14,7 @@ function Login() {
     const rota = tipoUsuario === "ong" ? "login-ong" : "login-lar";
 
     try {
-    const response = await fetch(`${process.env.VITE_API_BASE_URL}/${rota}`, {
-
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${rota}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -97,4 +94,4 @@ function Login() {
   );
 }
 
-module.exports = Login
+export default Login;

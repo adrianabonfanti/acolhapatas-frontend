@@ -1,9 +1,8 @@
-const { useState, useEffect } = require("react");
-const axios = require("axios");
-const ContatoFlutuante = require("../components/ContatoFlutuante");
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ContatoFlutuante from '../components/ContatoFlutuante'; 
 
-
- function MeusDadosOng() {
+export default function MeusDadosOng() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
   const ongId = user?.id;
@@ -32,8 +31,7 @@ const ContatoFlutuante = require("../components/ContatoFlutuante");
   useEffect(() => {
     const buscarDados = async () => {
       try {
-       const response = await axios.get(`${process.env.VITE_API_BASE_URL}/ongs/${ongId}`, {
-
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
@@ -87,8 +85,7 @@ const ContatoFlutuante = require("../components/ContatoFlutuante");
         data.append("logo", novaLogo);
       }
 
-     await axios.put(`${process.env.VITE_API_BASE_URL}/ongs/${ongId}`, data, {
-
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -183,4 +180,3 @@ const ContatoFlutuante = require("../components/ContatoFlutuante");
     </div>
   );
 }
-module.exports = MeusDadosOng;

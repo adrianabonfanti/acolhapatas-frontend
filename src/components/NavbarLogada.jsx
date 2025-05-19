@@ -1,6 +1,5 @@
-const { useState, useEffect } = require("react");
-const { useNavigate } = require("react-router-dom");
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavbarLogada({ setActivePage }) {
   const [userTipo, setUserTipo] = useState(null);
@@ -91,4 +90,4 @@ function NavbarLogada({ setActivePage }) {
   );
 }
 
-module.exports = NavbarLogada;
+export default NavbarLogada;
