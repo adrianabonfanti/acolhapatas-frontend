@@ -4,7 +4,7 @@ import ContatoFlutuante from '../components/ContatoFlutuante';
 export default function CadastroAnimal() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
-
+const [loading, setLoading] = useState(false);
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [animalSelecionado, setAnimalSelecionado] = useState(null);
@@ -120,46 +120,46 @@ export default function CadastroAnimal() {
   };
 
   const cadastrarAnimal = async (e) => {
-    e.preventDefault();
-    try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === "fotos" && formData.fotos) {
-          data.append("fotos", formData.fotos, formData.fotos.name);
-        } else if (typeof formData[key] === "boolean") {
-          data.append(key, formData[key] ? "true" : "false");
-        } else {
-          data.append(key, formData[key]);
-        }
-      }); 
-      
-  
-      if (modoEdicao && animalSelecionado) {
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // NÃO coloca "Content-Type" manualmente aqui
-          },
-        });
-        alert("Animal atualizado com sucesso!");
+  e.preventDefault();
+  setLoading(true); // INÍCIO
+  try {
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (key === "fotos" && formData.fotos && typeof formData.fotos !== "string") {
+        data.append("fotos", formData.fotos, formData.fotos.name);
+      } else if (typeof formData[key] === "boolean") {
+        data.append(key, formData[key] ? "true" : "false");
       } else {
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
-
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // NÃO coloca "Content-Type" manualmente aqui
-          },
-        });
-        alert("Animal cadastrado com sucesso!");
+        data.append(key, formData[key]);
       }
-  
-      limparFormulario();
-      buscarAnimais();
-     
-    } catch (error) {
-      console.error("Erro ao cadastrar/editar animal:", error);
+    });
+
+    if (modoEdicao && animalSelecionado) {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Animal atualizado com sucesso!");
+    } else {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Animal cadastrado com sucesso!");
     }
-  };
+
+    limparFormulario();
+    buscarAnimais();
+  } catch (error) {
+    console.error("Erro ao cadastrar/editar animal:", error);
+    alert("Erro ao salvar animal.");
+  } finally {
+    setLoading(false); // FIM
+  }
+};
+
   
   const deletarAnimal = async (id) => {
     if (!window.confirm("Tem certeza que deseja apagar este animal?")) return;
@@ -310,9 +310,10 @@ export default function CadastroAnimal() {
 )}
 
         <input type="file" name="fotos" onChange={handleFormChange} className="md:col-span-2 w-full bg-white text-gray-700" />
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
-          {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
-        </button>
+       <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
+  {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
+</button>
+
       </form>
       )}
 
