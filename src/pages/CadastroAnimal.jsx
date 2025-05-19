@@ -133,6 +133,7 @@ const [loading, setLoading] = useState(false);
         data.append(key, formData[key]);
       }
     });
+ data.append("ong", user._id); // ⬅️ ESSA LINHA É FUNDAMENTAL
 
     if (modoEdicao && animalSelecionado) {
       await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
@@ -142,11 +143,14 @@ const [loading, setLoading] = useState(false);
       });
       alert("Animal atualizado com sucesso!");
     } else {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
+        
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+     
+
       alert("Animal cadastrado com sucesso!");
     }
 
