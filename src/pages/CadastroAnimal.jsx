@@ -152,16 +152,17 @@ if (user && (user._id || user.id)) {
       });
       
       alert("Animal atualizado com sucesso!");
-    } else {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // Agora o nome da ONG vem certo do backend
-const nomeOng = response.data.ong?.nome || "ONG não identificada";
-      alert("Animal cadastrado com sucesso!");
-    }
+} else {
+  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const nomeOng = response.data.ong?.nome || "ONG não identificada";
+  alert(`Animal cadastrado com sucesso pela ONG ${nomeOng}!`);
+}
+
 
     limparFormulario();
     buscarAnimais();
