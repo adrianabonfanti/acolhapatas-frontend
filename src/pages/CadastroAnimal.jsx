@@ -125,13 +125,14 @@ const [loading, setLoading] = useState(false);
   try {
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
-      if (key === "fotos" && formData.fotos && typeof formData.fotos !== "string") {
-        data.append("fotos", formData.fotos, formData.fotos.name);
-      } else if (typeof formData[key] === "boolean") {
-        data.append(key, formData[key] ? "true" : "false");
-      } else {
-        data.append(key, formData[key]);
-      }
+    if (key === "fotos") {
+  if (formData.fotos && typeof formData.fotos !== "string") {
+    data.append("fotos", formData.fotos, formData.fotos.name);
+  }
+} else {
+  data.append(key, formData[key]);
+}
+
     });
 const user = JSON.parse(localStorage.getItem("user"));
 data.append("ong", user?._id);
