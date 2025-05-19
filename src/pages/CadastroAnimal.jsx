@@ -150,6 +150,7 @@ if (user && (user._id || user.id)) {
           Authorization: `Bearer ${token}`,
         },
       });
+      
       alert("Animal atualizado com sucesso!");
     } else {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs/animais`, data, {
@@ -157,6 +158,8 @@ if (user && (user._id || user.id)) {
           Authorization: `Bearer ${token}`,
         },
       });
+      // Agora o nome da ONG vem certo do backend
+const nomeOng = response.data.ong?.nome || "ONG não identificada";
       alert("Animal cadastrado com sucesso!");
     }
 
