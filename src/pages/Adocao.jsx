@@ -20,9 +20,11 @@ export default function Adocao() {
   const filtroButtonRef = useRef();
 const [imagensCarregadas, setImagensCarregadas] = useState(0);
 const [totalImagens, setTotalImagens] = useState(0);
+const [loadingDados, setLoadingDados] = useState(true);
 
   
   const buscarAnimais = async () => {
+    setLoadingDados(true);
     try {
       const query = new URLSearchParams();
       if (filtros.nome) query.append("nome", filtros.nome);
@@ -50,6 +52,12 @@ setImagensCarregadas(0);
       console.error("Erro ao buscar animais:", error);
     }
   };
+  useEffect(() => {
+  if (totalImagens > 0 && imagensCarregadas === totalImagens) {
+    setLoadingDados(false);
+  }
+}, [imagensCarregadas, totalImagens]);
+
 const handleImagemCarregada = () => {
   setImagensCarregadas(prev => prev + 1);
 };
@@ -145,7 +153,32 @@ const handleImagemCarregada = () => {
 </button>
 
     <div className="conteudo-adocao flex flex-col md:flex-row relative">
-  
+  {loadingDados ? (
+  <div className="w-full min-h-[400px] flex items-center justify-center py-10">
+
+    <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+  </div>
+) : (
+  <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {animais.length > 0 ? (
+      animais.map((animal) => (
+        <div key={animal._id} className="bg-white rounded-3xl shadow-md hover:shadow-lg p-4 flex flex-col">
+          <img
+            src={animal.fotos[0]}
+            alt={animal.nome}
+            onLoad={handleImagemCarregada}
+            onError={handleImagemCarregada}
+            className="w-full h-48 object-cover rounded-xl mb-4"
+          />
+          {/* ... resto dos dados do animal ... */}
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500">Nenhum animal encontrado.</p>
+    )}
+  </div>
+)}
+
 
       {/* Sidebar de Filtros */}
       <div
@@ -251,13 +284,9 @@ const handleImagemCarregada = () => {
       </div>
 
       {/* Conteúdo principal */}
-      {animais.length > 0 && imagensCarregadas < totalImagens && (
-  <div className="flex justify-center items-center h-40 w-full">
-    <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-  </div>
-)}
 
-      <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+     {/*  <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {animais.length > 0 ? (
           animais.map((animal) => (
@@ -327,7 +356,7 @@ onError={handleImagemCarregada}
         ) : (
           <p className="text-gray-500">Nenhum animal encontrado.</p>
         )}
-      </div>
+      </div> */}
 
   
       {/* Botão flutuante de contato */}
