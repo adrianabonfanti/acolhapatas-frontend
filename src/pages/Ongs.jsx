@@ -52,6 +52,7 @@ await api.post("/contato", {
   const fetchOngs = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+       console.log("ONGS RECEBIDAS:", response.data);
       setOngs(response.data);
     } catch (error) {
       console.error(error);
