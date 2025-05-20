@@ -170,10 +170,12 @@ if (typeof response.data.ong === "object" && response.data.ong?.nome) {
 
     limparFormulario();
     buscarAnimais();
-  } catch (error) {
-    console.error("Erro ao cadastrar/editar animal:", error);
-    alert("Erro ao salvar animal.");
-  } finally {
+} catch (error) {
+  console.error("Erro ao cadastrar/editar animal:", error?.response || error.message || error);
+  alert("Erro ao salvar animal.");
+}
+
+   finally {
     setLoading(false);
   }
 };
