@@ -251,7 +251,7 @@ const handleImagemCarregada = () => {
       </div>
 
       {/* Conteúdo principal */}
-      {imagensCarregadas < totalImagens && (
+      {animais.length > 0 && imagensCarregadas < totalImagens && (
   <div className="flex justify-center items-center h-40 w-full">
     <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
   </div>
@@ -265,7 +265,8 @@ const handleImagemCarregada = () => {
  <img
   src={animal.fotos[0]}
   alt={animal.nome}
-  onLoad={handleImagemCarregada}
+ onLoad={handleImagemCarregada}
+onError={handleImagemCarregada}
   className="w-full h-48 object-cover rounded-xl mb-4"
 />
 
