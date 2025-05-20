@@ -14,6 +14,31 @@ function Ongs(){
 const [loading, setLoading] = useState(false);
 const [cadastroSucesso, setCadastroSucesso] = useState(false);
 
+const buscarCep = async (e) => {
+  const cep = e.target.value.replace(/\D/g, "");
+  if (cep.length !== 8) return;
+
+  try {
+    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await response.json();
+
+    if (data.erro) {
+      alert("CEP não encontrado!");
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      street: data.logradouro || "",
+      city: data.localidade || "",
+      state: data.uf || ""
+    }));
+  } catch (error) {
+    alert("Erro ao buscar CEP.");
+  }
+};
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -140,11 +165,28 @@ const [cadastroSucesso, setCadastroSucesso] = useState(false);
            </div>
             <div>
           <label className="font-medium block mb-1">CEP:</label>
-          <input type="text" name="cep" placeholder="CEP" onChange={handleChange} required className="input" />
+         <input
+  type="text"
+  name="cep"
+  placeholder="CEP"
+  onChange={handleChange}
+  onBlur={buscarCep}
+  required
+  className="input"
+/>
+
            </div>
             <div>
           <label className="font-medium block mb-1">Rua:</label>
-          <input type="text" name="street" placeholder="Rua" onChange={handleChange} required className="input" />
+         <input
+  type="text"
+  name="street"
+  placeholder="Rua"
+  value={formData.street || ""}
+  onChange={handleChange}
+  required
+  className="input"
+/>
             </div>
             <div>
           <label className="font-medium block mb-1">Número:</label>
@@ -156,11 +198,27 @@ const [cadastroSucesso, setCadastroSucesso] = useState(false);
            </div>
             <div>
           <label className="font-medium block mb-1">Cidade:</label>
-          <input type="text" name="city" placeholder="Cidade" onChange={handleChange} required className="input" />
+        <input
+  type="text"
+  name="city"
+  placeholder="Cidade"
+  value={formData.city || ""}
+  onChange={handleChange}
+  required
+  className="input"
+/>
            </div>
             <div>
           <label className="font-medium block mb-1">Estado:</label>
-          <input type="text" name="state" placeholder="Estado" onChange={handleChange} required className="input" /></div>
+          <input
+  type="text"
+  name="state"
+  placeholder="Estado"
+  value={formData.state || ""}
+  onChange={handleChange}
+  required
+  className="input"
+/></div>
             <div>
           <label className="font-medium block mb-1">Nome do responsável:</label>
           <input type="text" name="responsibleName" placeholder="Nome do responsável" onChange={handleChange} required className="input" />
