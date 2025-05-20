@@ -49,15 +49,23 @@ await api.post("/contato", {
     }
   };
 
-  const fetchOngs = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
-       console.log("ONGS RECEBIDAS:", response.data);
+ const fetchOngs = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/public/ongs`);
+    console.log("ONGS RECEBIDAS:", response.data);
+
+    if (Array.isArray(response.data)) {
       setOngs(response.data);
-    } catch (error) {
-      console.error(error);
+    } else {
+      console.error("A resposta não é um array:", response.data);
+      setOngs([]); // evita crash
     }
-  };
+  } catch (error) {
+    console.error("Erro ao buscar ONGs:", error);
+    setOngs([]); // evita crash se der erro
+  }
+};
+
 
   useEffect(() => {
     fetchOngs();
@@ -92,7 +100,9 @@ await api.post("/contato", {
   </h2>
   <div className="max-w-7xl mx-auto">
   <div className="relative z-0">
+ {Array.isArray(ongs) && ongs.length > 0 && (
   <CarouselOngs ongs={ongs} onClickOng={openModal} />
+)}
 
 </div>
 
