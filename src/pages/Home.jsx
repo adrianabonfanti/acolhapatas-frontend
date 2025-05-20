@@ -47,7 +47,7 @@ function Home() {
     });
 }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     api.get("/random/6")
       .then((res) => {
         setAnimais(res.data);
@@ -59,7 +59,7 @@ function Home() {
         setOngs(res.data);
       });
   }, []);
- */
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
