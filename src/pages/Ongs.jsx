@@ -98,10 +98,10 @@ await api.post("/contato", {
 
   </div>
 </section>
-{/* {showModal && selectedOng && (
+{showModal && selectedOng && (
   <ModalONG ong={selectedOng} onClose={closeModal} />
 )}
-     */}   
+       
         <h2 className="text-2xl font-bold mt-12 mb-4 tituloSeja">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
