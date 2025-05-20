@@ -7,7 +7,7 @@ export default function Eventos() {
   const [eventos, setEventos] = useState([]);
   const [ongs, setOngs] = useState([]);
   const [filtros, setFiltros] = useState({
-    ongsSelecionadas: [],
+    ong: "",
     data: "",
     cidade: "",
     estado: ""
@@ -15,7 +15,10 @@ export default function Eventos() {
   const [showSlideFiltro, setShowSlideFiltro] = useState(false);
   const [modalEvento, setModalEvento] = useState(null);
   const [formEnviado, setFormEnviado] = useState(false);
-  const filtroRef = useRef();
+  const [modalInteresse, setModalInteresse] = useState(false);
+const [interesseEnviado, setInteresseEnviado] = useState(false);
+
+  const filtroRef = useRef(); 
 
   useEffect(() => {
     buscarEventos();
@@ -52,21 +55,53 @@ export default function Eventos() {
   };
 
   const aplicarFiltros = (evento) => {
-    const ongId = typeof evento.ong === "object" ? evento.ong._id : evento.ong;
-    const ongOk = filtros.ongsSelecionadas.length === 0 || filtros.ongsSelecionadas.includes(ongId);
+  const ongId = typeof evento.ong === "object" ? evento.ong._id : evento.ong;
+  const ongOk = !filtros.ong || filtros.ong === ongId;
 
-    const cidadeOk =
-      filtros.cidade.trim() === "" ||
-      evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
+  const cidadeOk =
+    filtros.cidade.trim() === "" ||
+    evento.cidade?.toLowerCase().includes(filtros.cidade.trim().toLowerCase());
 
-    const estadoOk =
-      filtros.estado === "" ||
-      evento.estado?.toUpperCase() === filtros.estado.toUpperCase();
+  const estadoOk =
+    filtros.estado === "" ||
+    evento.estado?.toUpperCase() === filtros.estado.toUpperCase();
 
-    const dataOk = filtros.data === "" || evento.data === filtros.data;
+  const dataOk = filtros.data === "" || evento.data === filtros.data;
 
-    return ongOk && cidadeOk && estadoOk && dataOk;
-  };
+  return ongOk && cidadeOk && estadoOk && dataOk;
+};
+
+const enviarVoluntario = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  try {
+    const [ano, mes, dia] = modalEvento.data.split("-");
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    // 1. Salvar no banco de dados
+    await api.post("/voluntarios", {
+      nome: formData.get("nome"),
+      telefone: formData.get("telefone"),
+      evento: modalEvento._id
+    });
+
+    // 2. Enviar e-mail para ONG
+    await api.post("/contato", {
+      name: formData.get("nome"),
+      phone: formData.get("telefone"),
+      message: `Quero ser voluntário para o evento ${modalEvento.nome}\n\nData: ${dataFormatada}\nLocal: ${modalEvento.endereco || "Endereço não informado"}\nCidade: ${modalEvento.cidade} - ${modalEvento.estado}`,
+      email: modalEvento?.ong?.email || "contato@acolhapatas.org"
+    });
+
+    setFormEnviado(true);
+    setTimeout(() => {
+      setFormEnviado(false);
+      setModalEvento(null);
+    }, 3000);
+  } catch (err) {
+    alert("Erro ao enviar. Tente novamente.");
+  }
+};
 
   const gerarLinkGoogleCalendar = (evento) => {
     const inicio = new Date(evento.data + "T" + (evento.horaInicio || "10:00"));
@@ -80,29 +115,7 @@ export default function Eventos() {
     )}&location=${encodeURIComponent(evento.endereco + ", " + evento.cidade + " - " + evento.estado)}`;
   };
 
-  const enviarVoluntario = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    try {
-     const [ano, mes, dia] = modalEvento.data.split("-");
-const dataFormatada = `${dia}/${mes}/${ano}`;
-
-await api.post("/contato", {
-  name: formData.get("nome"),
-  phone: formData.get("telefone"),
-  message: `Quero ser voluntário para o evento ${modalEvento.nome}\n\nData: ${dataFormatada}\nLocal: ${modalEvento.endereco || "Endereço não informado"}\nCidade: ${modalEvento.cidade} - ${modalEvento.estado}`,
-  email: modalEvento?.ong?.email || "contato@acolhapatas.org"
-});
-
-      setFormEnviado(true);
-      setTimeout(() => {
-        setFormEnviado(false);
-        setModalEvento(null);
-      }, 3000);
-    } catch (err) {
-      alert("Erro ao enviar. Tente novamente.");
-    }
-  };
+  
 
   return (
     <div className="pagina-eventos">
@@ -114,6 +127,13 @@ await api.post("/contato", {
           </h1>
         </div>
       </header>
+<button
+  onClick={() => setModalInteresse(true)}
+  className="fixed bottom-4 right-4 z-50 bg-emerald-600 text-white p-3 rounded-full shadow-lg hover:bg-emerald-700 flex items-center gap-2 botaoReceberEventos"
+>
+  <span className="material-icons">email</span>
+  Receber novos eventos
+</button>
 
       <div className="p-4">
         <button
@@ -134,7 +154,7 @@ await api.post("/contato", {
             <div className="campoFiltro mb-3">
               <h3 className="font-semibold">ONG</h3>
               {ongs.map((ong) => (
-                <label key={ong._id} className="block text-sm">
+             /*    <label key={ong._id} className="block text-sm">
                   <input
                     type="checkbox"
                     value={ong._id}
@@ -143,7 +163,15 @@ await api.post("/contato", {
                     className="mr-2"
                   />
                   {ong.name}
-                </label>
+                </label> */
+            
+          <select value={filtros.ong} onChange={(e) => setFiltros({ ...filtros, ong: e.target.value })}>
+  <option value="">Todas</option>
+  {ongs.map((ong) => (
+    <option key={ong._id} value={ong._id}>{ong.name}</option>
+  ))}
+</select>
+      
               ))}
             </div>
             <div className="campoFiltro mb-3">
@@ -191,7 +219,11 @@ await api.post("/contato", {
                 <h2 className="text-lg font-bold text-emerald-700 mb-1">{evento.nome}</h2>
               <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
   <span className="material-icons text-base text-emerald-600">calendar_today</span>
-  {new Date(evento.data).toLocaleDateString("pt-BR")}
+ {(() => {
+  const [ano, mes, dia] = evento.data.split("-");
+  return `${dia}/${mes}/${ano}`;
+})()}
+
 </p>
 
                 <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
@@ -202,11 +234,12 @@ await api.post("/contato", {
                   <span className="material-icons text-base text-emerald-600">place</span>
                   {evento.endereco}, {evento.cidade} - {evento.estado}
                 </p>
-                {evento.ong?.nome && (
+                {(evento.ong?.nome || evento.ong?.name) && (
                   <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
-                    <span className="material-icons text-base text-emerald-600">business</span>
-                    ONG: {evento.ong.nome}
-                  </p>
+  <span className="material-icons text-base text-emerald-600">business</span>
+    ONG: {evento.ong?.nome || evento.ong?.name}
+</p>
+
                 )}
                 {evento.ong?.instagram && (
                   <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
@@ -229,16 +262,16 @@ await api.post("/contato", {
                     href={gerarLinkGoogleCalendar(evento)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm hover:bg-blue-600 items-center"
                   >
                     <span className="material-icons align-middle text-sm">event</span> Me lembrar
                   </a>
                   {evento.precisaVoluntario && (
                     <button
                       onClick={() => setModalEvento(evento)}
-                      className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600"
+                      className="bg-emerald-500 text-white px-4 py-1 rounded-full text-sm hover:bg-emerald-600 items-center"
                     >
-                      <span className="material-icons align-middle text-sm">volunteer_activism</span> Quero me voluntariar
+                      <span className="material-icons align-middle text-sm">volunteer_activism</span> Me voluntariar
                     </button>
                   )}
                 </div>
@@ -251,9 +284,17 @@ await api.post("/contato", {
               <div className="bg-white p-6 rounded-xl shadow-xl w-80 relative">
                 <button onClick={() => setModalEvento(null)} className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">✕</button>
                 <h3 className="text-lg font-bold mb-4 text-center">Quero ser voluntário</h3>
+                 {/* Instruções da ONG */}
+      {modalEvento.informacoesVoluntario && (
+        <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-3 text-sm">
+          <strong>Instruções da ONG:</strong><br />
+          {modalEvento.informacoesVoluntario}
+        </div>
+      )}
                 {formEnviado ? (
                   <p className="text-green-600 font-semibold text-center">Mensagem enviada com sucesso!</p>
                 ) : (
+                  
                   <form onSubmit={enviarVoluntario} className="space-y-3">
                     <input type="text" name="nome" placeholder="Seu nome" className="w-full p-2 border rounded" required />
                     <input type="text" name="telefone" placeholder="Telefone" className="w-full p-2 border rounded" required />
@@ -263,6 +304,58 @@ await api.post("/contato", {
               </div>
             </div>
           )}
+          {modalInteresse && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-xl shadow-xl w-96 relative">
+      <button onClick={() => setModalInteresse(false)} className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl">✕</button>
+      <h3 className="text-lg font-bold mb-4 text-center">Receber avisos de novos eventos</h3>
+
+      {interesseEnviado ? (
+        <p className="text-green-600 font-semibold text-center">Cadastro realizado com sucesso!</p>
+      ) : (
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+              nome: formData.get("nome"),
+              email: formData.get("email"),
+              cidade: formData.get("cidade"),
+              estado: formData.get("estado"),
+            };
+            try {
+              await api.post("/interesse-eventos", data);
+              setInteresseEnviado(true);
+              setTimeout(() => {
+                setModalInteresse(false);
+                setInteresseEnviado(false);
+              }, 3000);
+            } catch (err) {
+              alert("Erro ao enviar. Tente novamente.");
+            }
+          }}
+          className="space-y-3"
+        >
+          <input type="text" name="nome" placeholder="Seu nome" className="w-full p-2 border rounded" required />
+          <input type="email" name="email" placeholder="Seu e-mail" className="w-full p-2 border rounded" required />          
+                  <input type="text" name="cidade" placeholder="Cidade (ou deixe em branco)" className="w-full p-2 border rounded" />
+          
+          <select name="estado" className="w-full p-2 border rounded">
+            <option value="">Todos os estados</option>
+            {["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"].map((uf) => (
+              <option key={uf} value={uf}>{uf}</option>
+            ))}
+          </select>
+
+          <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded">
+            Confirmar
+          </button>
+        </form>
+      )}
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </div>

@@ -30,26 +30,24 @@ function Home() {
   const handleImagemCarregada = () => {
     setImagensCarregadas((prev) => prev + 1);
   };
-  useEffect(() => {
+ useEffect(() => {
   setLoadingDados(true);
-  Promise.all([
-    api.get("/random/6").then((res) => {
-      setAnimais(res.data);
-      setTotalImagens(res.data.length);
-    }),
-    api.get("/public/ongs").then((res) => {
+
+  api.get("/public/ongs")
+    .then((res) => {
+      console.log("ONGS RECEBIDAS:", res.data);
       setOngs(res.data);
     })
-  ])
     .catch((err) => {
-      console.error("Erro ao carregar dados da home:", err);
+      console.error("ERRO AO CARREGAR ONGS", err);
     })
     .finally(() => {
+      console.log("FINALIZANDO LOADING DA HOME");
       setLoadingDados(false);
     });
 }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     api.get("/random/6")
       .then((res) => {
         setAnimais(res.data);
@@ -61,7 +59,7 @@ function Home() {
         setOngs(res.data);
       });
   }, []);
- */
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (

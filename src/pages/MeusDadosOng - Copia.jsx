@@ -31,7 +31,7 @@ export default function MeusDadosOng() {
   useEffect(() => {
     const buscarDados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/ongs/${ongId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
@@ -85,7 +85,7 @@ export default function MeusDadosOng() {
         data.append("logo", novaLogo);
       }
 
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, data, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/ongs/${ongId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -126,21 +126,50 @@ export default function MeusDadosOng() {
       
       )}
 
-      <form onSubmit={salvarAlteracoes} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input name="name" value={formData.name} disabled className="border p-2 " placeholder="Nome da ONG" />
-        <input name="cnpj" value={formData.cnpj} disabled className="border p-2" placeholder="CNPJ" />
-        <input name="phone" value={formData.phone || ""} onChange={handleFormChange} className="border p-2" placeholder="Telefone" />
-        <input name="responsibleName" value={formData.responsibleName || ""} onChange={handleFormChange} className="border p-2" placeholder="Nome do Responsável" />
-        <input name="responsibleEmail" value={formData.responsibleEmail || ""} onChange={handleFormChange} className="border p-2" placeholder="Email do Responsável" />
-        <input name="website" value={formData.website || ""} onChange={handleFormChange} className="border p-2" placeholder="Site" />
+      <form onSubmit={salvarAlteracoes} className="grid grid-cols-1 md:grid-cols-2 gap-1">
+        <div>
+        <label className="block font-semibold mb-1">Nome da ONG</label>
+        <input name="name" value={formData.name} disabled className="border p-2 " placeholder="Nome da ONG" /></div>
+        <div>
+        <label className="block font-semibold mb-1">CNPJ</label>
+        <input name="cnpj" value={formData.cnpj} disabled className="border p-2" placeholder="CNPJ" /></div>
+<div>
+        <label className="block font-semibold mb-1">Telefone</label>
+        <input name="phone" value={formData.phone || ""} onChange={handleFormChange} className="border p-2" placeholder="Telefone" /></div>
+        <div>
+        <label className="block font-semibold mb-1">Nome do Responsável</label>
+        <input name="responsibleName" value={formData.responsibleName || ""} onChange={handleFormChange} className="border p-2" placeholder="Nome do Responsável" /></div>
+<div>
+        <label className="block font-semibold mb-1">Email do Responsável</label>
+        <input name="responsibleEmail" value={formData.responsibleEmail || ""} onChange={handleFormChange} className="border p-2" placeholder="Email do Responsável" /></div>
+<div>
+        <label className="block font-semibold mb-1">Porte</label>
+        <input name="website" value={formData.website || ""} onChange={handleFormChange} className="border p-2" placeholder="Site" /></div>
+<div>
+        <label className="block font-semibold mb-1">Instagram</label>
         <input name="instagram" value={formData.instagram || ""} onChange={handleFormChange} className="border p-2" placeholder="Instagram" />
-        <input name="tiktok" value={formData.tiktok || ""} onChange={handleFormChange} className="border p-2" placeholder="TikTok" />
-        <input name="cep" value={formData.cep || ""} onChange={handleFormChange} className="border p-2" placeholder="CEP" />
-        <input name="street" value={formData.street || ""} onChange={handleFormChange} className="border p-2" placeholder="Rua" />
-        <input name="number" value={formData.number || ""} onChange={handleFormChange} className="border p-2" placeholder="Número" />
-        <input name="complement" value={formData.complement || ""} onChange={handleFormChange} className="border p-2" placeholder="Complemento" />
-        <input name="city" value={formData.city || ""} onChange={handleFormChange} className="border p-2" placeholder="Cidade" />
-        <input name="state" value={formData.state || ""} onChange={handleFormChange} className="border p-2" placeholder="Estado" />
+</div>
+<div>
+        <label className="block font-semibold mb-1">Tiktok</label>
+        <input name="tiktok" value={formData.tiktok || ""} onChange={handleFormChange} className="border p-2" placeholder="TikTok" /></div>
+        <div>
+        <label className="block font-semibold mb-1">CEP</label>
+        <input name="cep" value={formData.cep || ""} onChange={handleFormChange} className="border p-2" placeholder="CEP" /></div>
+<div>
+        <label className="block font-semibold mb-1">Rua</label>
+        <input name="street" value={formData.street || ""} onChange={handleFormChange} className="border p-2" placeholder="Rua" /></div>
+<div>
+        <label className="block font-semibold mb-1">Número</label>
+        <input name="number" value={formData.number || ""} onChange={handleFormChange} className="border p-2" placeholder="Número" /></div>
+<div>
+        <label className="block font-semibold mb-1">Complemento</label>
+        <input name="complement" value={formData.complement || ""} onChange={handleFormChange} className="border p-2" placeholder="Complemento" /></div>
+        <div>
+        <label className="block font-semibold mb-1">Cidade</label>
+        <input name="city" value={formData.city || ""} onChange={handleFormChange} className="border p-2" placeholder="Cidade" /></div>
+        <div>
+        <label className="block font-semibold mb-1">Estado</label>
+        <input name="state" value={formData.state || ""} onChange={handleFormChange} className="border p-2" placeholder="Estado" /></div>
 
         <button type="submit" className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded col-span-1 md:col-span-2">
           Salvar Alterações

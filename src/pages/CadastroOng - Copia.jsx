@@ -20,10 +20,10 @@ export default function CadastroOng() {
     if (formData.logo) data.append("logo", formData.logo);
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ongs`, data);
+      await axios.post(`${import.meta.env.VITE_API_URL}/ongs`, data);
 
       // Envio de e-mail para a Adriana
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/contato`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/contato`, {
         name: formData.name,
         email: "sistema@acolhapatas.org",
         phone: formData.phone,

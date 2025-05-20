@@ -48,7 +48,7 @@ export default function EditarPerfilLar() {
   const salvarAlteracoes = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/lartemporario/editar`, form, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/lartemporario/editar`, form, {
 
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -60,24 +60,34 @@ export default function EditarPerfilLar() {
   };
 
   return (
-    <>
-  
-  <div className="p-6 max-w-5xl mx-auto">
+   <div className="">
   <div className="bg-white shadow-md rounded-3xl p-6 border border-gray-200">
     <h1 className="text-3xl font-extrabold text-gray-800 mb-8 flex items-center gap-3">
       <span className="material-icons text-emerald-500">home</span>
       Editar Perfil do Lar Temporário
     </h1>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+     <div><label className="font-medium block mb-1">Nome:</label>
       <input type="text" name="nome" value={form.nome} readOnly className="input bg-gray-100" />
-      <input type="text" name="telefone" value={form.telefone} onChange={handleChange} className="input" placeholder="Telefone" />
-      <input type="text" name="cidade" value={form.cidade} onChange={handleChange} className="input" placeholder="Cidade" />
-      <input type="text" name="estado" value={form.estado} onChange={handleChange} className="input" placeholder="Estado" />
+</div>
+<div><label className="font-medium block mb-1">Telefone:</label>
+      <input type="text" name="telefone" value={form.telefone} onChange={handleChange} className="input" placeholder="Telefone" /></div>
+<div><label className="font-medium block mb-1">Cidade:</label>
+      <input type="text" name="cidade" value={form.cidade} onChange={handleChange} className="input" placeholder="Cidade" /></div>
+<div><label className="font-medium block mb-1">Estado:</label>
+      <input type="text" name="estado" value={form.estado} onChange={handleChange} className="input" placeholder="Estado" /></div>
+      <div><label className="font-medium block mb-1">CEP:</label>
       <input type="text" name="cep" value={form.cep} onChange={handleChange} className="input" placeholder="CEP" />
+</div>
+<div><label className="font-medium block mb-1">Rua:</label>
       <input type="text" name="rua" value={form.rua} onChange={handleChange} className="input" placeholder="Rua" />
+</div>
+<div><label className="font-medium block mb-1">Número:</label>
       <input type="text" name="numero" value={form.numero} onChange={handleChange} className="input" placeholder="Número" />
-      <input type="text" name="complemento" value={form.complemento} onChange={handleChange} className="input" placeholder="Complemento" />
+</div>
+<div><label className="font-medium block mb-1">Complemento:</label>
+      <input type="text" name="complemento" value={form.complemento} onChange={handleChange} className="input" placeholder="Complemento" /></div>
 
       <div>
         <label className="block font-semibold mb-1">Espécie</label>
@@ -114,8 +124,8 @@ export default function EditarPerfilLar() {
           <option value="tanto-faz">Tanto faz</option>
         </select>
       </div>
-
-      <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} className="input" placeholder="Vagas disponíveis" />
+<div><label className="font-medium block mb-1">Vagas Disponíveis:</label>
+      <input type="number" name="quantidade" value={form.quantidade} onChange={handleChange} className="input" placeholder="Vagas disponíveis" /></div>
 
       <div className="flex items-center gap-2 col-span-1 md:col-span-2">
         <input type="checkbox" name="medicacao" checked={form.medicacao} onChange={handleChange} className="w-5 h-5 text-emerald-600" />
@@ -145,6 +155,6 @@ export default function EditarPerfilLar() {
   <ContatoFlutuante />
 </div>
 
-    </>
+
   );
 }

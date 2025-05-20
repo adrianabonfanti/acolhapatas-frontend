@@ -16,8 +16,7 @@ export default function PainelOng() {
     if (!user || user.tipo !== "ong") {
       navigate("/login");
     }
-  }, [navigate]);
-  
+  }, [navigate]);  
 
   const handleLogout = () => {
     localStorage.removeItem("user");

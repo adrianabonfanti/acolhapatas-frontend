@@ -8,22 +8,23 @@ export default function AdminPanel() {
   const [detalhesEvento, setDetalhesEvento] = useState(null);
 
   const buscarPendentes = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/admin/pendentes`);
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/pendentes`);
     setPendentes(res.data);
   };
 
-  const buscarEventos = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/eventos/public`);
-      setEventos(res.data);
-    } catch (error) {
-      console.error("Erro ao buscar eventos:", error);
-    }
-  };
+const buscarEventos = async () => {
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/eventos/todos`);
+    setEventos(res.data);
+  } catch (error) {
+    console.error("Erro ao buscar eventos:", error);
+  }
+};
+
 
   const aprovar = async (id) => {
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/admin/aprovar/${id}`);
+      await axios.post(`${import.meta.env.VITE_API_URL}/admin/aprovar/${id}`);
       buscarPendentes();
     } catch (error) {
       console.error("Erro ao aprovar:", error);
@@ -33,7 +34,7 @@ export default function AdminPanel() {
 
   const recusar = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/admin/recusar/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/recusar/${id}`);
       buscarPendentes();
     } catch (error) {
       console.error("Erro ao recusar cadastro:", error);
@@ -44,7 +45,7 @@ export default function AdminPanel() {
   const deletarEvento = async (id) => {
     if (confirm("Tem certeza que deseja excluir este evento?")) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/eventos/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/eventos/${id}`);
         buscarEventos();
       } catch (error) {
         console.error("Erro ao deletar evento:", error);

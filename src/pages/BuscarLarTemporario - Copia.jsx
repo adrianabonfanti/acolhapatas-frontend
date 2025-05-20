@@ -36,7 +36,7 @@ export default function BuscarLarTemporario() {
  
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/lartemporario?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/lartemporario?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -53,36 +53,39 @@ export default function BuscarLarTemporario() {
       <h2 className="text-2xl font-bold mb-6">Procurar Lar Temporário</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2" />
-        <input type="text" name="cidade" value={filtros.cidade} onChange={handleFiltroChange} placeholder="Cidade" className="border p-2" />
-        <input type="text" name="estado" value={filtros.estado} onChange={handleFiltroChange} placeholder="Estado" className="border p-2" />
-
+        <div><label className="font-medium block mb-1">Nome:</label>
+        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2" /></div>
+        <div><label className="font-medium block mb-1">Cidade:</label>
+        <input type="text" name="cidade" value={filtros.cidade} onChange={handleFiltroChange} placeholder="Cidade" className="border p-2" /></div>
+        <div><label className="font-medium block mb-1">Estado:</label>
+        <input type="text" name="estado" value={filtros.estado} onChange={handleFiltroChange} placeholder="Estado" className="border p-2" /></div>
+<div><label className="font-medium block mb-1">Espécie:</label>
         <select name="especie" value={filtros.especie} onChange={handleFiltroChange} className="border p-2">
           <option value="">Todas as Espécies</option>
           <option value="cachorro">Cachorro</option>
           <option value="gato">Gato</option>
-        </select>
-
+        </select></div>
+<div><label className="font-medium block mb-1">Porte:</label>
         <select name="porte" value={filtros.porte} onChange={handleFiltroChange} className="border p-2">
           <option value="">Todos os Portes</option>
           <option value="pequeno">Pequeno</option>
           <option value="medio">Médio</option>
           <option value="grande">Grande</option>
-        </select>
-
+        </select></div>
+<div><label className="font-medium block mb-1">Idade:</label>
         <select name="idade" value={filtros.idade} onChange={handleFiltroChange} className="border p-2">
           <option value="">Todas as Idades</option>
           <option value="filhote">Filhote</option>
           <option value="adulto">Adulto</option>
           <option value="idoso">Idoso</option>
-        </select>
-
+        </select></div>
+<div><label className="font-medium block mb-1">Sexo:</label>
         <select name="sexo" value={filtros.sexo} onChange={handleFiltroChange} className="border p-2">
           <option value="">Todos os Sexos</option>
           <option value="macho">Macho</option>
           <option value="femea">Fêmea</option>
           <option value="tanto-faz">Tanto faz</option>
-        </select>
+        </select></div>
 
         <div className="flex items-center gap-2">
           <input type="checkbox" name="medicacao" checked={filtros.medicacao} onChange={handleFiltroChange} /> Usa medicação

@@ -105,11 +105,7 @@ const handleEnviarContato = async (e) => {
       <div className="flex-1 flex flex-col">
       
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-emerald-700 mb-6 flex items-center gap-2">
-            <span className="material-icons text-3xl">volunteer_activism</span>
-            O que é ser um Lar Temporário?
-          </h2>
-
+      <h2 class="text-2xl font-bold mb-4">O que é ser um lar temporário?</h2>
           <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
             {["home", "pets", "event", "chat"].map((icon, i) => {
               const titles = [
@@ -127,7 +123,7 @@ const handleEnviarContato = async (e) => {
               return (
                 <div
                   key={i}
-                  className="min-w-[250px] max-w-[300px] bg-white border border-emerald-100 shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
+                  className="caixaLar min-w-[250px] max-w-[300px] bg-white border border-emerald-100 shadow-md rounded-xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
                 >
                   <span className="material-icons text-emerald-600 text-4xl">{icon}</span>
                   <h3 className="font-semibold text-lg">{titles[i]}</h3>
@@ -140,36 +136,57 @@ const handleEnviarContato = async (e) => {
 
         <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
           {/* Dados Pessoais */}
-          <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-md mb-8">
+          <div className="bg-white  rounded-2xl p-6  mb-8">
+             <h2 class="text-2xl font-bold mb-4">Seja um lar temporário</h2>
   <h2 className="text-xl font-semibold text-emerald-700 flex items-center gap-2 mb-4">
     <span className="material-icons text-2xl">person</span>
     Dados Pessoais
   </h2>
 
   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
-    <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required />
-    <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required />
-    <input name="rua" type="text" placeholder="Rua" className="input w-full" required />
-    <input name="numero" type="text" placeholder="Número" className="input w-full" required />
-    <input name="complemento" type="text" placeholder="Complemento" className="input w-full" />
-    <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required />
-    <input name="estado" type="text" placeholder="Estado" className="input w-full" required />
-    <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required />
-    <input name="email" type="email" placeholder="E-mail" className="input w-full" required />
-    <input name="password" type="password" placeholder="Senha" className="input w-full" required />
+    <div>
+    <label className="font-medium block mb-1">Nome Completo:</label>
+    <input name="nome" type="text" placeholder="Nome completo" className="input w-full" required /></div>
+     <div>
+    <label className="font-medium block mb-1">CEP:</label>
+    <input name="cep" type="text" placeholder="CEP" className="input w-full" onBlur={buscarCep} required /></div>
+     <div>
+    <label className="font-medium block mb-1">Rua:</label>
+    <input name="rua" type="text" placeholder="Rua" className="input w-full" required /></div>
+     <div>
+    <label className="font-medium block mb-1">Número:</label>
+    <input name="numero" type="text" placeholder="Número" className="input w-full" required /></div>
+     <div>
+   <label className="font-medium block mb-1">Complemento:</label>
+    <input name="complemento" type="text" placeholder="Complemento" className="input w-full" /></div>
+     <div>
+    <label className="font-medium block mb-1">Cidade:</label>
+    <input name="cidade" type="text" placeholder="Cidade" className="input w-full" required /></div>
+     <div>
+    <label className="font-medium block mb-1">Estado:</label>
+    <input name="estado" type="text" placeholder="Estado" className="input w-full" required /></div>
+     <div>
+    <label className="font-medium block mb-1">Telefone:</label>
+    <input name="telefone" type="text" placeholder="Telefone" className="input w-full" required /></div>
+     <div>
+   <label className="font-medium block mb-1">E-mail:</label>
+    <input name="email" type="email" placeholder="E-mail" className="input w-full" required /></div>
+     <div>
+    <label className="font-medium block mb-1">Senha:</label>
+    <input name="password" type="password" placeholder="Senha" className="input w-full" required /></div>
   </div>
 </div>
 
 
 
           {/* Preferências de Animal */}
-          <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-md mb-8">
+          <div className="bg-white  rounded-2xl p-6  mb-8">
   <h2 className="text-xl font-semibold text-emerald-700 flex items-center gap-2 mb-4">
     <span className="material-icons text-2xl">pets</span>
     Preferências para Hospedagem
   </h2>
 
-  <div className="space-y-6 text-sm text-gray-700">
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
     <div>
       <label className="font-medium block mb-1">Espécie aceita:</label>
       <div className="flex flex-wrap gap-4">

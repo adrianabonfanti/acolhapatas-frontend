@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 export default function CadastroAnimal() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = user?.token;
+const token = localStorage.getItem("token");
 
+const [loading, setLoading] = useState(false);
   const [modoCadastro, setModoCadastro] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [animalSelecionado, setAnimalSelecionado] = useState(null);
@@ -73,7 +73,7 @@ export default function CadastroAnimal() {
     deficiencia: animal.deficiencia === "true" || animal.deficiencia === true,
     precisaLarTemporario: animal.precisaLarTemporario === "true" || animal.precisaLarTemporario === true,
 
-      fotos: null,
+      fotos: animal.fotos?.[0] || null,
     });
   };
 
@@ -110,7 +110,7 @@ export default function CadastroAnimal() {
       if (filtros.idade) query.append("idade", filtros.idade);
       if (filtros.porte) query.append("porte", filtros.porte);
 
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/animals?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/animals?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAnimais(response.data);
@@ -120,52 +120,67 @@ export default function CadastroAnimal() {
   };
 
   const cadastrarAnimal = async (e) => {
-    e.preventDefault();
-    try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === "fotos" && formData.fotos) {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (key === "fotos") {
+        if (formData.fotos && typeof formData.fotos !== "string") {
           data.append("fotos", formData.fotos, formData.fotos.name);
-        } else if (typeof formData[key] === "boolean") {
-          data.append(key, formData[key] ? "true" : "false");
-        } else {
-          data.append(key, formData[key]);
         }
-      }); 
-      
-  
-      if (modoEdicao && animalSelecionado) {
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // NÃO coloca "Content-Type" manualmente aqui
-          },
-        });
-        alert("Animal atualizado com sucesso!");
       } else {
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
-
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // NÃO coloca "Content-Type" manualmente aqui
-          },
-        });
-        alert("Animal cadastrado com sucesso!");
+        data.append(key, formData[key]);
       }
-  
-      limparFormulario();
-      buscarAnimais();
-     
-    } catch (error) {
-      console.error("Erro ao cadastrar/editar animal:", error);
-    }
-  };
+    });
+
+   const user = JSON.parse(localStorage.getItem("user"));
+if (user && (user._id || user.id)) {
+  data.append("ong", user._id || user.id);
+} else {
+  alert("Erro: ONG não encontrada. Faça login novamente.");
+  return;
+}
+
+
+
+    if (modoEdicao && animalSelecionado) {
+      await axios.put(`${import.meta.env.VITE_API_URL}/animals/${animalSelecionado._id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      alert("Animal atualizado com sucesso!");
+} else {
+  const response = await axios.post(`${import.meta.env.VITE_API_URL}/animals`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const nomeOng = response.data.ong?.nome || "ONG não identificada";
+  alert(`Animal cadastrado com sucesso`);
+}
+
+
+    limparFormulario();
+    buscarAnimais();
+  } catch (error) {
+    console.error("Erro ao cadastrar/editar animal:", error);
+    alert("Erro ao salvar animal.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   
   const deletarAnimal = async (id) => {
     if (!window.confirm("Tem certeza que deseja apagar este animal?")) return;
   
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/animals/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/animals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Animal apagado com sucesso!");
@@ -185,36 +200,49 @@ export default function CadastroAnimal() {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Buscar Animais</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2 w-full text-gray-700 bg-white" />
+        <div>
+        <label className="font-medium block mb-1">Nome:</label>
+        <input type="text" name="nome" value={filtros.nome} onChange={handleFiltroChange} placeholder="Nome" className="border p-2 w-full text-gray-700 bg-white" /></div>
+       <div>
+       <label className="font-medium block mb-1">Espécie:</label>
         <select name="especie" value={filtros.especie} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Espécies</option>
           <option value="Cachorro">Cachorro</option>
           <option value="Gato">Gato</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Sexo:</label>
         <select name="sexo" value={filtros.sexo} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Sexos</option>
           <option value="femea">Fêmea</option>
 <option value="macho">Macho</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Idade:</label>
         <select name="idade" value={filtros.idade} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todas as Idades</option>
           <option value="Filhote">Filhote</option>
           <option value="Adulto">Adulto</option>
           <option value="Idoso">Idoso</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Porte:</label>
         <select name="porte" value={filtros.porte} onChange={handleFiltroChange} className="border p-2 w-full text-gray-700 bg-white">
           <option value="">Todos os Portes</option>
           <option value="Pequeno">Pequeno</option>
           <option value="Médio">Médio</option>
           <option value="Grande">Grande</option>
-        </select>
+        </select></div>
+        <div>
+           <label className="font-medium block mb-1">Data de cadastro:</label>
+       
         <input
   type="date"
   name="dataCadastro"
   value={filtros.dataCadastro}
   onChange={handleFiltroChange}
   className="border p-2 w-full text-gray-700 placeholder:text-gray-400 bg-white"
-/>
+/> </div>
 
       </div>
 
@@ -238,30 +266,42 @@ export default function CadastroAnimal() {
 
       {modoCadastro && (
         <form onSubmit={cadastrarAnimal} className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+          <div>
+          <label className="font-medium block mb-1">Nome:</label>
         <input type="text" name="nome" value={formData.nome} onChange={handleFormChange} placeholder="Nome" className="border p-2 w-full bg-white text-gray-700" />
-        <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
+      </div> 
+      <div><label className="font-medium block mb-1">Espécies:</label>
+       <select name="especie" value={formData.especie} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione a Espécie</option>
           <option value="Cachorro">Cachorro</option>
           <option value="Gato">Gato</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Idade:</label>
         <select name="idade" value={formData.idade} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione a Idade</option>
           <option value="Filhote">Filhote</option>
           <option value="Adulto">Adulto</option>
           <option value="Idoso">Idoso</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Porte:</label>
         <select name="porte" value={formData.porte} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione o Porte</option>
           <option value="Pequeno">Pequeno</option>
           <option value="Médio">Médio</option>
           <option value="Grande">Grande</option>
-        </select>
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Sexo:</label>
         <select name="sexo" value={formData.sexo} onChange={handleFormChange} className="border p-2 w-full bg-white text-gray-700">
           <option value="">Selecione o Sexo</option>
           <option value="femea">Fêmea</option>
           <option value="macho">Macho</option>
-        </select>
-        <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700 md:col-span-2" />
+        </select></div>
+        <div>
+        <label className="font-medium block mb-1">Descrição:</label>
+        <textarea name="descricao" value={formData.descricao} onChange={handleFormChange} placeholder="Descrição" className="border p-2 w-full bg-white text-gray-700 md:col-span-2" /></div>
         {["precisaLarTemporario", "castrado", "vacinado", "usaMedicacao", "necessidadesEspeciais", "deficiencia"].map((campo) => (
           <label key={campo} className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
             <input
@@ -273,10 +313,22 @@ export default function CadastroAnimal() {
             {campo.charAt(0).toUpperCase() + campo.slice(1).replace(/([A-Z])/g, ' $1')}
           </label>
         ))}
+        {typeof formData.fotos === "string" && (
+  <div className="mb-2">
+    <label className="font-medium block mb-1">Imagem atual:</label>
+    <img
+      src={formData.fotos}
+      alt="Imagem atual"
+      className="w-40 h-40 object-cover rounded"
+    />
+  </div>
+)}
+
         <input type="file" name="fotos" onChange={handleFormChange} className="md:col-span-2 w-full bg-white text-gray-700" />
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
-          {modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
-        </button>
+       <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded md:col-span-2">
+  {loading ? "Salvando..." : modoEdicao ? "Salvar Alterações" : "Cadastrar Animal"}
+</button>
+
       </form>
       )}
 

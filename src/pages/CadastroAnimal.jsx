@@ -159,8 +159,12 @@ if (user && (user._id || user.id)) {
     },
   });
 
-  const nomeOng = response.data.ong?.nome || "ONG não identificada";
-  alert(`Animal cadastrado com sucesso`);
+if (typeof response.data.ong === "object" && response.data.ong?.nome) {
+  alert(`Animal cadastrado com sucesso pela ONG ${response.data.ong.nome}`);
+} else {
+  alert("Animal cadastrado com sucesso!");
+}
+
 }
 
 
