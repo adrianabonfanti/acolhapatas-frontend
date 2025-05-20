@@ -172,9 +172,11 @@ if (response.data?.ong && typeof response.data.ong === "object" && response.data
     limparFormulario();
     buscarAnimais();
 } catch (error) {
-  console.error("Erro ao cadastrar/editar animal:", error?.response || error.message || error);
-  alert("Erro ao salvar animal.");
+  const mensagem = error?.response?.data?.error || error.message || "Erro ao salvar animal.";
+  console.error("Erro ao cadastrar/editar animal:", mensagem);
+  alert(mensagem);
 }
+
 
    finally {
     setLoading(false);
