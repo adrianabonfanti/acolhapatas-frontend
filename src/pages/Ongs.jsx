@@ -11,6 +11,8 @@ function Ongs(){
   const [ongs, setOngs] = useState([]);
   const [selectedOng, setSelectedOng] = useState(null);
   const [showModal, setShowModal] = useState(false); 
+const [loading, setLoading] = useState(false);
+const [cadastroSucesso, setCadastroSucesso] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +25,7 @@ function Ongs(){
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  setLoading(true);
   try {
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
@@ -34,8 +37,6 @@ function Ongs(){
 
     const response = await axios.post(`${import.meta.env.VITE_API_URL}/ongs`, data);
 
-    console.log("RESPOSTA DA API:", response);
-
     if (response.status === 201) {
       await api.post("/contato", {
         name: formData.name,
@@ -44,9 +45,9 @@ function Ongs(){
         message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
       });
 
-      alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
+      setCadastroSucesso(true);
     } else {
       alert("Erro ao cadastrar ONG.");
     }
@@ -57,6 +58,8 @@ function Ongs(){
     } else {
       alert("Erro ao enviar cadastro.");
     }
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -190,10 +193,34 @@ function Ongs(){
          <label className="font-medium block mb-1">Logo da ONG:</label>
           <input type="file" name="logo" accept="image/*" onChange={handleFileChange}  className="input" />
           </div>
-          <button type="submit" className="bg-green-600 text-white py-2 rounded mt-4">Enviar cadastro</button> 
+         <button
+  type="submit"
+  disabled={loading}
+  className={`py-2 rounded mt-4 text-white font-bold ${
+    loading ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+  }`}
+>
+  {loading ? "Enviando..." : "Enviar cadastro"}
+</button>
+
         </form> 
 
         <ContatoFlutuante />
+        {cadastroSucesso && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
+      <h2 className="text-2xl font-bold text-emerald-700 mb-4">✅ Cadastro enviado!</h2>
+      <p>Obrigado por se cadastrar como ONG participante. Nossa equipe irá analisar sua inscrição.</p>
+      <button
+        onClick={() => setCadastroSucesso(false)}
+        className="mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Fechar
+      </button>
+    </div>
+  </div>
+)}
+
       </div>
     </div></>
   );
