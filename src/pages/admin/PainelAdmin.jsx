@@ -12,7 +12,7 @@ export default function PainelAdmin() {
   const adminToken = localStorage.getItem("adminToken");
 
   const axiosAuth = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/`,
+    baseURL: `${import.meta.env.VITE_API_URL}/`,
     headers: {
       Authorization: `Bearer ${adminToken}`,
     },

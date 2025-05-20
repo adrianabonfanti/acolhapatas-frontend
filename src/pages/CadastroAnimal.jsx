@@ -110,7 +110,7 @@ const [loading, setLoading] = useState(false);
       if (filtros.idade) query.append("idade", filtros.idade);
       if (filtros.porte) query.append("porte", filtros.porte);
 
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/animals?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/animals?${query.toString()}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAnimais(response.data);
@@ -145,7 +145,7 @@ if (user && (user._id || user.id)) {
 
 
     if (modoEdicao && animalSelecionado) {
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/animals/${animalSelecionado._id}`, data, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/animals/${animalSelecionado._id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,7 +153,7 @@ if (user && (user._id || user.id)) {
       
       alert("Animal atualizado com sucesso!");
 } else {
-  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/animals`, data, {
+  const response = await axios.post(`${import.meta.env.VITE_API_URL}/animals`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -180,7 +180,7 @@ if (user && (user._id || user.id)) {
     if (!window.confirm("Tem certeza que deseja apagar este animal?")) return;
   
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/animals/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/animals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Animal apagado com sucesso!");

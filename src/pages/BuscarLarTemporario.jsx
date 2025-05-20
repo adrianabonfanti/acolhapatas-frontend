@@ -36,7 +36,7 @@ export default function BuscarLarTemporario() {
  
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/lartemporario?${query.toString()}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/lartemporario?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

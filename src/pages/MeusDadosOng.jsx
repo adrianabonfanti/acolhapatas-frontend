@@ -31,7 +31,7 @@ export default function MeusDadosOng() {
   useEffect(() => {
     const buscarDados = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/ongs/${ongId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
@@ -85,7 +85,7 @@ export default function MeusDadosOng() {
         data.append("logo", novaLogo);
       }
 
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/ongs/${ongId}`, data, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/ongs/${ongId}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

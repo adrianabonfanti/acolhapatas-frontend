@@ -48,7 +48,7 @@ export default function EditarPerfilLar() {
   const salvarAlteracoes = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/lartemporario/editar`, form, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/lartemporario/editar`, form, {
 
         headers: { Authorization: `Bearer ${token}` },
       });
