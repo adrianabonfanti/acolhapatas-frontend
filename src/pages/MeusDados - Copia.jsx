@@ -1,0 +1,1 @@
+export default function MeusDados() { return <h1>Meus Dados</h1>; }
