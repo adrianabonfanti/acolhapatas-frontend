@@ -5,7 +5,7 @@ import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalONG from '../components/ModalOng';
 
-function Ongs = () => {
+function Ongs() => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
