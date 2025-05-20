@@ -5,7 +5,7 @@ import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalONG from '../components/ModalOng';
 
-const Ongs = () => {
+function Ongs = () => {
   const [formData, setFormData] = useState({});
   const [logo, setLogo] = useState(null);
   const [ongs, setOngs] = useState([]);
@@ -79,7 +79,7 @@ await api.post("/contato", {
   </div>
   <div className="w-1/2 h-full flex items-center justify-center px-6 divOngs">
    
-    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">ONGs Participantes</h1>
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-emerald-800 text-right">ONGs Participantes</h1>
   </div>
 </header>
     <div className="relative  min-h-screen">
