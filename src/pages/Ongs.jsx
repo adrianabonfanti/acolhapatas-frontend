@@ -98,40 +98,10 @@ await api.post("/contato", {
 
   </div>
 </section>
-{showModal && selectedOng && (
+{/* {showModal && selectedOng && (
   <ModalONG ong={selectedOng} onClose={closeModal} />
 )}
-       {/*  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {ongs.map((ong) => (
-            <div key={ong._id} onClick={() => openModal(ong)} className="cursor-pointer">
-   <div className="w-full min-h-[120px] max-h-[180px] flex items-center justify-center bg-white rounded-lg shadow p-2">
-  <img
-    src={ong.logo || "/sem_logo.png"}
-    alt={ong.name}
-    className="w-48 rounded shadow mb-4"
-  />
-</div>
-
-
-            </div>
-          ))}
-        </div> */}
-
-     {/*    {showModal && selectedOng && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg relative max-w-md w-full">
-              <button onClick={closeModal} className="absolute top-2 right-3 text-xl font-bold">✕</button>
-              <h2 className="text-2xl font-bold mb-4">{selectedOng.name}</h2>
-              <p><strong>Responsável:</strong> {selectedOng.responsibleName}</p>
-              <p><strong>Telefone:</strong> {selectedOng.phone}</p>
-              <p><strong>Instagram:</strong> {selectedOng.instagram}</p>
-              <p><strong>TikTok:</strong> {selectedOng.tiktok}</p>
-              <p><strong>Website:</strong> {selectedOng.website}</p>
-            
-            </div>
-          </div>
-        )} */}
-
+     */}   
         <h2 className="text-2xl font-bold mt-12 mb-4 tituloSeja">Seja uma ONG participante</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
