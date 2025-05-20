@@ -22,33 +22,45 @@ function Ongs(){
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        data.append(key, formData[key]);
-      });
-      if (logo) {
-        data.append("logo", logo);
-      }
+  e.preventDefault();
+  try {
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
+    });
+    if (logo) {
+      data.append("logo", logo);
+    }
 
-      await axios.post(`${import.meta.env.VITE_API_URL}/ongs`, data);
-      // Envia o e-mail para avisar você
-await api.post("/contato", {
-  name: formData.name,
-  email: formData.responsibleEmail,
-  phone: formData.phone,
-  message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
-});
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/ongs`, data);
+
+    console.log("RESPOSTA DA API:", response);
+
+    if (response.status === 201) {
+      await api.post("/contato", {
+        name: formData.name,
+        email: formData.responsibleEmail,
+        phone: formData.phone,
+        message: `Nova ONG cadastrada:\n\nNome: ${formData.name}\nResponsável: ${formData.responsibleName}\nEmail: ${formData.responsibleEmail}\nTelefone: ${formData.phone}\nCidade: ${formData.city} - ${formData.state}`
+      });
+
       alert("Cadastro enviado com sucesso! Aguarde aprovação.");
       setFormData({});
       setLogo(null);
-    } catch (error) {
-      console.error(error);
+    } else {
+      alert("Erro ao cadastrar ONG.");
+    }
+  } catch (error) {
+    console.error("ERRO AO CADASTRAR ONG:", error.response || error.message || error);
+    if (error.response?.data?.error) {
+      alert(`Erro: ${error.response.data.error}`);
+    } else {
       alert("Erro ao enviar cadastro.");
     }
-  };
+  }
+};
 
+ 
  const fetchOngs = async () => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/public/ongs`);
