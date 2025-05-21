@@ -135,6 +135,8 @@ const [loading, setLoading] = useState(false);
     });
 
    const user = JSON.parse(localStorage.getItem("user"));
+   const nomeOng = user?.name;
+const idOng = user?._id || user?.id;
 if (user && (user._id || user.id)) {
   data.append("ong", user._id || user.id);
 } else {
@@ -159,8 +161,8 @@ if (user && (user._id || user.id)) {
     },
   });
 
-if (response.data?.ong && typeof response.data.ong === "object" && response.data.ong.nome) {
-  alert(`Animal cadastrado com sucesso pela ONG ${response.data.ong.nome}`);
+if (response.data?.ong && typeof response.data.ong === "object" && response.data.ong.name) {
+  alert(`Animal cadastrado com sucesso pela ONG ${response.data.ong.name}`);
 } else {
   alert("Animal cadastrado com sucesso!");
 } 
