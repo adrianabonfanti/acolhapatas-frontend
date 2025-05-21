@@ -127,7 +127,8 @@ const [loading, setLoading] = useState(false);
     Object.keys(formData).forEach((key) => {
       if (key === "fotos") {
         if (formData.fotos && typeof formData.fotos !== "string") {
-          data.append("fotos", formData.fotos, formData.fotos.name);
+         data.append("fotos[]", formData.fotos, formData.fotos.name);
+
         }
       } else {
         data.append(key, formData[key]);
