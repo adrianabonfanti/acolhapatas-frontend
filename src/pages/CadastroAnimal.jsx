@@ -137,8 +137,9 @@ const [loading, setLoading] = useState(false);
    const user = JSON.parse(localStorage.getItem("user"));
    const nomeOng = user?.name;
 const idOng = user?._id || user?.id;
-if (user && (user._id || user.id)) {
-  data.append("ong", user._id || user.id);
+if (!user || (!user._id && !user.id)) {
+  alert("Erro: ONG não encontrada. Faça login novamente.");
+  return;
 } else {
   alert("Erro: ONG não encontrada. Faça login novamente.");
   return;
