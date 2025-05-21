@@ -155,8 +155,7 @@ if (user && (user._id || user.id)) {
       
       alert("Animal atualizado com sucesso!");
 } else {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/ongs/animais`, data, {
-
+  const response = await axios.post(`${import.meta.env.VITE_API_URL}/animals`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
