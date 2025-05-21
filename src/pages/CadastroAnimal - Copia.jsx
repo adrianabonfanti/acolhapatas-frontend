@@ -135,6 +135,8 @@ const [loading, setLoading] = useState(false);
     });
 
    const user = JSON.parse(localStorage.getItem("user"));
+   const nomeOng = user?.name;
+const idOng = user?._id || user?.id;
 if (user && (user._id || user.id)) {
   data.append("ong", user._id || user.id);
 } else {
@@ -159,17 +161,26 @@ if (user && (user._id || user.id)) {
     },
   });
 
-  const nomeOng = response.data.ong?.nome || "ONG não identificada";
-  alert(`Animal cadastrado com sucesso`);
+if (response.data?.ong && typeof response.data.ong === "object" && response.data.ong.name) {
+  alert(`Animal cadastrado com sucesso pela ONG ${response.data.ong.name}`);
+} else {
+  alert("Animal cadastrado com sucesso!");
+} 
+
+
 }
 
 
     limparFormulario();
     buscarAnimais();
-  } catch (error) {
-    console.error("Erro ao cadastrar/editar animal:", error);
-    alert("Erro ao salvar animal.");
-  } finally {
+} catch (error) {
+  const mensagem = error?.response?.data?.error || error.message || "Erro ao salvar animal.";
+  console.error("Erro ao cadastrar/editar animal:", mensagem);
+  alert(mensagem);
+}
+
+
+   finally {
     setLoading(false);
   }
 };
