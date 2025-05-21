@@ -124,7 +124,7 @@ const [loading, setLoading] = useState(false);
   setLoading(true);
   try {
     const data = new FormData();
-   Object.keys(formData).forEach((key) => {
+Object.keys(formData).forEach((key) => {
   if (key === "fotos") {
     if (formData.fotos && typeof formData.fotos !== "string") {
       data.append("fotos", formData.fotos, formData.fotos.name);
@@ -135,6 +135,7 @@ const [loading, setLoading] = useState(false);
     data.append(key, formData[key]);
   }
 });
+
 
 
    const user = JSON.parse(localStorage.getItem("user"));
