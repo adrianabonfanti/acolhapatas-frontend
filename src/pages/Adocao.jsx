@@ -68,7 +68,7 @@ const handleImagemCarregada = () => {
   useEffect(() => {
     async function carregarOngs() {
       try {
-        const res = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+        const response = await api.get("/public/ongs");
 
         setOngs(res.data);
       } catch (error) {
