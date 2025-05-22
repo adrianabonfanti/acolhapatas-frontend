@@ -27,7 +27,8 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
 
   const buscarEventos = async () => {
     try {
-      const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
+     const response = await api.get("/eventos/public");
+
       const hoje = new Date().toISOString().slice(0, 10);
       const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
       setEventos(eventosFiltrados.sort((a, b) => a.data.localeCompare(b.data)));
@@ -38,7 +39,8 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
 
   const buscarOngs = async () => {
     try {
-      const response = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+     const response = await api.get("/public/ongs");
+
       setOngs(response.data);
     } catch (error) {
       console.error("Erro ao buscar ONGs:", error);
@@ -108,11 +110,18 @@ const enviarVoluntario = async (e) => {
     const fim = new Date(evento.data + "T" + (evento.horaFim || "12:00"));
     const formatar = (d) => d.toISOString().replace(/[-:]|\.\d{3}/g, "").slice(0, 15) + "Z";
 
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      evento.nome
-    )}&dates=${formatar(inicio)}/${formatar(fim)}&details=${encodeURIComponent(
-      evento.descricao || "Evento do AcolhaPatas"
-    )}&location=${encodeURIComponent(evento.endereco + ", " + evento.cidade + " - " + evento.estado)}`;
+    const gerarLinkGoogleCalendar = (evento, inicio, fim) => {
+  const titulo = evento.nome || "Evento AcolhaPatas";
+  const descricao = evento.descricao || "Evento do AcolhaPatas";
+  const local = [evento.endereco, evento.cidade, evento.estado].filter(Boolean).join(", ");
+  
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE
+&text=${encodeURIComponent(titulo)}
+&dates=${formatar(inicio)}/${formatar(fim)}
+&details=${encodeURIComponent(descricao)}
+&location=${encodeURIComponent(local)}`;
+};
+
   };
 
   
