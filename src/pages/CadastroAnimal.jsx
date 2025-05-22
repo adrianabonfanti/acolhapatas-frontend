@@ -151,7 +151,7 @@ if (user && (user._id || user.id)) {
 
 
     if (modoEdicao && animalSelecionado) {
-      await axios.put(`${import.meta.env.VITE_API_URL}/animals/${animalSelecionado._id}`, data, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/ongs/animais/${animalSelecionado._id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -159,7 +159,7 @@ if (user && (user._id || user.id)) {
       
       alert("Animal atualizado com sucesso!");
 } else {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/animals`, data, {
+  await axios.post(`${import.meta.env.VITE_API_URL}/ongs/animais`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
