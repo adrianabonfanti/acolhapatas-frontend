@@ -28,7 +28,7 @@ export default function ModalOng({ ong, onClose }) {
           <p className="text-sm text-gray-500 mt-1">Confira os dados completos da instituição</p>
         </div>
 
-        <div className="space-y-3 text-gray-700 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-gray-700 text-sm">
           {ong.nome && (
             <p className="flex items-center gap-2">
               <span className="material-icons text-emerald-600">business</span>
