@@ -27,7 +27,8 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
 
   const buscarEventos = async () => {
     try {
-      const response = await axios.get("https://acolhapatas-api.onrender.com/eventos/public");
+     const response = await api.get("/eventos/public");
+
       const hoje = new Date().toISOString().slice(0, 10);
       const eventosFiltrados = response.data.filter((evento) => evento.data >= hoje);
       setEventos(eventosFiltrados.sort((a, b) => a.data.localeCompare(b.data)));
@@ -38,7 +39,8 @@ const [interesseEnviado, setInteresseEnviado] = useState(false);
 
   const buscarOngs = async () => {
     try {
-      const response = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+     const response = await api.get("/public/ongs");
+
       setOngs(response.data);
     } catch (error) {
       console.error("Erro ao buscar ONGs:", error);

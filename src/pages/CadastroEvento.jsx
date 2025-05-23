@@ -68,6 +68,8 @@ const abrirModalVoluntarios = async (eventoId) => {
         await axios.put(`${import.meta.env.VITE_API_URL}/eventos/${eventoSelecionado._id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        await buscarTodosEventos(); // isso garante que a lista seja atualizada
+
       } else {
        const response = await axios.post(`${import.meta.env.VITE_API_URL}/eventos`, data, {
   headers: { Authorization: `Bearer ${token}` },
@@ -118,6 +120,25 @@ setEventoSelecionado(null);
       setLoading(false);
     }
   };
+const editarEvento = (evento) => {
+  setModoCadastro(true);
+  setModoEdicao(true);
+  setEventoSelecionado(evento);
+  setFormData({
+    nome: evento.nome || "",
+    local: evento.local || "",
+    endereco: evento.endereco || "",
+    cidade: evento.cidade || "",
+    estado: evento.estado || "",
+    data: evento.data || "",
+    horaInicio: evento.horaInicio || "",
+    horaFim: evento.horaFim || "",
+    descricao: evento.descricao || "",
+    informacoesVoluntario: evento.informacoesVoluntario || "",
+    precisaVoluntario: !!evento.precisaVoluntario,
+    imagem: null,
+  });
+};
 
   const buscarEventos = async () => {
     try {

@@ -40,7 +40,8 @@ const [totalImagens, setTotalImagens] = useState(0);
       if (filtros.cidade) query.append("cidade", filtros.cidade.trim().toLowerCase());
       if (filtros.estado) query.append("estado", filtros.estado.toUpperCase());
 
-      const response = await axios.get(`https://acolhapatas-api.onrender.com/public/animals?${query.toString()}`);
+      const response = await api.get(`/public/animals?${query.toString()}`);
+
 
       setAnimais(response.data);
 setTotalImagens(response.data.length);
@@ -56,7 +57,8 @@ const handleImagemCarregada = () => {
 
   const buscarOngs = async () => {
     try {
-      const response = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+      const response = await api.get("/public/ongs");
+
 
       setOngs(response.data);
     } catch (error) {
@@ -66,7 +68,7 @@ const handleImagemCarregada = () => {
   useEffect(() => {
     async function carregarOngs() {
       try {
-        const res = await axios.get("https://acolhapatas-api.onrender.com/public/ongs");
+        const response = await api.get("/public/ongs");
 
         setOngs(res.data);
       } catch (error) {
