@@ -8,7 +8,7 @@ export default function PainelAdmin() {
   const [modalAberto, setModalAberto] = useState(false);
   const [dadosModal, setDadosModal] = useState({});
   const [tituloModal, setTituloModal] = useState("");
-
+const [eventos, setEventos] = useState([]);
   const adminToken = localStorage.getItem("adminToken");
 
   const axiosAuth = axios.create({
@@ -22,6 +22,7 @@ export default function PainelAdmin() {
     buscarOngs();
     buscarLares();
     buscarAnimais();
+    buscarEventos();
   }, []);
 
   const buscarOngs = async () => {
@@ -41,7 +42,22 @@ export default function PainelAdmin() {
       console.error("Erro ao buscar Lares Temporários:", error);
     }
   };
+const buscarEventos = async () => {
+  try {
+    const response = await axiosAuth.get("/admin/eventos");
+    setEventos(response.data);
+  } catch (error) {
+    console.error("Erro ao buscar Eventos:", error);
+  }
+};
 
+// função para deletar:
+const apagarEvento = async (id) => {
+  if (confirm("Tem certeza que deseja apagar este evento?")) {
+    await axiosAuth.delete(`/admin/eventos/${id}`);
+    buscarEventos();
+  }
+};
   const buscarAnimais = async () => {
     try {
       const response = await axiosAuth.get("/admin/animais");
@@ -119,8 +135,13 @@ export default function PainelAdmin() {
               <span className="material-icons">check_circle</span>
             </button>
           )}
-          <button
-            onClick={() => tipo === 'ONG' ? apagarOng(item._id) : tipo === 'Lar' ? apagarLar(item._id) : apagarAnimal(item._id)}
+         <button
+  onClick={() =>
+    tipo === 'ONG' ? apagarOng(item._id)
+    : tipo === 'Lar' ? apagarLar(item._id)
+    : tipo === 'Animal' ? apagarAnimal(item._id)
+    : apagarEvento(item._id)
+  }
             className="text-red-600 hover:text-red-800"
           >
             <span className="material-icons">delete</span>
@@ -148,6 +169,13 @@ export default function PainelAdmin() {
           <h2 className="text-xl font-bold">Animais Cadastrados</h2>
           <p className="text-3xl">{animais.length}</p>
         </div>
+        <div>
+  <h2 className="text-xl font-bold mb-2">Eventos</h2>
+  <div className="flex flex-col gap-4">
+    {eventos.map((item) => renderCard(item, 'Evento'))}
+  </div>
+</div>
+
       </div>
 
       {/* Cards Mobile */}
