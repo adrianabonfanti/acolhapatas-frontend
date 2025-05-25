@@ -131,7 +131,7 @@ const buscarCep = async (e) => {
         {/* Open Graph */}
         <meta property="og:title" content="AcolhaPatas - Conectando ONGs, lares temporários e adotantes" />
         <meta property="og:description" content="Encontre animais para adoção, cadastre-se como lar temporário e apoie ONGs de proteção animal." />
-        <meta property="og:image" content="https://acolhapatas.com.br/imagens/banner-og-home.jpg" />
+        <meta property="og:image" content="https://acolhapatas.com.br/imagens/banner-og-ongs.jpg" />
         <meta property="og:url" content="https://acolhapatas.com.br/" />
         <meta property="og:type" content="website" />
       </Helmet>
