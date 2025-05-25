@@ -17,7 +17,7 @@ export default function ModalOng({ ong, onClose }) {
           <div className="mb-4 text-center">
             <img
               src={ong.logo}
-              alt={`Logo da ${ong.nome}`}
+              alt={`Logo da ${ong.name}`}
               className="h-24 mx-auto object-contain"
             />
           </div>
