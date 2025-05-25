@@ -2,6 +2,7 @@ import api from '../services/api';
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
+import { Helmet } from "react-helmet-async";
 export default function Sobre() {
   const [showForm, setShowForm] = useState(false);
   const [formEnviado, setFormEnviado] = useState(false);
@@ -9,6 +10,19 @@ export default function Sobre() {
   const buttonRef = useRef();
 
   return (
+    <>
+     <Helmet>
+        <title>AcolhaPatas - Conectando ONGs, lares temporários e adotantes</title>
+        <meta name="description" content="Seja um lar temporário, adote um pet e conheça ONGs que resgatam animais em Pindamonhangaba e região." />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="AcolhaPatas - Conectando ONGs, lares temporários e adotantes" />
+        <meta property="og:description" content="Encontre animais para adoção, cadastre-se como lar temporário e apoie ONGs de proteção animal." />
+        <meta property="og:image" content="https://acolhapatas.com.br/imagens/banner-og-home.jpg" />
+        <meta property="og:url" content="https://acolhapatas.com.br/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
     <div className="flex min-h-screen">
       {/* Conteúdo principal */}
       <div className="flex-1 p-6 flex flex-col">
@@ -37,6 +51,6 @@ export default function Sobre() {
         </section>
       </div>
       <ContatoFlutuante />    
-    </div>
+    </div></>
   );
 }

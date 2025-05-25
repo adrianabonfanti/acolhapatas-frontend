@@ -4,6 +4,7 @@ import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalONG from '../components/ModalOng';
+import { Helmet } from "react-helmet-async";
 
 function Ongs(){
   const [formData, setFormData] = useState({});
@@ -122,6 +123,18 @@ const buscarCep = async (e) => {
 
   return (
     <>
+     <Helmet>
+        <title>AcolhaPatas - Conectando ONGs, lares temporários e adotantes</title>
+        <meta name="description" content="Seja um lar temporário, adote um pet e conheça ONGs que resgatam animais em Pindamonhangaba e região." />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="AcolhaPatas - Conectando ONGs, lares temporários e adotantes" />
+        <meta property="og:description" content="Encontre animais para adoção, cadastre-se como lar temporário e apoie ONGs de proteção animal." />
+        <meta property="og:image" content="https://acolhapatas.com.br/imagens/banner-og-home.jpg" />
+        <meta property="og:url" content="https://acolhapatas.com.br/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
      <header className="page-header headerOng w-full h-60 md:h-72 lg:h-80 flex items-center bg-emerald-50 shadow-inner overflow-hidden page-header">
   <div className="w-1/2 h-full">
     

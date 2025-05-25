@@ -11,7 +11,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import CarouselOngs from '../components/CarouselOngs';
 import ModalOng from "../components/ModalOng";
 import AnimalCard from "../components/AnimalCard"; 
-
+import { Helmet } from "react-helmet-async";
 
 
 function Home() {
@@ -114,6 +114,18 @@ function Home() {
 
   return (
     <>
+     <Helmet>
+        <title>AcolhaPatas - Conectando ONGs, lares temporários e adotantes</title>
+        <meta name="description" content="Seja um lar temporário, adote um pet e conheça ONGs que resgatam animais em Pindamonhangaba e região." />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="AcolhaPatas - Conectando ONGs, lares temporários e adotantes" />
+        <meta property="og:description" content="Encontre animais para adoção, cadastre-se como lar temporário e apoie ONGs de proteção animal." />
+        <meta property="og:image" content="https://acolhapatas.com.br/imagens/banner-og-home.jpg" />
+        <meta property="og:url" content="https://acolhapatas.com.br/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
     <section className="backImage relative h-screen max-h-[600px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: 'url("/hero_horizontal.jpg")' }}>
   <div className="absolute inset-0  z-0" />
   
