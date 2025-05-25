@@ -29,10 +29,10 @@ export default function ModalOng({ ong, onClose }) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-gray-700 text-sm">
-          {ong.nome && (
+          {ong.name && (
             <p className="flex items-start gap-2">
               <span className="material-icons text-emerald-600">business</span>
-              <strong className="min-w-[110px]">Nome:</strong> <span>{ong.nome}</span>
+              <strong className="min-w-[110px]">Nome:</strong> <span>{ong.name}</span>
             </p>
           )}
           {ong.responsibleName && (
