@@ -249,7 +249,7 @@ const buscarCep = async (e) => {
           <input type="password" name="password" placeholder="Senha" onChange={handleChange} required className="input" />
            </div>
             <div>
-          <label className="font-medium block mb-1">Nome Completo:</label>
+          <label className="font-medium block mb-1">Website:</label>
           <input type="text" name="website" placeholder="Website" onChange={handleChange} className="input" />
             </div>
             <div>
