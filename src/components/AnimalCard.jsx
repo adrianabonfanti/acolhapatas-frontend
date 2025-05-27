@@ -1,11 +1,10 @@
 // ✅ AnimalCard.jsx corrigido
 import React from "react";
-import CheckIcon from '@mui/icons-material/CheckCircle';
-import MedicationIcon from '@mui/icons-material/Medication';
-import VaccinesIcon from '@mui/icons-material/Vaccines';
-import PetsIcon from '@mui/icons-material/Pets';
 
 export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
+  const status = animal.status || "ativo";
+  if (status === "adotado" || status === "pausado") return null;
+
   return (
     <div className="bg-white rounded-3xl shadow-md overflow-hidden transition hover:shadow-lg">
       {animal.fotos[0] ? (
@@ -32,7 +31,11 @@ export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
         <p className="text-sm text-gray-500 mb-3">
           {animal.especie} • {animal.idade} • {animal.porte} • {animal.sexo}
         </p>
-
+   {animal.createdAt && (
+          <p className="text-xs text-gray-400 mb-3">
+            Cadastrado em {new Date(animal.createdAt).toLocaleDateString("pt-BR")}
+          </p>
+        )}
         {animal.descricao && (
           <p className="text-sm italic text-gray-700 mb-4">"{animal.descricao}"</p>
         )}
@@ -40,22 +43,27 @@ export default function AnimalCard({ animal, onAdotar, onImagemCarregada }) {
         <div className="flex flex-wrap gap-2 mb-5">
           {String(animal.castrado) === "true" && (
             <span className="flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-3 py-1 rounded-full font-medium">
-              <CheckIcon fontSize="small" /> Castrado
+              <span className="material-icons text-sm">check_circle</span> Castrado
             </span>
           )}
           {String(animal.vacinado) === "true" && (
             <span className="flex items-center gap-1 bg-cyan-50 text-cyan-700 text-xs px-3 py-1 rounded-full font-medium">
-              <VaccinesIcon fontSize="small" /> Vacinado
+              <span className="material-icons text-sm">vaccines</span> Vacinado
             </span>
           )}
-          {String(animal.precisaLarTemporario) === "true" && (
+          {String(animal.precisaLarTemporario) === "true" && status === "ativo" && (
             <span className="flex items-center gap-1 bg-sky-50 text-sky-700 text-xs px-3 py-1 rounded-full font-medium">
-              <PetsIcon fontSize="small" /> Precisa de lar temporário
+              <span className="material-icons text-sm">pets</span> Precisa de lar temporário
             </span>
           )}
           {String(animal.usaMedicacao) === "true" && (
             <span className="flex items-center gap-1 bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded-full font-medium">
-              <MedicationIcon fontSize="small" /> Usa medicação
+              <span className="material-icons text-sm">medication</span> Usa medicação
+            </span>
+          )}
+          {status === "achouLar" && (
+            <span className="flex items-center gap-1 bg-amber-50 text-amber-700 text-xs px-3 py-1 rounded-full font-medium">
+              <span className="material-icons text-sm">home</span> Em lar temporário
             </span>
           )}
         </div>

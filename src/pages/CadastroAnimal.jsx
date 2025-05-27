@@ -30,7 +30,9 @@ const [loading, setLoading] = useState(false);
     usaMedicacao: false,
     necessidadesEspeciais: false,
     deficiencia: false,
-    precisaLarTemporario: false, // <<< adiciona ISSO
+    precisaLarTemporario: false,
+    achouLar: false,
+    status: "ativo",
     fotos: null,
   });
 
@@ -77,24 +79,21 @@ const [loading, setLoading] = useState(false);
     });
   };
 
-  const handleFormChange = (e) => {
+   const handleFormChange = (e) => {
     const { name, value, type, checked, files } = e.target;
     if (type === "checkbox") {
       setFormData({ ...formData, [name]: checked });
     } else if (type === "file") {
       const novoArquivo = files[0];
       setFormData({ ...formData, fotos: novoArquivo });
-      if (animalSelecionado) {
-        setAnimalSelecionado((prev) => ({
-          ...prev,
-          fotos: null, // limpa a imagem antiga!
-        }));
-      }
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
-  
+
+  const handleStatusChange = (novoStatus) => {
+    setFormData({ ...formData, status: novoStatus });
+  };
 
   const handleFiltroChange = (e) => {
     const { name, value } = e.target;
@@ -328,6 +327,40 @@ if (response.data?.ong && typeof response.data.ong === "object" && response.data
             {campo.charAt(0).toUpperCase() + campo.slice(1).replace(/([A-Z])/g, ' $1')}
           </label>
         ))}
+            {/* Grupo de botões de status */}
+      <div className="md:col-span-2">
+        <label className="block font-medium mb-1">Status:</label>
+        <div className="flex gap-4">
+          {[
+            { valor: "ativo", icone: "pets", cor: "bg-green-100 text-green-700", titulo: "Ativo (aparece em todo o site)" },
+            { valor: "adotado", icone: "check_circle", cor: "bg-blue-100 text-blue-700", titulo: "Adotado (sai da vitrine)" },
+            { valor: "pausado", icone: "pause_circle", cor: "bg-yellow-100 text-yellow-700", titulo: "Pausado (oculto temporariamente)" },
+          ].map((opcao) => (
+            <button
+              type="button"
+              key={opcao.valor}
+              className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium shadow-sm ${formData.status === opcao.valor ? opcao.cor : "bg-gray-100 text-gray-600"}`}
+              onClick={() => handleStatusChange(opcao.valor)}
+              title={opcao.titulo}
+            >
+              <span className="material-icons text-base">{opcao.icone}</span>
+              {opcao.valor.charAt(0).toUpperCase() + opcao.valor.slice(1)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Checkbox achouLar */}
+      <label className="flex items-center gap-2 w-full bg-white px-2 py-1 rounded border text-gray-700">
+        <input
+          type="checkbox"
+          name="achouLar"
+          checked={formData.achouLar}
+          onChange={handleFormChange}
+        />
+        <span className="material-icons text-base text-amber-500">home</span>
+        Achou lar temporário
+      </label>
         {typeof formData.fotos === "string" && (
   <div className="mb-2">
     <label className="font-medium block mb-1">Imagem atual:</label>
