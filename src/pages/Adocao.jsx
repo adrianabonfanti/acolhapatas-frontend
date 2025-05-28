@@ -6,6 +6,7 @@ import "../styles/adocao.css";
 import "../styles/global.css";
 import ModalOng from "../components/ModalOng";
 import { Helmet } from "react-helmet-async";
+import AnimalCard from "../components/AnimalCard";
 
 export default function Adocao() {
   const [filtros, setFiltros] = useState({ nome: "", especie: [], sexo: [], idade: [], porte: [], ong: "", cidade: "", estado: "" });
@@ -269,67 +270,24 @@ const handleImagemCarregada = () => {
       
       <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        {animais.length > 0 ? (
-          animais.map((animal) => (
-            <div key={animal._id} className="bg-white rounded-3xl shadow-md hover:shadow-lg p-4 flex flex-col">
-  <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded-xl mb-4" />
+       {animais.length > 0 ? (
+  animais.map((animal) => (
+    <AnimalCard
+      key={animal._id}
+      animal={animal}
+      onAdotar={() => {
+        const ong = ongs.find((o) =>
+          o._id === (typeof animal.ong === 'string' ? animal.ong : animal.ong._id)
+        );
+        setOngAdocao(ong);
+      }}
+      onImagemCarregada={handleImagemCarregada}
+    />
+  ))
+) : (
+  <p className="text-gray-500">Nenhum animal encontrado.</p>
+)}
 
-  <h3 className="text-lg font-bold text-gray-800 mb-1">{animal.nome}</h3>
-  <p className="text-sm text-gray-600 mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
-
-  {animal.descricao && <p className="text-sm italic text-gray-700 mb-3">"{animal.descricao}"</p>}
-
-  <div className="flex flex-wrap gap-2 text-xs text-gray-700 mb-4">
-    {String(animal.castrado) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">check_circle</i> Castrado
-      </span>
-    )}
-    {String(animal.vacinado) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">vaccines</i> Vacinado
-      </span>
-    )}
-    {String(animal.precisaLarTemporario) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">house</i> Precisa de lar
-      </span>
-    )}
-    {String(animal.usaMedicacao) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-pink-50 text-pink-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">medication</i> Medicação
-      </span>
-    )}
-    {String(animal.deficiencia) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-red-50 text-red-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">accessibility</i> Deficiente
-      </span>
-    )}
-    {String(animal.necessidadesEspeciais) === "true" && (
-      <span className="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-2 py-1 rounded-full">
-        <i className="material-icons text-sm">psychology</i> Necessidades especiais
-      </span>
-    )}
-  </div>
-
-  <button
-  onClick={() => {
-    const ong = ongs.find((o) => o._id === (typeof animal.ong === 'string' ? animal.ong : animal.ong._id));
-    console.log("ONG da adoção:", ong);
-    setOngAdocao(ong);
-  }}className="botaoQueroAdotar w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm py-2 rounded-full"
-  
->
-  Quero Adotar
-</button>
-
-
-</div>
-
-          ))
-        ) : (
-          <p className="text-gray-500">Nenhum animal encontrado.</p>
-        )}
       </div>
 
   
