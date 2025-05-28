@@ -3,6 +3,8 @@ import api from '../services/api';
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ContatoFlutuante from '../components/ContatoFlutuante';
+import AnimalCard from "../components/AnimalCard";
+
 export default function HomeOng() {
   const navigate = useNavigate();
   const [animais, setAnimais] = useState([]);
@@ -96,22 +98,15 @@ export default function HomeOng() {
       <h3 className="text-xl font-bold mb-4">Últimos Animais Cadastrados</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {animais.map((animal) => (
-          <div key={animal._id} className="bg-white shadow-md p-4 rounded-lg">
-            <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
-            <h4 className="text-lg font-semibold mt-2">{animal.nome}</h4>
-            <p className="text-sm mb-2">{animal.especie} | {animal.idade} | {animal.porte} | {animal.sexo}</p>
+        {animais.map((animal) => (
+  <AnimalCard
+    key={animal._id}
+    animal={animal}
+    onAdotar={null} // ou você pode passar uma função, mas aqui provavelmente não tem botão de adoção
+    onImagemCarregada={() => {}} // ou remova se o `AnimalCard` não quebrar sem isso
+  />
+))}
 
-            {animal.descricao && <p className="text-sm mb-2"><strong>Sobre:</strong> {animal.descricao}</p>}
-            <ul className="text-xs text-gray-600 space-y-1">
-            {String(animal.castrado) === "true" && <li>✅ Castrado</li>}
-{String(animal.vacinado) === "true" && <li>✅ Vacinado</li>}
-{String(animal.precisaLarTemporario) === "true" && <li>🏡 Precisa de lar temporário</li>}
-{String(animal.usaMedicacao) === "true" && <li>💊 Usa medicação</li>}
-{String(animal.deficiencia) === "true" && <li>♿ Possui deficiência</li>}
-{String(animal.necessidadesEspeciais) === "true" && <li>🩺 Necessidades especiais</li>}
-
-            </ul>
-          </div>
         ))}
       </div>
 
