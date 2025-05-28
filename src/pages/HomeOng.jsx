@@ -98,7 +98,7 @@ export default function HomeOng() {
       <h3 className="text-xl font-bold mb-4">Últimos Animais Cadastrados</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {animais.map((animal) => (
-        {animais.map((animal) => (
+       
   <AnimalCard
     key={animal._id}
     animal={animal}
@@ -107,7 +107,7 @@ export default function HomeOng() {
   />
 ))}
 
-        ))}
+    
       </div>
 
       <ContatoFlutuante />
