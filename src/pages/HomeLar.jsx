@@ -3,6 +3,7 @@ import api from '../services/api';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ContatoFlutuante from '../components/ContatoFlutuante';
+import AnimalCard from "../components/AnimalCard";
 
 export default function HomeLar() {
   const [animais, setAnimais] = useState([]);
@@ -89,22 +90,13 @@ if (lar.medicacao) {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {animais.map((animal) => (
-            <div key={animal._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={animal.fotos[0]} alt={animal.nome} className="w-full h-48 object-cover rounded" />
-              <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">{animal.nome}</h2>
-                <p><strong>Espécie:</strong> {animal.especie}</p>
-                <p><strong>Idade:</strong> {animal.idade}</p>
-                <p><strong>Porte:</strong> {animal.porte}</p>
-                <p><strong>Sexo:</strong> {animal.sexo}</p>
-                <button
-                  onClick={() => abrirModal(animal)}
-                  className="mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full"
-                >
-                  Quero Acolher
-                </button>
-              </div>
-            </div>
+           <AnimalCard
+    key={animal._id}
+    animal={animal}
+    onAdotar={() => setAnimalSelecionado(animal)}
+    onImagemCarregada={() => {}}
+  />
+
           ))}
         </div>
         
